@@ -121,8 +121,6 @@ const css = `
 
 /* ── Layout ── */
 .page { max-width: 860px; margin: 0 auto; padding: 3.5rem 1.5rem 5.5rem; background: #f5efe4 !important; }
-.sec { animation: enter 0.5s ease both; }
-@keyframes enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
 /* ── Typography ── */
 h1 {
@@ -259,35 +257,6 @@ a:hover { color: #5c1515 !important; }
 .res-note { font-family: ${SERIF}; font-size: 0.94rem; font-style: italic; color: #3a2a1a !important; margin-top: 0.2rem; }
 .res-hint { font-family: ${SERIF}; font-size: 0.96rem; font-style: italic; color: #3d2a18 !important; margin-bottom: 1.1rem; }
 
-/* ── Email ── */
-.email-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.9rem; }
-.email-input {
-  font-family: ${SERIF}; font-size: 0.94rem; padding: 10px 13px;
-  border: 1px solid rgba(201,168,76,0.5); background: #3a0e0e !important;
-  color: #f0e8d8 !important; outline: none; width: 235px; max-width: 100%;
-  transition: border-color 0.2s;
-}
-.email-input::placeholder { color: rgba(240,232,216,0.5) !important; }
-.email-input:focus { border-color: #c9a84c; }
-.email-btn {
-  font-family: ${LABEL}; font-size: 0.86rem; letter-spacing: 0.12em; text-transform: uppercase;
-  padding: 10px 18px; background: #c9a84c !important; color: #2a1000 !important;
-  border: none; cursor: pointer; transition: background 0.18s;
-}
-.email-btn:hover { background: #dbbe62 !important; }
-.email-confirm { font-family: ${DISPLAY}; font-size: 1rem; font-style: italic; color: #e8c97a !important; margin-top: 0.8rem; }
-
-/* ── Back to top ── */
-.back-top {
-  position: fixed; bottom: 2rem; right: 1.5rem;
-  width: 36px; height: 36px; background: #5c1515 !important;
-  color: #f0e8d8 !important; border: 1px solid #c9a84c; cursor: pointer;
-  font-family: ${SERIF}; font-size: 1rem; display: flex; align-items: center; justify-content: center;
-  opacity: 0; pointer-events: none; transition: opacity 0.25s, background 0.18s; z-index: 150;
-}
-.back-top.visible { opacity: 1; pointer-events: auto; }
-.back-top:hover { background: #4a1010 !important; }
-
 /* ── Footer ── */
 .footer { background: #4a1010 !important; border-top: 2px solid #c9a84c; padding: 1.4rem 1.5rem; }
 .footer-inner { max-width: 860px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.4rem; }
@@ -297,7 +266,7 @@ a:hover { color: #5c1515 !important; }
 
 /* ── Print ── */
 @media print {
-  .nav-wrap, .footer, .hamburger, .mob-nav, .news-strip, .email-row, .email-btn, .back-top, .skip-link, .spec-grid { display: none !important; }
+  .nav-wrap, .footer, .hamburger, .mob-nav, .news-strip, .skip-link, .spec-grid { display: none !important; }
   #site-root { font-size: 11pt !important; background: white !important; color: black !important; }
   .page { max-width: 100% !important; padding: 0 !important; }
   h1, h2 { color: black !important; }
@@ -322,7 +291,6 @@ a:hover { color: #5c1515 !important; }
   .footer-inner { flex-direction: column; align-items: flex-start; }
   .contact-row { flex-direction: column; gap: 0.25rem; }
   .contact-label { min-width: unset; }
-  .back-top { bottom: 1.2rem; right: 1rem; }
 }
 `;
 
@@ -416,7 +384,6 @@ const PROJECTS = [
 function Research() {
   return (
     <div className="sec">
-      <Label t="Research" />
       <h2>Research Interests</h2>
       <Rule />
       <p>My philosophical work spans pragmatist ethics and metaethics, feminist philosophy of the late nineteenth and early twentieth century, philosophy of moral education, philosophy of action, and moral responsibility. I work at the boundary between historical recovery and systematic philosophy, using archival research to reconstruct positions and arguments that were historically significant but have been marginalized by the discipline's received canon.</p>
@@ -424,7 +391,6 @@ function Research() {
       <p>This project is developed in a book in progress, <em>The Purposive Self: Agency, Normativity, and Moral Growth</em>, targeted at Fordham University Press, Oxford University Press, and Cambridge University Press.</p>
 
       <div style={{ marginTop: "2.6rem" }}>
-        <Label t="ELC Recovery Project" />
         <h2>The Ella Lyman Cabot Recovery Project</h2>
         <Rule />
         <p>I am the only scholar conducting sustained archival recovery work on Ella Lyman Cabot. I hold literary rights to her unpublished material through the Ella Lyman Cabot Trust, have fully digitized the Schlesinger Library ELC Papers (8.17 linear feet), and have conducted extensive research in the Harvard University Archives (Papers of Richard Clarke Cabot, HUG 4255, 221 containers).</p>
@@ -468,7 +434,7 @@ function Research() {
         <p style={{ fontFamily: SERIF, fontSize: "0.95rem", color: "#555555", marginBottom: "1rem", lineHeight: "1.7" }}>Selected papers from the active research program. Primary target venues listed.</p>
 
         <div style={{ marginBottom: "1.2rem" }}>
-          <div style={{ fontFamily: SANS, fontSize: "0.73rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.accent, marginBottom: "0.6rem" }}>James–Cabot–Murdoch Series</div>
+          <div style={{ fontFamily: SANS, fontSize: "0.73rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.muted, marginBottom: "0.6rem" }}>James–Cabot–Murdoch Series</div>
           {[
             { t: "Cabot's Account of Experience", v: "William James Studies" },
             { t: "Cabot's Account of Community", v: "Journal of Speculative Philosophy" },
@@ -482,7 +448,7 @@ function Research() {
         </div>
 
         <div style={{ marginBottom: "1.2rem" }}>
-          <div style={{ fontFamily: SANS, fontSize: "0.73rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.accent, marginBottom: "0.6rem" }}>ELC Recovery Papers</div>
+          <div style={{ fontFamily: SANS, fontSize: "0.73rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.muted, marginBottom: "0.6rem" }}>ELC Recovery Papers</div>
           {[
             { t: "Ethical Life and the Structure of Selfhood: Reconstructing Cabot's Minimal Metaphysics", v: "Journal of Speculative Philosophy" },
             { t: "Minimal Metaphysics and Pragmatist-Feminism", v: "Metaphilosophy" },
@@ -500,7 +466,7 @@ function Research() {
         </div>
 
         <div>
-          <div style={{ fontFamily: SANS, fontSize: "0.73rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.accent, marginBottom: "0.6rem" }}>Systematic Papers</div>
+          <div style={{ fontFamily: SANS, fontSize: "0.73rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.muted, marginBottom: "0.6rem" }}>Systematic Papers</div>
           {[
             { t: "Purposive Pluralism: A Third Option Between Global Expressivism and Bifurcationism", v: "BJHP / Journal of the History of Philosophy / Philosophical Studies" },
             { t: "Purposive Selfhood and the Metaphysics of Habit", v: "Transactions of the Charles S. Peirce Society; MSA 2027 abstract submitted" },
@@ -557,7 +523,6 @@ const TALKS = [
 function Publications() {
   return (
     <div className="sec">
-      <Label t="Scholarship" />
       <h2>Publications &amp; Talks</h2>
       <Rule />
 
@@ -616,15 +581,15 @@ function Publications() {
       <div>
         <div className="sub-label">Awards &amp; Prizes</div>
         <div className="pub-item">
-          <div className="pub-title">Harris-Jones Prize <span style={{ color: C.accent }}>2026</span></div>
+          <div className="pub-title">Harris-Jones Prize <span style={{ color: C.muted }}>2026</span></div>
           <div className="pub-meta">Society for the Advancement of American Philosophy (SAAP). Recognizes work in the Philosophy of the Black Experience. Awarded for "Pluralism in Practice: Interpreting Black Feminism and Womanism Through Ella Lyman Cabot."</div>
         </div>
         <div className="pub-item">
-          <div className="pub-title">Outstanding Paper Prize, Finalist <span style={{ color: C.accent }}>2025</span></div>
+          <div className="pub-title">Outstanding Paper Prize, Finalist <span style={{ color: C.muted }}>2025</span></div>
           <div className="pub-meta">North American Association for Philosophy and Education (NAAPE). For "Being the Moral Teacher: Ella Lyman Cabot's Ideal Theory of Self and Egoist Virtue."</div>
         </div>
         <div className="pub-item">
-          <div className="pub-title">RWES Research Award, Application Submitted <span style={{ color: C.accent }}>2026</span></div>
+          <div className="pub-title">RWES Research Award, Application Submitted <span style={{ color: C.muted }}>2026</span></div>
           <div className="pub-meta">Ralph Waldo Emerson Society. For "Emerson, Cabot, and the Pragmatist-Feminist Tradition."</div>
         </div>
       </div>
@@ -646,7 +611,6 @@ const INST = [
 function Teaching() {
   return (
     <div className="sec">
-      <Label t="Pedagogy" />
       <h2>Teaching</h2>
       <Rule />
 
@@ -676,7 +640,7 @@ function Teaching() {
       <div style={{ marginBottom: "1.5rem" }}>
         <div className="sub-label">Adult Basic Education</div>
         <div className="pub-item" style={{ borderBottom: "none" }}>
-          <div className="pub-title">Miami Correctional Facility <span style={{ color: C.accent, fontFamily: SANS, fontSize: "0.8rem", fontWeight: 400 }}>2022–2024</span></div>
+          <div className="pub-title">Miami Correctional Facility <span style={{ color: C.muted, fontFamily: SANS, fontSize: "0.8rem", fontWeight: 400 }}>2022–2024</span></div>
           <div className="pub-meta">Adult Basic Education Instructor · Ivy Tech Community College</div>
         </div>
       </div>
@@ -723,8 +687,7 @@ const CV_DATA = [
 function CV() {
   return (
     <div className="sec">
-      <Label t="Curriculum Vitae" />
-      <h2>Academic CV</h2>
+      <h2>Curriculum Vitae</h2>
       <Rule />
       {CV_DATA.map((sec, i) => (
         <div key={i} className="cv-sec">
@@ -741,8 +704,8 @@ function CV() {
         </div>
       ))}
       <div className="cv-box">
-        <div style={{ fontFamily: SANS, fontSize: "0.85rem", color: C.textMuted, marginBottom: "0.4rem" }}>Full curriculum vitae available upon request.</div>
-        <a href="mailto:castleberryj@uindy.edu" className="cv-link">Request CV →</a>
+        <div style={{ fontFamily: SANS, fontSize: "0.85rem", color: C.mutedLight, marginBottom: "0.4rem" }}>Full curriculum vitae available upon request.</div>
+        <a href="mailto:castleberryj@uindy.edu" className="cv-link">Request CV</a>
       </div>
     </div>
   );
@@ -752,13 +715,10 @@ function CV() {
 
 function Resources() {
   const [tab, setTab] = useState("primary");
-  const [email, setEmail] = useState("");
-  const [joined, setJoined] = useState(false);
   const resources = tab === "primary" ? PRIMARY : SECONDARY;
 
   return (
     <div className="sec">
-      <Label t="Resources" />
       <h2>Cabot Resource Library</h2>
       <Rule />
       <p>A living bibliography of primary and secondary sources for the Boston ethics tradition. Maintained as part of the Boston Ethics Tradition Recovery Program and updated as new scholarship appears.</p>
@@ -771,7 +731,7 @@ function Resources() {
             </button>
           ))}
         </div>
-        <p style={{ fontFamily: SANS, fontSize: "0.81rem", color: C.textMuted, fontStyle: "italic", marginBottom: "1.1rem" }}>
+        <p style={{ fontFamily: SANS, fontSize: "0.81rem", color: C.mutedLight, fontStyle: "italic", marginBottom: "1.1rem" }}>
           {tab === "primary" ? "Works authored by Ella Lyman Cabot, Richard Clarke Cabot, or Ada Peirce McCormick." : "Scholarly works about ELC, RCC, or APM by other authors."}
         </p>
         {resources.map((r, i) => (
@@ -785,16 +745,7 @@ function Resources() {
 
       <div style={{ marginTop: "2.8rem" }}>
         <div className="sub-label">Boston Ethics Network</div>
-        <div className="callout-dark">
-          <h3>Scholars &amp; Collaborators</h3>
-          <p style={{ marginTop: "0.5rem" }}>I am building a network of scholars working on the Boston ethics tradition and related questions in American pragmatism, feminist philosophy, and philosophy of education. If you work on any figure in this tradition, I welcome contact.</p>
-          {joined
-            ? <p className="email-confirm">Thank you. I'll be in touch.</p>
-            : <div className="email-row">
-                <input className="email-input" type="email" placeholder="your@email.edu" value={email} onChange={e => setEmail(e.target.value)} aria-label="Email address" />
-                <button className="email-btn" onClick={() => email && setJoined(true)}>Connect</button>
-              </div>}
-        </div>
+        <p>I am in correspondence with a small group of scholars working on the Boston ethics tradition and related questions in American pragmatism, feminist philosophy, and philosophy of education. If you work on any figure in this tradition, write to me at <a href="mailto:castleberryj@uindy.edu">castleberryj@uindy.edu</a>.</p>
       </div>
     </div>
   );
@@ -804,8 +755,7 @@ function Resources() {
 function Contact() {
   return (
     <div className="sec">
-      <Label t="Contact" />
-      <h2>Get in Touch</h2>
+      <h2>Correspondence</h2>
       <Rule />
       <p>I welcome correspondence about the ELC recovery project, the Boston ethics tradition, potential collaborations, philosophy of education, and moral responsibility. I am particularly glad to hear from scholars interested in the Boston ethics network, potential co-editors, and press editors working on history of philosophy or American philosophy series.</p>
 
@@ -824,21 +774,17 @@ function Contact() {
         ))}
       </div>
 
-      <div style={{ marginTop: "2rem", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1rem" }}>
-        {[
-          { heading: "For press and series editors", body: "I am actively developing pitches for the Cambridge Elements Women in the History of Philosophy series and the Oxford New Histories of Philosophy series. Inquiries are welcome." },
-          { heading: "For scholars in related fields", body: "I am seeking contributors for the Resource Library and collaborators on the Boston Ethics Tradition Recovery Program. The Trust grants access to unpublished ELC material." },
-        ].map((box, i) => (
-          <div key={i} style={{ background: C.bgAlt, padding: "1.1rem 1.3rem", borderRadius: "4px", borderTop: `3px solid ${C.accentBar}` }}>
-            <div style={{ fontFamily: SANS, fontSize: "0.77rem", fontWeight: 600, color: C.accent, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "0.5rem" }}>{box.heading}</div>
-            <p style={{ fontSize: "0.88rem", lineHeight: "1.65", color: C.text }}>{box.body}</p>
-          </div>
-        ))}
+      <div style={{ marginTop: "2.4rem" }}>
+        <div className="sub-label">Press &amp; series editors</div>
+        <p>I am actively developing pitches for the Cambridge Elements Women in the History of Philosophy series and the Oxford New Histories of Philosophy series. Inquiries are welcome.</p>
       </div>
 
-      <div className="callout" style={{ marginTop: "1.8rem" }}>
-        <p>For CV, syllabi, writing samples, or paper drafts, email directly. Response time is typically within one week.</p>
+      <div style={{ marginTop: "1.6rem" }}>
+        <div className="sub-label">Scholars in related fields</div>
+        <p>I am seeking contributors for the Resource Library and collaborators on the Boston Ethics Tradition Recovery Program. The Trust grants access to unpublished ELC material.</p>
       </div>
+
+      <p style={{ marginTop: "1.8rem", fontStyle: "italic" }}>For CV, syllabi, writing samples, or paper drafts, email directly. Response time is typically within one week.</p>
     </div>
   );
 }
@@ -893,17 +839,6 @@ function useSEO(s) {
   }, [s]);
 }
 
-// ── BACK TO TOP ───────────────────────────────────────────────────
-function useScrollTop() {
-  const [show, setShow] = useState(false);
-  useEffect(() => {
-    const onScroll = () => setShow(window.scrollY > 400);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-  return show;
-}
-
 // ── APP ───────────────────────────────────────────────────────────
 const SECTIONS = ["Home","Research","Publications","Teaching","CV","Resources","Contact"];
 const VIEWS = {
@@ -914,10 +849,9 @@ const VIEWS = {
 export default function App() {
   const [active, setActive] = useState("Home");
   const [open, setOpen] = useState(false);
-  const showTop = useScrollTop();
   useSEO(active);
 
-  function go(s) { setActive(s); setOpen(false); window.scrollTo({ top: 0, behavior: "smooth" }); }
+  function go(s) { setActive(s); setOpen(false); window.scrollTo({ top: 0 }); }
 
   return (
     <div id="site-root">
@@ -948,16 +882,9 @@ export default function App() {
         {VIEWS[active]}
       </main>
 
-      <button
-        className={`back-top ${showTop ? "visible" : ""}`}
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        aria-label="Back to top"
-      >↑</button>
-
       <footer className="footer">
         <div className="footer-inner">
           <p>&copy; {new Date().getFullYear()} Jacob B. Castleberry &nbsp;·&nbsp; Literary rights to ELC's unpublished material held by the Ella Lyman Cabot Trust</p>
-          <p>Website built with <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude</a></p>
         </div>
       </footer>
     </div>
