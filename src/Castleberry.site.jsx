@@ -46,14 +46,22 @@ const C = {
   newsSlate:"#3a5a7a",  // slate for news strip accent
   newsBg:   "#edf1f5",  // very light slate tint for news strip
 };
-const SERIF   = "'Spectral', Georgia, 'Times New Roman', serif";
-const LABEL   = "'Cormorant SC', Georgia, serif";
-const DISPLAY = "'Cormorant Garamond', Georgia, 'Times New Roman', serif";
-// SANS removed — this design uses serif and small-caps throughout for period coherence
+const SERIF   = "'EB Garamond', Georgia, 'Times New Roman', serif";
+const LABEL   = "'EB Garamond', Georgia, serif"; // small caps via font-variant-caps
+const DISPLAY = "'EB Garamond', Georgia, 'Times New Roman', serif";
+const FELL    = "'IM Fell English', Georgia, 'Times New Roman', serif";
 const SANS = LABEL; // alias for backward compat with existing JSX references
 
+// Convert 1..30 to Roman numerals — for the projects list, set in display caps.
+function roman(n) {
+  const r = [["XXX",30],["XX",20],["XIX",19],["XV",15],["XIV",14],["X",10],["IX",9],["V",5],["IV",4],["I",1]];
+  let out = "";
+  for (const [s, v] of r) while (n >= v) { out += s; n -= v; }
+  return out;
+}
+
 const css = `
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cormorant+SC:wght@400;500;600&family=Spectral:ital,wght@0,400;0,500;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=IM+Fell+English:ital@0;1&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -66,6 +74,9 @@ const css = `
   font-size: 20px;
   line-height: 1.65;
   -webkit-text-size-adjust: 100%;
+  font-feature-settings: "kern" 1, "liga" 1, "dlig" 1, "calt" 1;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+  text-rendering: optimizeLegibility;
 }
 
 /* ── Skip nav ── */
@@ -85,10 +96,10 @@ const css = `
 }
 .nav-inner { max-width: 860px; margin: 0 auto; padding: 0 1.4rem; height: 58px; display: flex; align-items: center; justify-content: space-between; }
 .nav-logo {
-  font-family: ${DISPLAY};
-  font-size: 1rem; font-weight: 400; font-style: italic;
+  font-family: ${FELL};
+  font-size: 1.05rem; font-weight: 400; font-style: italic;
   color: #f0e8d8 !important; background: none; border: none; cursor: pointer;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
 }
 .nav-logo:hover { color: #e8c97a !important; }
 .nav-links { display: flex; list-style: none; }
@@ -124,22 +135,23 @@ const css = `
 
 /* ── Typography ── */
 h1 {
-  font-family: ${DISPLAY}; font-weight: 300; font-style: italic;
-  font-size: clamp(2.4rem, 5.5vw, 3.6rem); line-height: 1.05;
-  color: #5c1515 !important; letter-spacing: -0.01em;
+  font-family: ${DISPLAY}; font-weight: 500; font-style: normal;
+  font-size: clamp(2.6rem, 6vw, 4rem); line-height: 1.02;
+  color: #5c1515 !important; letter-spacing: 0;
+  font-feature-settings: "kern" 1, "liga" 1, "dlig" 1, "swsh" 1;
 }
 h2 {
-  font-family: ${DISPLAY}; font-weight: 600;
-  font-size: clamp(1.45rem, 3vw, 2rem); line-height: 1.2;
-  color: #5c1515 !important; margin-bottom: 0.05em;
+  font-family: ${DISPLAY}; font-weight: 500; font-style: italic;
+  font-size: clamp(1.55rem, 3.2vw, 2.15rem); line-height: 1.2;
+  color: #5c1515 !important; margin-bottom: 0.1em;
 }
 h3 {
-  font-family: ${LABEL}; font-weight: 700; font-size: 0.88rem;
-  text-transform: uppercase; letter-spacing: 0.18em;
+  font-family: ${LABEL}; font-weight: 500; font-size: 0.95rem;
+  font-variant-caps: all-small-caps; letter-spacing: 0.14em;
   color: #3d2a18 !important; margin-bottom: 0.6rem;
 }
-p { font-family: ${SERIF}; font-size: 1rem; line-height: 1.8; color: #1a1209 !important; }
-p + p { margin-top: 1rem; }
+p { font-family: ${SERIF}; font-size: 1.05rem; line-height: 1.75; color: #1a1209 !important; }
+p + p { margin-top: 1rem; text-indent: 1.4em; }
 em { font-style: italic; }
 strong { font-weight: 600; color: #1a1209 !important; }
 a { color: #2a4a6a !important; text-underline-offset: 3px; }
@@ -151,15 +163,104 @@ a:hover { color: #5c1515 !important; }
   margin: 1.5rem 0 2rem;
 }
 
+/* Centered fleuron section divider — replaces or accompanies the gold rule */
+.fleuron {
+  text-align: center;
+  font-family: ${FELL};
+  color: #c9a84c;
+  font-size: 1.5rem;
+  line-height: 1;
+  margin: 2.4rem auto;
+  letter-spacing: 0.6em;
+  padding-left: 0.6em; /* compensate for tracking */
+}
+.fleuron::before { content: "❦"; }
+
 .lead {
-  font-family: ${LABEL}; font-size: 0.96rem; letter-spacing: 0.08em;
+  font-family: ${LABEL}; font-size: 1rem; letter-spacing: 0.05em;
+  font-variant-caps: all-small-caps;
   color: #3d2a18 !important; margin: 0.4rem 0 1.6rem; line-height: 1.6;
 }
 .sub-label {
-  font-family: ${LABEL}; font-size: 0.86rem; font-weight: 500;
-  text-transform: uppercase; letter-spacing: 0.16em;
+  font-family: ${LABEL}; font-size: 0.96rem; font-weight: 500;
+  font-variant-caps: all-small-caps; letter-spacing: 0.12em;
   color: #3d2a18 !important; border-bottom: 1px solid #d4c9b8;
   padding-bottom: 0.45rem; margin-bottom: 1.2rem;
+}
+
+/* ── Masthead (home page) ── set like a 19c periodical front ── */
+.masthead {
+  text-align: center;
+  padding: 1.6rem 0 2.2rem;
+  border-top: 3px double #c9a84c;
+  border-bottom: 3px double #c9a84c;
+  margin: 0 0 2.4rem;
+  position: relative;
+}
+.masthead-line {
+  font-family: ${LABEL};
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.32em;
+  font-size: 0.86rem;
+  color: #4a1010 !important;
+  padding-left: 0.32em;
+  margin-bottom: 1.4rem;
+}
+.masthead-line .dot { color: #c9a84c; margin: 0 0.7em; }
+.masthead h1 {
+  font-size: clamp(2.8rem, 7vw, 4.4rem);
+  font-weight: 500;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0;
+  margin: 0;
+}
+.masthead-motto {
+  font-family: ${FELL};
+  font-style: italic;
+  font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+  color: #3d2a18 !important;
+  line-height: 1.4;
+  margin-top: 1rem;
+}
+.masthead-rule {
+  width: 70%; max-width: 360px;
+  height: 0;
+  border-top: 1px solid #c9a84c;
+  margin: 1.2rem auto 0;
+  position: relative;
+}
+.masthead-rule::before {
+  content: "❦";
+  position: absolute;
+  top: -0.7em;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #f5efe4;
+  padding: 0 0.6rem;
+  color: #c9a84c;
+  font-family: ${FELL};
+  font-size: 1.05rem;
+}
+
+/* ── Drop cap ── for opening prose paragraphs */
+.dropcap::first-letter {
+  font-family: ${DISPLAY};
+  font-weight: 500;
+  font-size: 4.2em;
+  line-height: 0.86;
+  float: left;
+  padding: 0.05em 0.12em 0 0;
+  margin-right: 0.04em;
+  color: #5c1515;
+  font-feature-settings: "swsh" 1;
+}
+.dropcap + p { text-indent: 0; }
+
+/* Hanging indent for bibliography-style entries */
+.hang {
+  padding-left: 1.6em;
+  text-indent: -1.6em;
 }
 
 /* ── Callouts ── */
@@ -176,42 +277,106 @@ a:hover { color: #5c1515 !important; }
 .callout-dark p { color: #f0e8d8 !important; font-size: 0.94rem; line-height: 1.75; }
 .callout-dark h3 { color: #e8c97a !important; }
 
-/* ── News strip ── */
+/* ── Notices (journal-style, not an alert box) ── */
 .news-strip {
-  background: #f5e8c4 !important; border-left: 3px solid #c9a84c;
-  padding: 1.1rem 1.5rem; margin-bottom: 2.5rem;
+  background: transparent !important;
+  border-top: 1px solid #c4b9a8;
+  border-bottom: 1px solid #c4b9a8;
+  padding: 1rem 0 0.6rem;
+  margin: 0 0 2.6rem;
 }
-.news-strip h3 { color: #4a1010 !important; margin-bottom: 0.6rem; }
-.news-item { display: flex; gap: 0.8rem; align-items: baseline; padding: 0.3rem 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
+.news-strip h3 {
+  text-align: center;
+  color: #5c1515 !important;
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.32em;
+  padding-left: 0.32em;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.7rem;
+}
+.news-item { display: flex; gap: 1rem; align-items: baseline; padding: 0.32rem 0; border-bottom: 1px dotted #d4c9b8; }
 .news-item:last-child { border-bottom: none; }
-.news-date { font-family: ${LABEL}; font-size: 0.96rem; letter-spacing: 0.1em; color: #7a5c0f !important; min-width: 56px; flex-shrink: 0; }
-.news-text { font-family: ${SERIF}; font-size: 0.9rem; color: #1a1209 !important; line-height: 1.75; }
-
-/* ── Specialization chips ── */
-.spec-grid { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.7rem; }
-.spec-chip {
-  font-family: ${LABEL}; font-size: 0.96rem; letter-spacing: 0.08em;
-  color: #4a1010 !important; background: #f0e4d4 !important;
-  border: 1px solid #d4c9b8; padding: 4px 11px; line-height: 1.4;
+.news-date {
+  font-family: ${FELL};
+  font-style: italic;
+  font-size: 1rem;
+  color: #7a5c0f !important;
+  min-width: 56px;
+  flex-shrink: 0;
 }
-.comp-chip {
-  font-family: ${LABEL}; font-size: 0.96rem; letter-spacing: 0.08em;
-  color: #3d2a18 !important; background: #f5efe4 !important;
-  border: 1px solid #d4c9b8; padding: 4px 11px; line-height: 1.4;
+.news-text { font-family: ${SERIF}; font-size: 0.98rem; color: #1a1209 !important; line-height: 1.6; }
+
+/* ── Specialization chips: set as catalog labels, not pill buttons ── */
+.spec-grid { display: flex; flex-wrap: wrap; gap: 0.5rem 1.1rem; margin-top: 0.7rem; }
+.spec-chip, .comp-chip {
+  font-family: ${SERIF}; font-size: 0.98rem; font-style: italic;
+  background: transparent !important; border: none;
+  padding: 0; line-height: 1.5;
+  color: #1a1209 !important;
+  position: relative;
+}
+.spec-chip { color: #4a1010 !important; }
+.spec-chip + .spec-chip::before, .comp-chip + .comp-chip::before {
+  content: "❦";
+  color: #c9a84c;
+  font-family: ${FELL};
+  font-style: normal;
+  margin-right: 1.1rem;
+  margin-left: -1.1rem;
+  font-size: 0.8em;
+  display: inline-block;
 }
 
 /* ── Projects ── */
 .project-list { margin-top: 1.5rem; border-top: 1px solid #d4c9b8; }
 .project-item { display: flex; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid #d4c9b8; }
-.project-num { font-family: ${LABEL}; font-size: 0.96rem; letter-spacing: 0.1em; color: #c9a84c !important; min-width: 1.6rem; padding-top: 4px; }
-.project-title { font-family: ${DISPLAY}; font-size: 1.04rem; font-weight: 500; color: #5c1515 !important; margin-bottom: 0.3rem; }
-.project-desc { font-family: ${SERIF}; font-size: 0.94rem; line-height: 1.75; color: #3a2a1a !important; }
+.project-num {
+  font-family: ${FELL};
+  font-size: 1.15rem;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  color: #c9a84c !important;
+  min-width: 2.4rem;
+  padding-top: 2px;
+  text-align: right;
+}
+.project-title { font-family: ${DISPLAY}; font-size: 1.12rem; font-weight: 500; font-style: italic; color: #5c1515 !important; margin-bottom: 0.3rem; }
+.project-desc { font-family: ${SERIF}; font-size: 0.98rem; line-height: 1.7; color: #3a2a1a !important; }
+.project-desc + .project-desc, .project-item p + p { text-indent: 0; }
 
-/* ── Publications ── */
-.pub-item { padding: 1rem 0; border-bottom: 1px solid #ddd0bc; }
-.pub-title { font-family: ${DISPLAY}; font-size: 1rem; font-weight: 500; color: #5c1515 !important; margin-bottom: 0.18rem; }
-.pub-meta { font-family: ${LABEL}; font-size: 0.88rem; letter-spacing: 0.08em; color: #3d2a18 !important; }
-.pub-note { font-family: ${SERIF}; font-size: 0.92rem; font-style: italic; color: #3a5a7a !important; margin-top: 0.14rem; }
+/* ── Paper list (research) ── set as catalog entries with italic venue */
+.paper-group { margin-bottom: 1.4rem; }
+.group-label {
+  font-family: ${LABEL};
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.16em;
+  font-size: 0.95rem;
+  color: #5c1515 !important;
+  margin-bottom: 0.7rem;
+}
+.paper-row { padding: 0.45rem 0 0.55rem 1.6em; text-indent: -1.6em; border-bottom: 1px dotted #d4c9b8; }
+.paper-row:last-child { border-bottom: none; }
+.paper-title { font-family: ${SERIF}; font-size: 1rem; color: #5c1515 !important; }
+.paper-target { font-family: ${SERIF}; font-size: 0.96rem; font-style: italic; color: #3a5a7a !important; text-indent: 0; display: block; margin-top: 0.1rem; }
+
+/* ── Reprint groups (research) ── */
+.reprint-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem 1.8rem; margin-top: 0.5rem; }
+.reprint-author { font-family: ${DISPLAY}; font-style: italic; font-size: 1.04rem; color: #5c1515 !important; margin-bottom: 0.2rem; padding-top: 0.6rem; border-top: 1px solid #d4c9b8; }
+.reprint-work { font-family: ${SERIF}; font-size: 0.96rem; color: #1a1209 !important; line-height: 1.5; padding-left: 1rem; text-indent: -1rem; }
+@media (max-width: 640px) { .reprint-grid { grid-template-columns: 1fr; } }
+
+/* ── Publications (set as a real bibliography: hanging indent, no rules) ── */
+.pub-item {
+  padding: 0.55rem 0 0.55rem 1.6em;
+  text-indent: -1.6em;
+  border-bottom: none;
+}
+.pub-title { font-family: ${SERIF}; font-size: 1rem; font-weight: 500; color: #5c1515 !important; display: inline; }
+.pub-title em { font-style: italic; }
+.pub-meta { font-family: ${SERIF}; font-size: 1rem; color: #1a1209 !important; display: inline; text-indent: 0; }
+.pub-meta::before { content: ". "; }
+.pub-note { font-family: ${SERIF}; font-size: 0.92rem; font-style: italic; color: #3a5a7a !important; display: block; margin-top: 0.1rem; text-indent: 0; }
 
 /* ── CV ── */
 .cv-sec { margin-bottom: 2rem; }
@@ -258,11 +423,28 @@ a:hover { color: #5c1515 !important; }
 .res-hint { font-family: ${SERIF}; font-size: 0.96rem; font-style: italic; color: #3d2a18 !important; margin-bottom: 1.1rem; }
 
 /* ── Footer ── */
-.footer { background: #4a1010 !important; border-top: 2px solid #c9a84c; padding: 1.4rem 1.5rem; }
-.footer-inner { max-width: 860px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.4rem; }
-.footer p { font-family: ${LABEL}; font-size: 0.86rem; letter-spacing: 0.06em; color: rgba(240,232,216,0.65) !important; }
-.footer a { color: rgba(240,232,216,0.65) !important; }
+.footer { background: #4a1010 !important; border-top: 2px solid #c9a84c; padding: 1.8rem 1.5rem; }
+.footer-inner {
+  max-width: 860px; margin: 0 auto;
+  display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+  text-align: center;
+}
+.footer p {
+  font-family: ${SERIF};
+  font-size: 0.9rem;
+  color: rgba(240,232,216,0.7) !important;
+  line-height: 1.5;
+}
+.footer a { color: rgba(240,232,216,0.7) !important; }
 .footer a:hover { color: #f0e8d8 !important; }
+.colophon {
+  font-family: ${FELL} !important;
+  font-style: italic;
+  font-size: 0.88rem !important;
+  color: rgba(240,232,216,0.55) !important;
+  letter-spacing: 0.01em;
+}
+.colophon .pilcrow { color: #c9a84c; margin: 0 0.4em; }
 
 /* ── Print ── */
 @media print {
@@ -296,7 +478,6 @@ a:hover { color: #5c1515 !important; }
 
 // ── PRIMITIVES ────────────────────────────────────────────────────
 const Rule = () => <div className="rule" />;
-const Label = ({ t }) => <h3>{t}</h3>;
 const Dot = () => <div className="cv-dot" />;
 
 // ── HOME ──────────────────────────────────────────────────────────
@@ -309,13 +490,19 @@ const NEWS = [
 function Home() {
   return (
     <div className="sec">
-      <Label t="Moral Philosopher" />
-      <h1>Jacob B. Castleberry</h1>
+      <header className="masthead">
+        <div className="masthead-line">
+          Moral Philosopher <span className="dot">·</span> Independent Scholar <span className="dot">·</span> MMXXVI
+        </div>
+        <h1>Jacob B. Castleberry</h1>
+        <p className="masthead-motto">A recovery of the Boston ethics tradition</p>
+        <div className="masthead-rule" />
+      </header>
+
       <p className="lead">MA Philosophy, Western Michigan University &nbsp;·&nbsp; BA, Indiana University Kokomo</p>
-      <Rule />
 
       <div className="news-strip">
-        <h3>Recent</h3>
+        <h3>Notices</h3>
         {NEWS.map((n, i) => (
           <div key={i} className="news-item">
             <span className="news-date">{n.date}</span>
@@ -324,17 +511,19 @@ function Home() {
         ))}
       </div>
 
-      <p>I am a philosopher working at the intersection of American pragmatism, feminist philosophy, history of ethics, and philosophy of education. My research centers on the recovery and philosophical reconstruction of the Boston ethics tradition, a neglected network of late nineteenth- and early twentieth-century American moral philosophy centered at Harvard and rooted in Boston Unitarian intellectual culture.</p>
+      <p className="dropcap">I am a philosopher working at the intersection of American pragmatism, feminist philosophy, history of ethics, and philosophy of education. My research centers on the recovery and philosophical reconstruction of the Boston ethics tradition, a neglected network of late nineteenth- and early twentieth-century American moral philosophy centered at Harvard and rooted in Boston Unitarian intellectual culture.</p>
       <p>The animating project of my scholarship is the recovery of <em>Ella Lyman Cabot</em> (1866–1934): ethics educator, Massachusetts Board of Education member for nearly three decades, author of eleven ethics books, and student of George Herbert Palmer and Josiah Royce at Harvard. I hold literary rights to her unpublished material through the Ella Lyman Cabot Trust and have fully digitized her papers at the Schlesinger Library, Radcliffe Institute.</p>
       <p>I am a moral philosopher working as an independent scholar. I am the recipient of the 2026 Harris-Jones Prize from the Society for the Advancement of American Philosophy.</p>
 
-      <div style={{ marginTop: "2rem" }}>
+      <div className="fleuron" />
+
+      <div style={{ marginTop: "0.6rem" }}>
         <div className="sub-label">Areas of Specialization</div>
         <div className="spec-grid">
           {["Pragmatist metaphysics and history of American philosophy","Metaethics","Moral responsibility","Philosophy of education"].map((s,i) => <span key={i} className="spec-chip">{s}</span>)}
         </div>
-        <div style={{ marginTop: "0.65rem" }}>
-          <div style={{ fontFamily: SANS, fontSize: "0.72rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: "#555555", marginBottom: "0.4rem" }}>Areas of Competence</div>
+        <div style={{ marginTop: "1.4rem" }}>
+          <div className="sub-label">Areas of Competence</div>
           <div className="spec-grid">
             {["Epistemology","Philosophy of mind","Feminist philosophy","Ethics","Philosophy of science"].map((s,i) => <span key={i} className="comp-chip">{s}</span>)}
           </div>
@@ -400,7 +589,7 @@ function Research() {
       <div className="project-list">
         {PROJECTS.map((p, i) => (
           <div key={i} className="project-item">
-            <div className="project-num">{i + 1}</div>
+            <div className="project-num">{roman(i + 1)}</div>
             <div>
               <div className="project-title">{p.t}</div>
               <div className="project-desc">{p.d}</div>
@@ -411,18 +600,18 @@ function Research() {
 
       <div style={{ marginTop: "2.6rem" }}>
         <div className="sub-label">Critical Reprint Program</div>
-        <p style={{ fontFamily: SERIF, fontSize: "0.97rem", lineHeight: "1.75", color: "#111111", marginBottom: "1.2rem" }}>The Boston Ethics Tradition Recovery Program includes a series of critical reissues of the core published texts in the tradition. Each volume receives a new scholarly introduction, regularized pagination, and editorial footnotes cross-referencing related works, unpublished manuscripts, and archival sources — providing the scholarly apparatus needed to support sustained future research on these figures. All texts are in the public domain. Target: Harvard University Press, Oxford University Press, or Cambridge University Press.</p>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 1.5rem" }}>
+        <p>The Boston Ethics Tradition Recovery Program includes a series of critical reissues of the core published texts in the tradition. Each volume receives a new scholarly introduction, regularized pagination, and editorial footnotes cross-referencing related works, unpublished manuscripts, and archival sources — providing the scholarly apparatus needed to support sustained future research on these figures. All texts are in the public domain. Target: Harvard University Press, Oxford University Press, or Cambridge University Press.</p>
+        <div className="reprint-grid">
           {[
             { author: "Ella Lyman Cabot", works: ["Everyday Ethics (1906)", "Temptations to Rightdoing (1929)"] },
             { author: "Richard Clarke Cabot", works: ["What Men Live By (1914)", "The Meaning of Right and Wrong (1933)", "Adventures on the Borderland of Ethics (1926)"] },
             { author: "George Herbert Palmer", works: ["The Field of Ethics (1901)", "The Nature of Goodness (1903)"] },
             { author: "Josiah Royce", works: ["The Philosophy of Loyalty (1908)"] },
           ].map((group, i) => (
-            <div key={i} style={{ padding: "0.7rem 0", borderBottom: "1px solid #e5e7eb" }}>
-              <div style={{ fontFamily: DISPLAY, fontSize: "0.97rem", fontWeight: 500, color: "#5c1515", marginBottom: "0.3rem" }}>{group.author}</div>
+            <div key={i}>
+              <div className="reprint-author">{group.author}</div>
               {group.works.map((w, j) => (
-                <div key={j} style={{ fontFamily: SANS, fontSize: "0.82rem", color: "#555555", lineHeight: "1.6" }}>{w}</div>
+                <div key={j} className="reprint-work">{w}</div>
               ))}
             </div>
           ))}
@@ -431,50 +620,50 @@ function Research() {
 
       <div style={{ marginTop: "2.6rem" }}>
         <div className="sub-label">Papers in Progress</div>
-        <p style={{ fontFamily: SERIF, fontSize: "0.95rem", color: "#555555", marginBottom: "1rem", lineHeight: "1.7" }}>Selected papers from the active research program. Primary target venues listed.</p>
+        <p style={{ fontStyle: "italic", marginBottom: "1.4rem" }}>Selected papers from the active research program. Primary target venues listed.</p>
 
-        <div style={{ marginBottom: "1.2rem" }}>
-          <div style={{ fontFamily: SANS, fontSize: "0.73rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.muted, marginBottom: "0.6rem" }}>James–Cabot–Murdoch Series</div>
+        <div className="paper-group">
+          <div className="group-label">James–Cabot–Murdoch Series</div>
           {[
             { t: "Cabot's Account of Experience", v: "William James Studies" },
             { t: "Cabot's Account of Community", v: "Journal of Speculative Philosophy" },
             { t: "James, Cabot, and Murdoch on Suffering", v: "Ethics / Journal of Moral Philosophy" },
           ].map((p, i) => (
-            <div key={i} style={{ padding: "0.5rem 0", borderBottom: "1px solid #e5e7eb" }}>
-              <div style={{ fontFamily: DISPLAY, fontSize: "0.97rem", fontWeight: 500, color: "#5c1515" }}>{p.t}</div>
-              <div style={{ fontFamily: SANS, fontSize: "0.8rem", color: "#555555", marginTop: "0.1rem" }}>Target: <em>{p.v}</em></div>
+            <div key={i} className="paper-row">
+              <span className="paper-title">{p.t}.</span>
+              <span className="paper-target">Target: <em>{p.v}</em></span>
             </div>
           ))}
         </div>
 
-        <div style={{ marginBottom: "1.2rem" }}>
-          <div style={{ fontFamily: SANS, fontSize: "0.73rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.muted, marginBottom: "0.6rem" }}>ELC Recovery Papers</div>
+        <div className="paper-group">
+          <div className="group-label">ELC Recovery Papers</div>
           {[
             { t: "Ethical Life and the Structure of Selfhood: Reconstructing Cabot's Minimal Metaphysics", v: "Journal of Speculative Philosophy" },
             { t: "Minimal Metaphysics and Pragmatist-Feminism", v: "Metaphilosophy" },
             { t: "Being the Moral Teacher: Cabot's Ideal Theory of Self and Egoist Virtue", v: "Journal of Moral Education" },
-            { t: "Cabot’s Virtue Theory: A Response to Heney (2023)", v: "History of Philosophy Quarterly" },
+            { t: "Cabot's Virtue Theory: A Response to Heney (2023)", v: "History of Philosophy Quarterly" },
             { t: "Emerson, Cabot, and the Pragmatist-Feminist Tradition", v: "Emerson Society Papers" },
             { t: "ELC as Spiritual Director: Practice, Theology, and the Limits of the Label", v: "History of philosophy and American religion journals" },
             { t: "Ada Peirce McCormick as Philosophical Witness", v: "American philosophy and history of philosophy journals" },
           ].map((p, i) => (
-            <div key={i} style={{ padding: "0.5rem 0", borderBottom: "1px solid #e5e7eb" }}>
-              <div style={{ fontFamily: DISPLAY, fontSize: "0.97rem", fontWeight: 500, color: "#5c1515" }}>{p.t}</div>
-              <div style={{ fontFamily: SANS, fontSize: "0.8rem", color: "#555555", marginTop: "0.1rem" }}>Target: <em>{p.v}</em></div>
+            <div key={i} className="paper-row">
+              <span className="paper-title">{p.t}.</span>
+              <span className="paper-target">Target: <em>{p.v}</em></span>
             </div>
           ))}
         </div>
 
-        <div>
-          <div style={{ fontFamily: SANS, fontSize: "0.73rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: C.muted, marginBottom: "0.6rem" }}>Systematic Papers</div>
+        <div className="paper-group">
+          <div className="group-label">Systematic Papers</div>
           {[
             { t: "Purposive Pluralism: A Third Option Between Global Expressivism and Bifurcationism", v: "BJHP / Journal of the History of Philosophy / Philosophical Studies" },
             { t: "Purposive Selfhood and the Metaphysics of Habit", v: "Transactions of the Charles S. Peirce Society; MSA 2027 abstract submitted" },
             { t: "Probabilistic Compatibilism", v: "Philosophical Psychology" },
           ].map((p, i) => (
-            <div key={i} style={{ padding: "0.5rem 0", borderBottom: "1px solid #e5e7eb" }}>
-              <div style={{ fontFamily: DISPLAY, fontSize: "0.97rem", fontWeight: 500, color: "#5c1515" }}>{p.t}</div>
-              <div style={{ fontFamily: SANS, fontSize: "0.8rem", color: "#555555", marginTop: "0.1rem" }}>Target: <em>{p.v}</em></div>
+            <div key={i} className="paper-row">
+              <span className="paper-title">{p.t}.</span>
+              <span className="paper-target">Target: <em>{p.v}</em></span>
             </div>
           ))}
         </div>
@@ -482,7 +671,7 @@ function Research() {
 
       <div style={{ marginTop: "2.6rem" }}>
         <div className="sub-label">Long-Range Research</div>
-        <p style={{ fontFamily: SERIF, fontSize: "0.97rem", lineHeight: "1.75", color: "#111111" }}>Beyond the recovery program, I am developing several long-range projects in systematic philosophy and the history of philosophy. These include a book on collective purposive agency as a sequel to <em>The Purposive Self</em>, and an exploratory argument identifying Thomas Reid, Kierkegaard, and Ella Lyman Cabot as a unified tradition in the philosophy of purposive selfhood running from Scottish common sense philosophy through German existentialism into American pragmatism. I am also developing the Purposive Pluralism project as a contribution to the metaethics literature on expressivism and bifurcationism, and an Oxford Pragmatism Review essay connecting the recovery work to current debates in the history of British analytic philosophy.</p>
+        <p>Beyond the recovery program, I am developing several long-range projects in systematic philosophy and the history of philosophy. These include a book on collective purposive agency as a sequel to <em>The Purposive Self</em>, and an exploratory argument identifying Thomas Reid, Kierkegaard, and Ella Lyman Cabot as a unified tradition in the philosophy of purposive selfhood running from Scottish common sense philosophy through German existentialism into American pragmatism. I am also developing the Purposive Pluralism project as a contribution to the metaethics literature on expressivism and bifurcationism, and an Oxford Pragmatism Review essay connecting the recovery work to current debates in the history of British analytic philosophy.</p>
       </div>
 
       <div className="callout">
@@ -885,6 +1074,7 @@ export default function App() {
       <footer className="footer">
         <div className="footer-inner">
           <p>&copy; {new Date().getFullYear()} Jacob B. Castleberry &nbsp;·&nbsp; Literary rights to ELC's unpublished material held by the Ella Lyman Cabot Trust</p>
+          <p className="colophon">Set in EB Garamond &amp; IM Fell English <span className="pilcrow">¶</span> Boston Ethics Tradition Recovery Program</p>
         </div>
       </footer>
     </div>
