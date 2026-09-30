@@ -517,7 +517,7 @@ function Home() {
       </div>
 
       <p className="dropcap">I am a philosopher working at the intersection of American pragmatism, feminist philosophy, history of ethics, and philosophy of education. My research centers on the recovery and philosophical reconstruction of the Boston ethics tradition, a neglected network of late nineteenth- and early twentieth-century American moral philosophy centered at Harvard and rooted in Boston Unitarian intellectual culture.</p>
-      <p>The animating project of my scholarship is the recovery of <em>Ella Lyman Cabot</em> (1866–1934): ethics educator, Massachusetts Board of Education member for nearly three decades, author of eleven ethics books, and student of George Herbert Palmer and Josiah Royce at Harvard. I hold literary rights to her unpublished material through the Ella Lyman Cabot Trust and have fully digitized her papers at the Schlesinger Library, Radcliffe Institute.</p>
+      <p>The animating project of my scholarship is the recovery of <em>Ella Lyman Cabot</em> (1866–1934): ethics educator, Massachusetts Board of Education member for nearly three decades, author of books on ethics and moral education, and student of George Herbert Palmer and Josiah Royce at Harvard. I hold literary rights to her unpublished material through the Ella Lyman Cabot Trust and have fully digitized her papers at the Schlesinger Library, Radcliffe Institute. My current book, <em>An Untold American Philosophy of Love: Ella Lyman Cabot on Becoming Ourselves</em>, reconstructs and develops her philosophy to argue for love as the normative foundation of ethics.</p>
       <p>I am a moral philosopher working as an independent scholar. I am the recipient of the 2026 Harris-Jones Prize from the Society for the Advancement of American Philosophy and a 2026 Research Award from the Ralph Waldo Emerson Society, and I teach as an Associate Adjunct in Philosophy at the University of Indianapolis.</p>
 
       <div className="fleuron" />
@@ -546,12 +546,12 @@ function Home() {
 // ── RESEARCH ──────────────────────────────────────────────────────
 const PROJECTS = [
   {
-    t: "Ella Lyman Cabot: Purposive Selfhood and the Philosophical Education of Children (Edited Volume, Routledge)",
-    d: "Co-edited with Maughn Rollins Gregory and Megan Jane Laverty for the Routledge Philosophy for Children Forebears series. The first collected edition of Cabot's writings on the philosophical education of children, organized in five parts, each pairing her primary texts with an original commentary chapter by a contemporary scholar, with an editorial introduction and conclusion. Manuscript complete; awaiting series editors' approval for submission.",
+    t: "An Untold American Philosophy of Love: Ella Lyman Cabot on Becoming Ourselves (Monograph, current priority)",
+    d: "The central book of the recovery project. It reconstructs and develops Cabot's philosophy to argue for love as the normative foundation of ethics: how attraction and commitment give a life a chosen purpose, how a relationship makes particular obligations one's own and keeps them binding through failure, and how loving another adequately requires recognizing that person's independent purposes. Later chapters set Cabot beside MacIntyre and contemporary work on attention, practical identity, and aspiration, and develop an account of forgiveness as a test of accountability and changed purposes. Approximately 90,000 words. Formal proposal invited by John Kaag for Bloomsbury's American Philosophy Series; proposal in preparation.",
   },
   {
-    t: "An Untold American Philosophy of Love: Ella Lyman Cabot on Becoming Ourselves (Monograph)",
-    d: "A book reconstructing and developing Cabot's philosophy to argue for love as the normative foundation of ethics: love as attraction and commitment, the ownership of obligation, and individuality. Formal proposal invited by John Kaag for Bloomsbury's American Philosophy Series; proposal in preparation.",
+    t: "Ella Lyman Cabot: Purposive Selfhood and the Philosophical Education of Children (Edited Volume, Routledge)",
+    d: "Co-edited with Maughn Rollins Gregory and Megan Jane Laverty for the Routledge Philosophy for Children Forebears series. The first collected edition of Cabot's writings on the philosophical education of children, organized in five parts, each pairing her primary texts with an original commentary chapter by a contemporary scholar, with an editorial introduction and conclusion. Manuscript complete; awaiting series editors' approval for submission.",
   },
   {
     t: "Ella Lyman Cabot: Philosophical Writings (Edition)",
@@ -563,6 +563,33 @@ const PROJECTS = [
   },
 ];
 
+const GOALS = [
+  {
+    h: "Fellowships",
+    items: [
+      { t: "Love Ethic Faculty Fellowship, 2027–28", v: "Institute for Ethics and the Common Good, University of Notre Dame", d: "A year in residence to complete An Untold American Philosophy of Love, rewriting existing arguments into an integrated manuscript of about 90,000 words, with a public-engagement component bringing Cabot's Philosophy for Children methods to Notre Dame students and a public discussion." },
+      { t: "Fulbright U.S. Student Program, Canada Research Award, 2027–28", v: "University of Saskatchewan, hosted by Diana Heney", d: "\"Who Else Did What Cabot Did: Bridging Pragmatism and Idealism in Canada.\" An archival year searching for thinkers who, like Cabot, refused to choose between pragmatism and idealism, beginning with the Halifax philosophers Eliza Ritchie and Ethel Gordon Muir and the Watson, Caldwell, Murray, and Schurman circles, and compiling a register of scholars who moved between Harvard and Canadian posts. Planned outcomes: two articles and a chapter of The Purposive Self." },
+    ],
+  },
+  {
+    h: "Book Proposals",
+    items: [
+      { t: "An Untold American Philosophy of Love", v: "Bloomsbury American Philosophy Series", d: "Formal proposal, invited by series editor John Kaag." },
+      { t: "Ella Lyman Cabot: Philosophical Writings", v: "Routledge Studies in American Philosophy", d: "Prospectus for an edition of Cabot's writings on growth, individuality, purpose, love, and immortality." },
+      { t: "Reading Within: Ella Lyman Cabot and the Medieval Tradition of Selfhood", v: "University of Notre Dame Press", d: "Proposal and sample chapter." },
+    ],
+  },
+  {
+    h: "Conference and Journal Submissions",
+    items: [
+      { t: "Helping the Puzzled Girls: Cabot on Making a Purpose One's Own", v: "SAAP 2027" },
+      { t: "Love and the Whole: Ella Lyman Cabot and John Dewey", v: "SAAP session, APA Pacific Division 2027" },
+      { t: "John William Miller and Huw Price on the scope of functional explanation", v: "SAAP 2027 panel" },
+      { t: "After Dewey; No Moral Equivalent to War; Ella Lyman Cabot and the Platonic-Augustinian Tradition in Virtue Ethics", v: "Journal submissions, 2026–27" },
+    ],
+  },
+];
+
 function Research() {
   return (
     <div className="sec">
@@ -570,13 +597,13 @@ function Research() {
       <Rule />
       <p>My philosophical work spans pragmatist ethics and metaethics, feminist philosophy of the late nineteenth and early twentieth century, philosophy of moral education, philosophy of action, and moral responsibility. I work at the boundary between historical recovery and systematic philosophy, using archival research to reconstruct positions and arguments that were historically significant but have been marginalized by the discipline's received canon.</p>
       <p>The systematic project is a unified account of purposive selfhood as the ground of normativity, moral responsibility, and moral growth. The central claim is that neither deflationary expressivism nor heavyweight metaphysical realism can account for genuine moral error, diachronic responsibility, and the possibility of becoming a better person. What is needed is a minimal metaphysics of the purposive self: a framework in which the self is a purposive achievement, and in which that achievement is what makes normativity, responsibility, and moral growth possible. Ella Lyman Cabot's pragmatic idealism supplies that framework, tested against problems across metaethics, moral responsibility theory, and philosophy of education.</p>
-      <p>This project is developed in a book in progress, <em>The Purposive Self: Agency, Normativity, and Moral Growth</em>, targeted at Fordham University Press, Oxford University Press, and Cambridge University Press.</p>
+      <p>This systematic project is developed in my own book in progress, <em>The Purposive Self: Agency, Normativity, and Moral Growth</em>, targeted at Fordham University Press, Oxford University Press, and Cambridge University Press.</p>
 
       <div style={{ marginTop: "2.6rem" }}>
         <h2>The Ella Lyman Cabot Recovery Project</h2>
         <Rule />
         <p>I am the only scholar conducting sustained archival recovery work on Ella Lyman Cabot. I hold literary rights to her unpublished material through the Ella Lyman Cabot Trust, have fully digitized and transcribed the Schlesinger Library ELC Papers (8.17 linear feet), and am sorting and transcribing some 16,000 photographs from the Harvard University Archives (Papers of Richard Clarke Cabot, HUG 4255, 221 containers).</p>
-        <p>The recovery project currently comprises an edited volume, a monograph, and an edition of Cabot's philosophical writings, with a further monograph in development.</p>
+        <p>The recovery project is led by a monograph on Cabot's philosophy of love, my current priority, alongside an edited volume, an edition of her philosophical writings, and a further monograph in development.</p>
       </div>
 
       <div className="project-list">
@@ -587,6 +614,24 @@ function Research() {
               <div className="project-title">{p.t}</div>
               <div className="project-desc">{p.d}</div>
             </div>
+          </div>
+        ))}
+      </div>
+
+      <div style={{ marginTop: "2.6rem" }}>
+        <h2>Near-Future Goals</h2>
+        <Rule />
+        <p>Applications and submissions I am preparing for the 2026–27 cycle.</p>
+        {GOALS.map((g, i) => (
+          <div key={i} style={{ marginTop: "1.6rem" }}>
+            <div className="sub-label">{g.h}</div>
+            {g.items.map((p, j) => (
+              <div key={j} className="pub-item">
+                <div className="pub-title">{p.t}</div>
+                <div className="pub-meta"><em>{p.v}</em></div>
+                {p.d && <div className="pub-note">{p.d}</div>}
+              </div>
+            ))}
           </div>
         ))}
       </div>
@@ -727,14 +772,14 @@ function Publications() {
       <div style={{ marginBottom: "2.2rem" }}>
         <div className="sub-label">Books in Progress</div>
         <div className="pub-item">
-          <div className="pub-title"><em>The Purposive Self: Agency, Normativity, and Moral Growth</em></div>
-          <div className="pub-meta">A systematic account of purposive selfhood as the ground of normativity and moral growth, developed through Ella Lyman Cabot's pragmatic idealism and tested against problems in metaethics, moral responsibility, and philosophy of education.</div>
-          <div className="pub-note">Target: Fordham University Press (primary); Oxford University Press; Cambridge University Press.</div>
+          <div className="pub-title"><em>An Untold American Philosophy of Love: Ella Lyman Cabot on Becoming Ourselves</em></div>
+          <div className="pub-meta">Current priority · Ella Lyman Cabot Recovery Project. Reconstructs and develops Cabot's philosophy to argue for love as the normative foundation of ethics: love as attraction and commitment, the ownership of obligation, and individuality.</div>
+          <div className="pub-note">Formal proposal invited by John Kaag for Bloomsbury's American Philosophy Series; proposal in preparation.</div>
         </div>
         <div className="pub-item">
-          <div className="pub-title"><em>An Untold American Philosophy of Love: Ella Lyman Cabot on Becoming Ourselves</em></div>
-          <div className="pub-meta">Love as attraction and commitment, the ownership of obligation, and individuality in Cabot's philosophy.</div>
-          <div className="pub-note">Formal proposal invited by John Kaag for Bloomsbury's American Philosophy Series; proposal in preparation.</div>
+          <div className="pub-title"><em>The Purposive Self: Agency, Normativity, and Moral Growth</em></div>
+          <div className="pub-meta">Systematic monograph. An account of purposive selfhood as the ground of normativity and moral growth, drawing on Ella Lyman Cabot's pragmatic idealism and tested against problems in metaethics, moral responsibility, and philosophy of education.</div>
+          <div className="pub-note">Target: Fordham University Press (primary); Oxford University Press; Cambridge University Press.</div>
         </div>
       </div>
 
