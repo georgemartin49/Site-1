@@ -12,12 +12,14 @@ const PRIMARY = [
   { author: "Ada Peirce McCormick", title: "Research materials on Richard Clarke Cabot", year: "", type: "Archival, Harvard University Archives (HUG 4255.80)", note: "25 containers. APM was a primary witness to ELC and RCC over several decades." },
 ];
 const SECONDARY = [
-  { author: "Jacob B. Castleberry (ed.)", title: "Ella Lyman Cabot (Edited Volume)", year: "Forthcoming", type: "Edited volume", venue: "Philosophy for Children Forebears, Routledge" },
+  { author: "Jacob B. Castleberry, Maughn Rollins Gregory, and Megan Jane Laverty (eds.)", title: "Ella Lyman Cabot: Purposive Selfhood and the Philosophical Education of Children", year: "In preparation", type: "Edited volume", venue: "Philosophy for Children Forebears, Routledge" },
   { author: "Jacob B. Castleberry", title: "Pluralism in Practice: Interpreting Black Feminism and Womanism Through Ella Lyman Cabot", year: "Forthcoming", type: "Journal article", venue: "The Pluralist" },
   { author: "Jacob B. Castleberry", title: "Ella Lyman Cabot: Teaching for Royce's Beloved Community", year: "Forthcoming 2027", type: "Journal article", venue: "Philosophy of Education" },
+  { author: "Jacob B. Castleberry", title: "An Organic Pragmatist Synthesis through Ella Lyman Cabot: A Review Essay of Diana Heney's American Ethics (2025)", year: "Forthcoming 2027", type: "Review essay", venue: "The Pluralist" },
   { author: "Jacob B. Castleberry", title: "Reasonable Communities: P4C and Peace Education", year: "2023", type: "Book chapter", venue: "Cultivating Reasonableness in Education: Community of Philosophical Inquiry, Springer" },
   { author: "Jacob B. Castleberry and Kevin M. Clark", title: "Expanding the Facilitator's Toolbox: Vygotskian Mediation in Philosophy for Children", year: "2020", type: "Journal article", venue: "Analytic Teaching and Philosophical Praxis" },
   { author: "Samantha Matherne", title: "Ella Lyman Cabot's Everyday Ethics", year: "2023", type: "Book chapter", venue: "Oxford Handbook of American and British Women Philosophers in the Nineteenth Century, Oxford University Press" },
+  { author: "Diana Heney", title: "American Ethics", year: "2025", type: "Book" },
   { author: "Diana Heney", title: "Cabot on Virtue", year: "2023", type: "Journal article", venue: "History of Philosophy Quarterly" },
   { author: "John Kaag", title: "Idealism, Pragmatism, and Feminism: The Philosophy of Ella Lyman Cabot", year: "2011", type: "Book", venue: "Lexington Books" },
 ];
@@ -482,8 +484,11 @@ const Dot = () => <div className="cv-dot" />;
 
 // ── HOME ──────────────────────────────────────────────────────────
 const NEWS = [
-  { date: "2026", text: "Harris-Jones Prize, Society for the Advancement of American Philosophy, for \"Pluralism in Practice.\"" },
-  { date: "2026", text: "\"Pluralism in Practice: Interpreting Black Feminism and Womanism Through Ella Lyman Cabot\" accepted at The Pluralist." },
+  { date: "Jan 2027", text: "Three papers at the APA Eastern Division meeting in Boston, including a Josiah Royce Society and Ralph Waldo Emerson Society session I am organizing." },
+  { date: "Nov 2026", text: "\"Two Orders of Love: Ella Lyman Cabot Versus MacIntyre\" at the Society of Christian Philosophers Eastern Regional Meeting." },
+  { date: "2026", text: "\"Trauma and Diachronic Reasons-Responsive Moral Responsibility\" accepted at Philosophy of Medicine (forthcoming 2027)." },
+  { date: "2026", text: "Ralph Waldo Emerson Society Research Award, supporting archival work in the Richard Clarke Cabot Papers at Harvard." },
+  { date: "2026", text: "Harris-Jones Prize, Society for the Advancement of American Philosophy, for \"Pluralism in Practice,\" forthcoming in The Pluralist." },
   { date: "2026", text: "\"Ella Lyman Cabot: Teaching for Royce's Beloved Community\" accepted at Philosophy of Education (forthcoming 2027)." },
 ];
 
@@ -513,7 +518,7 @@ function Home() {
 
       <p className="dropcap">I am a philosopher working at the intersection of American pragmatism, feminist philosophy, history of ethics, and philosophy of education. My research centers on the recovery and philosophical reconstruction of the Boston ethics tradition, a neglected network of late nineteenth- and early twentieth-century American moral philosophy centered at Harvard and rooted in Boston Unitarian intellectual culture.</p>
       <p>The animating project of my scholarship is the recovery of <em>Ella Lyman Cabot</em> (1866–1934): ethics educator, Massachusetts Board of Education member for nearly three decades, author of eleven ethics books, and student of George Herbert Palmer and Josiah Royce at Harvard. I hold literary rights to her unpublished material through the Ella Lyman Cabot Trust and have fully digitized her papers at the Schlesinger Library, Radcliffe Institute.</p>
-      <p>I am a moral philosopher working as an independent scholar. I am the recipient of the 2026 Harris-Jones Prize from the Society for the Advancement of American Philosophy.</p>
+      <p>I am a moral philosopher working as an independent scholar. I am the recipient of the 2026 Harris-Jones Prize from the Society for the Advancement of American Philosophy and a 2026 Research Award from the Ralph Waldo Emerson Society, and I teach as an Associate Adjunct in Philosophy at the University of Indianapolis.</p>
 
       <div className="fleuron" />
 
@@ -541,32 +546,20 @@ function Home() {
 // ── RESEARCH ──────────────────────────────────────────────────────
 const PROJECTS = [
   {
-    t: "Ella Lyman Cabot (Edited Volume, Routledge)",
-    d: "An edited volume in the Routledge Philosophy for Children Forebears series, which I edit. Five parts, ten primary texts, five commentary chapters, editorial introduction, and afterword. Each part pairs primary ELC texts with an original commentary chapter. Draft at 209 pages; restructuring in progress. Target manuscript: 2027–2028.",
+    t: "Ella Lyman Cabot: Purposive Selfhood and the Philosophical Education of Children (Edited Volume, Routledge)",
+    d: "Co-edited with Maughn Rollins Gregory and Megan Jane Laverty for the Routledge Philosophy for Children Forebears series. The first collected edition of Cabot's writings on the philosophical education of children, organized in five parts, each pairing her primary texts with an original commentary chapter by a contemporary scholar, with an editorial introduction and conclusion. Manuscript complete; awaiting series editors' approval for submission.",
   },
   {
-    t: "Essential Writings: Oxford New Histories of Philosophy",
-    d: "A critical edition of ELC's published and select unpublished texts with scholarly introduction, editorial footnotes, and cross-references to the unpublished archive. Proposed for the Oxford New Histories of Philosophy series (ed. Christia Mercer and Melvin Rogers, Oxford University Press), the series that has published comparable editions of Frances Power Cobbe, Maria W. Stewart, and Mary Ann Shadd Cary. Inquiry in progress.",
+    t: "An Untold American Philosophy of Love: Ella Lyman Cabot on Becoming Ourselves (Monograph)",
+    d: "A book reconstructing and developing Cabot's philosophy to argue for love as the normative foundation of ethics: love as attraction and commitment, the ownership of obligation, and individuality. Formal proposal invited by John Kaag for Bloomsbury's American Philosophy Series; proposal in preparation.",
   },
   {
-    t: "Cambridge Element: Women in the History of Philosophy",
-    d: "A Cambridge Elements volume of approximately 20,000–30,000 words presenting my scholarly analysis of ELC's philosophy: her minimal metaphysics, purposivist moral psychology, and feminist pragmatist ethics, drawing on archival material unavailable to prior scholarship. Cambridge University Press, Women in the History of Philosophy series. Inquiry active.",
+    t: "Ella Lyman Cabot: Philosophical Writings (Edition)",
+    d: "An edition, with introduction and notes, of Cabot's philosophical writings on growth, individuality, purpose, love, and immortality, including the drafts of her unfinished book on growth that Royce encouraged her to write, her 1890 examination answers for Palmer's ethics course, \"The Place of Pleasure,\" \"Marriage\" (1889), \"Civil Service Versus the Sword\" (1915), \"On Immortality,\" and her commentary on Royce's The World and the Individual. Target: Routledge Studies in American Philosophy.",
   },
   {
-    t: "The Marriage of Ella Cabot (Biography)",
-    d: "A full-length scholarly biography drawing on Ada Peirce McCormick's drafts, ELC's diaries and journals, and the full archival record at the Schlesinger Library and Harvard University Archives. Full scholarly annotation, archival citation, endnotes, bibliography, and editorial apparatus. Target: Harvard University Press or Oxford University Press (primary aspirational); Cambridge University Press.",
-  },
-  {
-    t: "ELC Unpublished Philosophy (Critical Edition)",
-    d: "A critical edition of ELC's unpublished philosophical manuscripts with critical introduction, headnotes, and editorial annotation cross-referencing her published works. Key texts include \"Idea and Purpose,\" \"Individuality,\" \"The Search for the Eternal,\" \"The Place of Pleasure\" (Royce seminar thesis), \"The Place of Death,\" and her response to \"The World and the Individual.\" Target: Oxford New Histories of Philosophy or Harvard University Press.",
-  },
-  {
-    t: "Collected Poems, 1875–1934 (Critical Edition)",
-    d: "A critical edition of 300+ poems with scholarly introduction, editorial annotation, and source identification. The only prior publication of this material is a private family pamphlet (52 Poems, 1935). Target: Harvard University Press, Oxford University Press, or Cambridge University Press. NEH Scholarly Editions eligible.",
-  },
-  {
-    t: "ELC–RCC Letters Edition",
-    d: "A critical edition of the ELC–RCC correspondence, beginning with the 415,000+ characters of 1892–93 courtship letters already transcribed. Corrects biographical errors in prior secondary literature. Critical introduction, headnotes, and full editorial annotation. Target: Oxford New Histories of Philosophy or Harvard University Press.",
+    t: "Reading Within: Ella Lyman Cabot and the Medieval Tradition of Selfhood (Monograph)",
+    d: "A prospective book arguing that Cabot's five conditions of selfhood (individuality, interest, purpose, growth, and invention) are a pragmatist reformulation of structures developed by Augustine, Aquinas, Dante, and medieval women writers. Proposal in preparation.",
   },
 ];
 
@@ -582,8 +575,8 @@ function Research() {
       <div style={{ marginTop: "2.6rem" }}>
         <h2>The Ella Lyman Cabot Recovery Project</h2>
         <Rule />
-        <p>I am the only scholar conducting sustained archival recovery work on Ella Lyman Cabot. I hold literary rights to her unpublished material through the Ella Lyman Cabot Trust, have fully digitized the Schlesinger Library ELC Papers (8.17 linear feet), and have conducted extensive research in the Harvard University Archives (Papers of Richard Clarke Cabot, HUG 4255, 221 containers).</p>
-        <p>The recovery project comprises seven planned publications spanning an edited volume, critical editions, a biography, a Cambridge Element, and an Oxford series volume.</p>
+        <p>I am the only scholar conducting sustained archival recovery work on Ella Lyman Cabot. I hold literary rights to her unpublished material through the Ella Lyman Cabot Trust, have fully digitized and transcribed the Schlesinger Library ELC Papers (8.17 linear feet), and am sorting and transcribing some 16,000 photographs from the Harvard University Archives (Papers of Richard Clarke Cabot, HUG 4255, 221 containers).</p>
+        <p>The recovery project currently comprises an edited volume, a monograph, and an edition of Cabot's philosophical writings, with a further monograph in development.</p>
       </div>
 
       <div className="project-list">
@@ -599,8 +592,8 @@ function Research() {
       </div>
 
       <div style={{ marginTop: "2.6rem" }}>
-        <div className="sub-label">Critical Reprint Program</div>
-        <p>The Boston Ethics Tradition Recovery Program includes a series of critical reissues of the core published texts in the tradition. Each volume receives a new scholarly introduction, regularized pagination, and editorial footnotes cross-referencing related works, unpublished manuscripts, and archival sources — providing the scholarly apparatus needed to support sustained future research on these figures. All texts are in the public domain. Target: Harvard University Press, Oxford University Press, or Cambridge University Press.</p>
+        <div className="sub-label">Longer-Range Editorial Work</div>
+        <p>The archive also holds material for later editions: Cabot's poetry across ten manuscript collections, the Ella–Richard Cabot correspondence, and several drafts of Ada Peirce McCormick's unfinished biography of the Cabots. The Boston Ethics Tradition Recovery Program further envisions a series of critical reissues of the core published texts in the tradition. Each volume receives a new scholarly introduction, regularized pagination, and editorial footnotes cross-referencing related works, unpublished manuscripts, and archival sources — providing the scholarly apparatus needed to support sustained future research on these figures. All texts are in the public domain. Target: Harvard University Press, Oxford University Press, or Cambridge University Press.</p>
         <div className="reprint-grid">
           {[
             { author: "Ella Lyman Cabot", works: ["Everyday Ethics (1906)", "Temptations to Rightdoing (1929)"] },
@@ -639,10 +632,13 @@ function Research() {
         <div className="paper-group">
           <div className="group-label">ELC Recovery Papers</div>
           {[
-            { t: "Ethical Life and the Structure of Selfhood: Reconstructing Cabot's Minimal Metaphysics", v: "Journal of Speculative Philosophy" },
-            { t: "Minimal Metaphysics and Pragmatist-Feminism", v: "Metaphilosophy" },
-            { t: "Being the Moral Teacher: Cabot's Ideal Theory of Self and Egoist Virtue", v: "Journal of Moral Education" },
-            { t: "Cabot's Virtue Theory: A Response to Heney (2023)", v: "History of Philosophy Quarterly" },
+            { t: "After Dewey: Ella Lyman Cabot, Owned Obligation, and the Anti-Deficit Child Trilemma", v: "Educational Theory" },
+            { t: "Helping the Puzzled Girls: Cabot on Making a Purpose One's Own", v: "Journal of Speculative Philosophy" },
+            { t: "Ella Lyman Cabot and the Platonic-Augustinian Tradition in Virtue Ethics", v: "History of Philosophy Quarterly" },
+            { t: "No Moral Equivalent to War: Ella Lyman Cabot's Religious Case Against William James, 1915", v: "European Journal of Pragmatism and American Philosophy" },
+            { t: "Two Orders of Love: Ella Lyman Cabot Versus MacIntyre on the Proper Ordering of Augustinian Virtue", v: "SCP Eastern Regional Meeting, November 2026" },
+            { t: "Self-Reliance, Loyalty, and American Idealism: Ella Lyman Cabot Between Royce and Emerson", v: "APA Eastern Division, January 2027" },
+            { t: "Against the Isolated Self: Ella Lyman Cabot's Ethics of Love and the Collapse of Egoism and Altruism", v: "APA Eastern Division, January 2027" },
             { t: "Emerson, Cabot, and the Pragmatist-Feminist Tradition", v: "Emerson Society Papers" },
             { t: "ELC as Spiritual Director: Practice, Theology, and the Limits of the Label", v: "History of philosophy and American religion journals" },
             { t: "Ada Peirce McCormick as Philosophical Witness", v: "American philosophy and history of philosophy journals" },
@@ -657,6 +653,7 @@ function Research() {
         <div className="paper-group">
           <div className="group-label">Systematic Papers</div>
           {[
+            { t: "Constitutive Constraints, Scientific Inquiry, and the Limits of Global Expressivism", v: "Synthese" },
             { t: "Purposive Pluralism: A Third Option Between Global Expressivism and Bifurcationism", v: "BJHP / Journal of the History of Philosophy / Philosophical Studies" },
             { t: "Purposive Selfhood and the Metaphysics of Habit", v: "Transactions of the Charles S. Peirce Society; MSA 2027 abstract submitted" },
             { t: "Probabilistic Compatibilism", v: "Philosophical Psychology" },
@@ -671,13 +668,13 @@ function Research() {
 
       <div style={{ marginTop: "2.6rem" }}>
         <div className="sub-label">Long-Range Research</div>
-        <p>Beyond the recovery program, I am developing several long-range projects in systematic philosophy and the history of philosophy. These include a book on collective purposive agency as a sequel to <em>The Purposive Self</em>, and an exploratory argument identifying Thomas Reid, Kierkegaard, and Ella Lyman Cabot as a unified tradition in the philosophy of purposive selfhood running from Scottish common sense philosophy through German existentialism into American pragmatism. I am also developing the Purposive Pluralism project as a contribution to the metaethics literature on expressivism and bifurcationism, and an Oxford Pragmatism Review essay connecting the recovery work to current debates in the history of British analytic philosophy.</p>
+        <p>Beyond the recovery program, I am developing several long-range projects in systematic philosophy and the history of philosophy. These include a book on collective purposive agency as a sequel to <em>The Purposive Self</em>, and an exploratory argument identifying Thomas Reid, Kierkegaard, and Ella Lyman Cabot as a unified tradition in the philosophy of purposive selfhood running from Scottish common sense philosophy through German existentialism into American pragmatism. I am also developing the Purposive Pluralism project as a contribution to the metaethics literature on expressivism and bifurcationism, and a comparison of John William Miller and Huw Price on the scope of functional explanation, planned for a SAAP 2027 panel.</p>
       </div>
 
       <div className="callout">
         <h3 style={{ marginBottom: "0.6rem" }}>Archival Holdings</h3>
-        <p><strong>Schlesinger Library, Radcliffe Institute, Harvard University.</strong> Ella Lyman Cabot Papers (Collection A-139). 8.17 linear feet. Full archive digitized. Permission to publish all materials secured from the Ella Lyman Cabot Trust.</p>
-        <p style={{ marginTop: "0.65rem" }}><strong>Harvard University Archives, Pusey Library.</strong> Papers of Richard Clarke Cabot (HUG 4255). 221 containers. Includes Ada Peirce McCormick's research materials (HUG 4255.80, 25 containers).</p>
+        <p><strong>Schlesinger Library, Radcliffe Institute, Harvard University.</strong> Ella Lyman Cabot Papers (Collection A-139). 8.17 linear feet. Full archive digitized and transcribed. Permission to publish all materials secured from the Ella Lyman Cabot Trust.</p>
+        <p style={{ marginTop: "0.65rem" }}><strong>Harvard University Archives, Pusey Library.</strong> Papers of Richard Clarke Cabot (HUG 4255). 221 containers. Includes Ada Peirce McCormick's research materials (HUG 4255.80, 25 containers) and multiple drafts of her unpublished biography of the Cabots. Some 16,000 photographs taken; sorting and transcription underway, with a focus on Cabot's philosophical formation and relation to Emerson.</p>
       </div>
     </div>
   );
@@ -685,18 +682,27 @@ function Research() {
 
 // ── PUBLICATIONS ──────────────────────────────────────────────────
 const FORTHCOMING = [
-  { t: "Ella Lyman Cabot (Edited Volume)", v: "Philosophy for Children Forebears", p: "Routledge", e: "Series Eds. Maughn Rollins Gregory and Megan Jane Laverty", n: "Jacob B. Castleberry, volume editor. 209 pages drafted; restructuring in progress. Target manuscript: 2027–2028." },
   { t: "Pluralism in Practice: Interpreting Black Feminism and Womanism Through Ella Lyman Cabot", v: "The Pluralist", n: "Accepted. Winner of the 2026 Harris-Jones Prize, SAAP." },
   { t: "Ella Lyman Cabot: Teaching for Royce's Beloved Community", v: "Philosophy of Education", n: "Forthcoming 2027." },
+  { t: "Trauma and Diachronic Reasons-Responsive Moral Responsibility", v: "Philosophy of Medicine", n: "Forthcoming 2027." },
+  { t: "An Organic Pragmatist Synthesis through Ella Lyman Cabot: A Review Essay of Diana Heney's American Ethics (2025)", v: "The Pluralist", n: "Review essay. Forthcoming 2027." },
+  { t: "Review of Cheryl Misak, Oxford Pragmatism (Oxford University Press, 2025)", v: "Transactions of the Charles S. Peirce Society", n: "Book review. Vol. 70, no. 1 (2026)." },
 ];
 const PUBLISHED = [
   { t: "Reasonable Communities: P4C and Peace Education", v: "Cultivating Reasonableness in Education: Community of Philosophical Inquiry", p: "Springer", y: "2023" },
   { t: "Expanding the Facilitator's Toolbox: Vygotskian Mediation in Philosophy for Children", v: "Analytic Teaching and Philosophical Praxis", y: "2020", n: "Co-authored with Kevin M. Clark." },
 ];
 const UNDER_REVIEW = [
+  { t: "Being the Moral Teacher: Ella Lyman Cabot's Purposive Virtue Ethics", v: "Journal of Philosophy of Education", n: "Revise and resubmit." },
+  { t: "What the Tradition Presupposes: Minimal Metaphysics, Pragmatist-Feminism, and the Case for Centering Ella Lyman Cabot", v: "Transactions of the Charles S. Peirce Society" },
   { t: "Rationality as Probabilistic Coherence: Credal Expressivism, Planning Attitudes, and the Guidance of Action", v: "Philosophical Studies" },
-  { t: "Trauma and Diachronic Reasons-Responsive Moral Responsibility", v: "Philosophy of Medicine" },
-  { t: "Trauma, Coherence, and Reasons-Responsive Moral Responsibility", v: "In revision" },
+];
+const UPCOMING_TALKS = [
+  { t: "Self-Reliance, Loyalty, and American Idealism: Ella Lyman Cabot Between Royce and Emerson", v: "APA Eastern Division, Boston · Josiah Royce Society and Ralph Waldo Emerson Society session (session organizer)", y: "January 2027" },
+  { t: "No Moral Equivalent to War: Ella Lyman Cabot's Religious Case Against William James, 1915", v: "APA Eastern Division, Boston · William James Society session", y: "January 2027" },
+  { t: "Against the Isolated Self: Ella Lyman Cabot's Ethics of Love and the Collapse of Egoism and Altruism", v: "APA Eastern Division, Boston · SAAP session", y: "January 2027" },
+  { t: "Two Orders of Love: Ella Lyman Cabot Versus MacIntyre on the Proper Ordering of Augustinian Virtue", v: "Society of Christian Philosophers, Eastern Regional Meeting, Christopher Newport University", y: "November 2026" },
+  { t: "After Dewey: Ella Lyman Cabot, Owned Obligation, and the Anti-Deficit Child Trilemma", v: "NAAPE", y: "October 2026" },
 ];
 const TALKS = [
   { t: "Pluralism in Practice: Interpreting Black Feminism and Womanism Through Ella Lyman Cabot", v: "SAAP", y: "2026" },
@@ -707,6 +713,9 @@ const TALKS = [
   { t: "Being the Moral Teacher: Ella Lyman Cabot's Ideal Theory of Self and Egoist Virtue", v: "NAAPE / SOPHE", y: "2025" },
   { t: "Ella Lyman Cabot: Pioneering Ethics Education for Women's Selfhood", v: "ISEB", y: "2025" },
   { t: "Reasonable Communities: P4C and Peace Education", v: "NAAPE", y: "2023" },
+  { t: "What is the ABE Teacher: Three Metaphors for Conceptualizing the Role", v: "IAACE", y: "2023" },
+  { t: "Ella Lyman Cabot: The Ethical Educator of Selfhood", v: "NAAPE", y: "2022" },
+  { t: "A Pragmatist Metaethics", v: "Indiana University Bicentennial Philosophy Conference", y: "2019" },
 ];
 
 function Publications() {
@@ -716,11 +725,34 @@ function Publications() {
       <Rule />
 
       <div style={{ marginBottom: "2.2rem" }}>
-        <div className="sub-label">Book in Progress</div>
+        <div className="sub-label">Books in Progress</div>
         <div className="pub-item">
           <div className="pub-title"><em>The Purposive Self: Agency, Normativity, and Moral Growth</em></div>
           <div className="pub-meta">A systematic account of purposive selfhood as the ground of normativity and moral growth, developed through Ella Lyman Cabot's pragmatic idealism and tested against problems in metaethics, moral responsibility, and philosophy of education.</div>
           <div className="pub-note">Target: Fordham University Press (primary); Oxford University Press; Cambridge University Press.</div>
+        </div>
+        <div className="pub-item">
+          <div className="pub-title"><em>An Untold American Philosophy of Love: Ella Lyman Cabot on Becoming Ourselves</em></div>
+          <div className="pub-meta">Love as attraction and commitment, the ownership of obligation, and individuality in Cabot's philosophy.</div>
+          <div className="pub-note">Formal proposal invited by John Kaag for Bloomsbury's American Philosophy Series; proposal in preparation.</div>
+        </div>
+      </div>
+
+      <div style={{ marginBottom: "2.2rem" }}>
+        <div className="sub-label">Edited Volume in Preparation</div>
+        <div className="pub-item">
+          <div className="pub-title"><em>Ella Lyman Cabot: Purposive Selfhood and the Philosophical Education of Children</em></div>
+          <div className="pub-meta">Co-edited with Maughn Rollins Gregory and Megan Jane Laverty. Philosophy for Children Forebears series, Routledge.</div>
+          <div className="pub-note">Manuscript complete; awaiting series editors' approval for submission. Includes my editorial introduction, "Ella Lyman Cabot: The Ethical Educator of Selfhood."</div>
+        </div>
+      </div>
+
+      <div style={{ marginBottom: "2.2rem" }}>
+        <div className="sub-label">Commissioned</div>
+        <div className="pub-item">
+          <div className="pub-title">"Love" and "Friendship" (Ralph Waldo Emerson)</div>
+          <div className="pub-meta"><em>The Literary Encyclopedia</em></div>
+          <div className="pub-note">Commissioned reference entries; in preparation.</div>
         </div>
       </div>
 
@@ -752,10 +784,20 @@ function Publications() {
           <div key={i} className="pub-item">
             <div className="pub-title">{p.t}</div>
             <div className="pub-meta"><em>{p.v}</em></div>
+            {p.n && <div className="pub-note">{p.n}</div>}
           </div>
         ))}
       </div>
 
+      <div style={{ marginBottom: "2.2rem" }}>
+        <div className="sub-label">Forthcoming Presentations</div>
+        {UPCOMING_TALKS.map((p, i) => (
+          <div key={i} className="pub-item">
+            <div className="pub-title">{p.t}</div>
+            <div className="pub-meta">{p.v} &middot; {p.y}</div>
+          </div>
+        ))}
+      </div>
 
       <div style={{ marginBottom: "2.2rem" }}>
         <div className="sub-label">Conference Presentations</div>
@@ -778,8 +820,8 @@ function Publications() {
           <div className="pub-meta">North American Association for Philosophy and Education (NAAPE). For "Being the Moral Teacher: Ella Lyman Cabot's Ideal Theory of Self and Egoist Virtue."</div>
         </div>
         <div className="pub-item">
-          <div className="pub-title">RWES Research Award, Application Submitted <span style={{ color: C.muted }}>2026</span></div>
-          <div className="pub-meta">Ralph Waldo Emerson Society. For "Emerson, Cabot, and the Pragmatist-Feminist Tradition."</div>
+          <div className="pub-title">Research Award <span style={{ color: C.muted }}>2026</span></div>
+          <div className="pub-meta">Ralph Waldo Emerson Society. Supported archival research in the Papers of Richard Clarke Cabot, Harvard University Archives, on Ella Lyman Cabot's philosophical formation and relation to Emerson.</div>
         </div>
       </div>
     </div>
@@ -788,8 +830,9 @@ function Publications() {
 
 // ── TEACHING ──────────────────────────────────────────────────────
 const INST = [
-  { name: "University of Indianapolis", detail: "Intro to Ethics · Intro to Philosophy · Business Ethics" },
+  { name: "University of Indianapolis", detail: "Associate Adjunct · Intro to Ethics · Intro to Philosophy · Business Ethics" },
   { name: "Ivy Tech Community College", detail: "Intro to Ethics (18 sections) · Intro to Philosophy" },
+  { name: "Purdue University Indianapolis", detail: "Instructor of record, Philosophy" },
   { name: "Park University", detail: "Ancient & Medieval Phil. · Philosophy of Religion · Ethics" },
   { name: "Southern New Hampshire University", detail: "Ethics in Global Society" },
   { name: "Indiana University Kokomo", detail: "Critical Thinking · Elementary Logic" },
@@ -812,7 +855,7 @@ function Teaching() {
       </div>
 
       <div style={{ marginBottom: "1.8rem" }}>
-        <div className="sub-label">Institutions (60 courses at 7 institutions)</div>
+        <div className="sub-label">Institutions (70+ courses at 8 institutions)</div>
         <div className="inst-grid">
           {INST.map((inst, i) => (
             <div key={i} className="inst-item">
@@ -849,7 +892,8 @@ const CV_DATA = [
   ]},
   { h: "Current Positions", items: [
     { t: "Independent Scholar", s: "Boston Ethics Tradition Recovery Program" },
-    { t: "Adjunct Instructor of Philosophy", s: "Seven institutions · 60 courses as instructor of record" },
+    { t: "Associate Adjunct in Philosophy", s: "University of Indianapolis" },
+    { t: "Instructor of Record", s: "Eight institutions · 70+ courses" },
   ]},
   { h: "Archival & Editorial", items: [
     { t: "Literary Rights Holder", s: "Ella Lyman Cabot Trust, literary rights to unpublished material of Ella Lyman Cabot (1866–1934)" },
@@ -857,19 +901,25 @@ const CV_DATA = [
   ]},
   { h: "Awards & Prizes", items: [
     { t: "Harris-Jones Prize", s: "Society for the Advancement of American Philosophy, 2026" },
-    { t: "Outstanding Paper Prize, Finalist", s: "North American Association for Philosophy and Education, 2025" },
+    { t: "Ralph Waldo Emerson Society Research Award", s: "Ralph Waldo Emerson Society, 2026" },
+    { t: "Outstanding Paper Prize, Finalist", s: "North American Association for Philosophy and Education / Educational Theory, 2025" },
   ]},
   { h: "Selected Publications", items: [
+    { t: "Pluralism in Practice: Interpreting Black Feminism and Womanism Through Ella Lyman Cabot", s: "The Pluralist, forthcoming" },
+    { t: "Ella Lyman Cabot: Teaching for Royce's Beloved Community", s: "Philosophy of Education, forthcoming 2027" },
+    { t: "Trauma and Diachronic Reasons-Responsive Moral Responsibility", s: "Philosophy of Medicine, forthcoming 2027" },
     { t: "Reasonable Communities: P4C and Peace Education", s: "Cultivating Reasonableness in Education, Springer, 2023" },
     { t: "Expanding the Facilitator's Toolbox", s: "Analytic Teaching and Philosophical Praxis, 2020 (with Kevin M. Clark)" },
   ]},
   { h: "Affiliations", items: [
     { t: "Society for the Advancement of American Philosophy (SAAP)" },
-    { t: "Philosophy and Education Society (PES)" },
+    { t: "Philosophy of Education Society (PES)" },
     { t: "North American Association for Philosophy and Education (NAAPE)" },
     { t: "Northeastern Philosophy and Education Society (NEPES)" },
     { t: "Society of Philosophy and History of Education (SOPHE)" },
     { t: "International Society of Educational Biography (ISEB)" },
+    { t: "Southern Society for Philosophy and Psychology (SSPP)" },
+    { t: "Indiana Association for Adult and Continuing Education (IAACE)" },
   ]},
 ];
 
@@ -965,7 +1015,7 @@ function Contact() {
 
       <div style={{ marginTop: "2.4rem" }}>
         <div className="sub-label">Press &amp; series editors</div>
-        <p>I am actively developing pitches for the Cambridge Elements Women in the History of Philosophy series and the Oxford New Histories of Philosophy series. Inquiries are welcome.</p>
+        <p>I am preparing proposals for a monograph on Cabot's philosophy of love and an edition of her philosophical writings. Inquiries from press and series editors working in American philosophy and the history of philosophy are welcome.</p>
       </div>
 
       <div style={{ marginTop: "1.6rem" }}>
@@ -981,9 +1031,9 @@ function Contact() {
 // ── SEO & JSON-LD ─────────────────────────────────────────────────
 const META = {
   Home:         ["Jacob B. Castleberry | Philosopher", "Jacob B. Castleberry is a moral philosopher specializing in American pragmatism, feminist philosophy, and recovery of the Boston ethics tradition, including Ella Lyman Cabot (1866–1934)."],
-  Research:     ["Research | Jacob B. Castleberry", "Six planned recovery publications on Ella Lyman Cabot plus a systematic book project on purposive selfhood, normativity, and moral growth."],
+  Research:     ["Research | Jacob B. Castleberry", "Book projects on Ella Lyman Cabot, including a Routledge edited volume, a monograph on her philosophy of love, and an edition of her philosophical writings, plus a systematic book on purposive selfhood."],
   Publications: ["Publications & Talks | Jacob B. Castleberry", "Publications and conference presentations by Jacob B. Castleberry on Ella Lyman Cabot, pragmatist ethics, and philosophy of education."],
-  Teaching:     ["Teaching | Jacob B. Castleberry", "Jacob B. Castleberry has taught 60 courses at seven institutions. Teaching philosophy draws on Cabot, Royce, and the Philosophy for Children tradition."],
+  Teaching:     ["Teaching | Jacob B. Castleberry", "Jacob B. Castleberry has taught 70+ courses at eight institutions. Teaching philosophy draws on Cabot, Royce, and the Philosophy for Children tradition."],
   CV:           ["CV | Jacob B. Castleberry", "Curriculum vitae for Jacob B. Castleberry, philosopher and principal investigator of the Boston Ethics Tradition Recovery Program."],
   Resources:    ["Cabot Resource Library | Jacob B. Castleberry", "Primary and secondary sources for the Boston ethics tradition: Ella Lyman Cabot, Richard Clarke Cabot, Ada Peirce McCormick, and related scholars."],
   Contact:      ["Contact | Jacob B. Castleberry", "Contact Jacob B. Castleberry about the ELC recovery project, the Boston Ethics Tradition Recovery Program, or scholarly collaboration."],
@@ -1021,7 +1071,10 @@ function useSEO(s) {
           { "@type": "CollegeOrUniversity", "name": "Indiana University Kokomo" }
         ],
         "knowsAbout": ["American pragmatism","Ella Lyman Cabot","Boston ethics tradition","philosophy of education","metaethics","moral responsibility","feminist philosophy"],
-        "award": "Harris-Jones Prize, Society for the Advancement of American Philosophy, 2026"
+        "award": [
+          "Harris-Jones Prize, Society for the Advancement of American Philosophy, 2026",
+          "Research Award, Ralph Waldo Emerson Society, 2026"
+        ]
       });
       document.head.appendChild(script);
     }
