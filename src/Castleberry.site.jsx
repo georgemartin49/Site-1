@@ -1,28 +1,58 @@
 import { useState, useEffect } from "react";
 
-// ── RESOURCES DATA -- edit to update ───────────────────────────────
+// ── SITE-WIDE FACTS -- edit to update ──────────────────────────────
+const EMAIL = "castleberryj@uindy.edu";
+// One wording for the rights question, used everywhere it comes up.
+const RIGHTS = "Unpublished writings of Ella Lyman Cabot appear by permission of the Ella Lyman Cabot Trust.";
+const CV_UPDATED = "October 2026";
+const CV_PDF = ""; // put the PDF in public/ (e.g. "castleberry-cv.pdf") and name it here to show a download link
+const PHILPEOPLE = "https://philpeople.org/profiles/jacob-b-castleberry";
+
+const FINDING_AID_ELC = "https://hollisarchives.lib.harvard.edu/repositories/8/resources/5278";
+const FINDING_AID_RCC = "https://id.lib.harvard.edu/ead/hua02998/catalog";
+
+// ── RESOURCES DATA ─────────────────────────────────────────────────
+// cite: the rest of the citation after the title. url: a full-text copy or record.
 const PRIMARY = [
-  { author: "Ella Lyman Cabot", title: "Everyday Ethics", year: "1906", type: "Book", note: "Primary philosophical text; synthesizes Palmer and Royce into a pragmatist-feminist ethics of moral growth." },
-  { author: "Ella Lyman Cabot", title: "Temptations to Rightdoing", year: "1929", type: "Book", note: "Final major work; develops the loyalty/allegiance/prejudice distinction." },
-  { author: "Ella Lyman Cabot", title: "Seven Suggestions to Parents", year: "", type: "Book", note: "" },
-  { author: "Ella Lyman Cabot", title: "A Course in Citizenship", year: "1914", type: "Book", note: "" },
-  { author: "Richard Clarke Cabot", title: "What Men Live By", year: "1914", type: "Book", note: "" },
-  { author: "Richard Clarke Cabot", title: "The Meaning of Right and Wrong", year: "1933", type: "Book", note: "RCC's final philosophical work; engages the agreements debate with Perry and Hocking." },
-  { author: "Richard Clarke Cabot", title: "Adventures on the Borderland of Ethics", year: "1926", type: "Book", note: "" },
-  { author: "Ada Peirce McCormick", title: "Research materials on Richard Clarke Cabot", year: "", type: "Archival, Harvard University Archives (HUG 4255.80)", note: "25 containers. APM was a primary witness to ELC and RCC over several decades." },
+  { author: "Ella Lyman Cabot", title: "Everyday Ethics", cite: "New York: Henry Holt, 1906.", url: "https://archive.org/details/cu31924031217874", source: "Internet Archive", note: "Her principal philosophical text; synthesizes Palmer and Royce into a pragmatist-feminist ethics of moral growth." },
+  { author: "Ella Lyman Cabot", title: "Ethics for Children", cite: "Boston: Houghton Mifflin, 1910.", url: "https://onlinebooks.library.upenn.edu/webbin/book/lookupname?key=Cabot,+Ella+Lyman", source: "HathiTrust, via the Online Books Page" },
+  { author: "Ella Lyman Cabot et al.", title: "A Course in Citizenship", cite: "Boston: Houghton Mifflin, 1914.", url: "https://archive.org/details/courseincitizens00cabouoft", source: "Internet Archive (later edition, A Course in Citizenship and Patriotism)" },
+  { author: "Ella Lyman Cabot", title: "Seven Ages of Childhood", cite: "Boston: Houghton Mifflin, 1921.", url: "https://archive.org/details/sevenageschildh00cabogoog", source: "Internet Archive" },
+  { author: "Ella Lyman Cabot", title: "Temptations to Rightdoing", cite: "1929.", note: "Her final major work; develops the distinction between loyalty, allegiance, and prejudice." },
+  { author: "Ella Lyman Cabot", title: "Seven Suggestions to Parents", cite: "" },
+  { author: "Richard Clarke Cabot", title: "What Men Live By: Work, Play, Love, Worship", cite: "Boston: Houghton Mifflin, 1914.", url: "https://archive.org/details/whatmenlivebywor00cabo", source: "Internet Archive" },
+  { author: "Richard Clarke Cabot", title: "Adventures on the Borderland of Ethics", cite: "1926." },
+  { author: "Richard Clarke Cabot", title: "The Meaning of Right and Wrong", cite: "New York: Macmillan, 1933.", url: "https://archive.org/details/meaningofrightwr0000rich", source: "Internet Archive (borrowable)", note: "His final philosophical work; engages the debate over moral agreement with Perry and Hocking." },
+];
+const ARCHIVES = [
+  { title: "Papers of Ella Lyman Cabot, 1873–1934", cite: "Schlesinger Library, Radcliffe Institute, Harvard University. Collection A-139. 8.17 linear feet.", url: FINDING_AID_ELC, note: "Journals, travel journals, and correspondence, including nearly all of her letters with Richard Clarke Cabot; some letters survive only as typed transcripts." },
+  { title: "Papers of Richard Clarke Cabot, 1886–1974", cite: "Harvard University Archives. HUG 4255. 255 boxes.", url: FINDING_AID_RCC, note: "Includes Ada Peirce McCormick's research materials on the Cabots (HUG 4255.80) and drafts of her unpublished biography of them." },
 ];
 const SECONDARY = [
-  { author: "Jacob B. Castleberry, Maughn Rollins Gregory, and Megan Jane Laverty (eds.)", title: "Ella Lyman Cabot: Purposive Selfhood and the Philosophical Education of Children", year: "In preparation", type: "Edited volume", venue: "Philosophy for Children Forebears, Routledge" },
-  { author: "Jacob B. Castleberry", title: "Pluralism in Practice: Interpreting Black Feminism and Womanism Through Ella Lyman Cabot", year: "Forthcoming", type: "Journal article", venue: "The Pluralist" },
-  { author: "Jacob B. Castleberry", title: "Ella Lyman Cabot: Teaching for Royce's Beloved Community", year: "Forthcoming 2027", type: "Journal article", venue: "Philosophy of Education" },
-  { author: "Jacob B. Castleberry", title: "An Organic Pragmatist Synthesis through Ella Lyman Cabot: A Review Essay of Diana Heney's American Ethics (2025)", year: "Forthcoming 2027", type: "Review essay", venue: "The Pluralist" },
-  { author: "Jacob B. Castleberry", title: "Reasonable Communities: P4C and Peace Education", year: "2023", type: "Book chapter", venue: "Cultivating Reasonableness in Education: Community of Philosophical Inquiry, Springer" },
-  { author: "Jacob B. Castleberry and Kevin M. Clark", title: "Expanding the Facilitator's Toolbox: Vygotskian Mediation in Philosophy for Children", year: "2020", type: "Journal article", venue: "Analytic Teaching and Philosophical Praxis" },
-  { author: "Samantha Matherne", title: "Ella Lyman Cabot's Everyday Ethics", year: "2023", type: "Book chapter", venue: "Oxford Handbook of American and British Women Philosophers in the Nineteenth Century, Oxford University Press" },
-  { author: "Diana Heney", title: "American Ethics", year: "2025", type: "Book" },
-  { author: "Diana Heney", title: "Cabot on Virtue", year: "2023", type: "Journal article", venue: "History of Philosophy Quarterly" },
-  { author: "John Kaag", title: "Idealism, Pragmatism, and Feminism: The Philosophy of Ella Lyman Cabot", year: "2011", type: "Book", venue: "Lexington Books" },
+  { author: "Jacob B. Castleberry, Maughn Rollins Gregory, and Megan Jane Laverty, eds.", title: "Ella Lyman Cabot: Purposive Selfhood and the Philosophical Education of Children", cite: "Philosophy for Children Forebears. Manuscript complete; awaiting series editors' approval for submission to Routledge." },
+  { author: "Jacob B. Castleberry", title: "Trauma and Diachronic Reasons-Responsive Moral Responsibility", cite: "Philosophy of Medicine 7, no. 1 (2026).", url: "https://doi.org/10.5195/pom.2026.284", source: "Open access" },
+  { author: "Jacob B. Castleberry", title: "Pluralism in Practice: Interpreting Black Feminism and Womanism Through Ella Lyman Cabot", cite: "The Pluralist, forthcoming." },
+  { author: "Jacob B. Castleberry", title: "Ella Lyman Cabot: Teaching for Royce's Beloved Community", cite: "Philosophy of Education, forthcoming 2027." },
+  { author: "Jacob B. Castleberry", title: "An Organic Pragmatist Synthesis through Ella Lyman Cabot: A Review Essay of Diana Heney's American Ethics (2025)", cite: "The Pluralist, forthcoming 2027." },
+  { author: "Diana Heney", title: "American Ethics: An Introduction to Pragmatist Moral Philosophy", cite: "2025." },
+  { author: "Diana B. Heney", title: "The Virtue Ethics of Ella Lyman Cabot", cite: "History of Philosophy Quarterly 40, no. 4 (2023): 279–301.", url: "https://philpapers.org/rec/HENTVE", source: "PhilPapers record" },
+  { author: "Samantha Matherne", title: "Ella Lyman Cabot's Everyday Ethics", cite: "In the Oxford Handbook of American and British Women Philosophers in the Nineteenth Century. Oxford University Press, 2023." },
+  { author: "John Kaag", title: "Idealism, Pragmatism, and Feminism: The Philosophy of Ella Lyman Cabot", cite: "Lanham, MD: Lexington Books, 2011.", url: "https://philpapers.org/rec/KAAIPA-2", source: "PhilPapers record" },
 ];
+
+// ── ROUTES ── each section has its own address (#/edition etc.) ────
+const ROUTES = { Home: "", Edition: "edition", Research: "research", Publications: "publications", Teaching: "teaching", CV: "cv", Resources: "resources", Contact: "contact" };
+const SECTIONS = Object.keys(ROUTES);
+const NAV_LABEL = { Edition: "Cabot Edition" };
+const label = s => NAV_LABEL[s] || s;
+const href = s => (ROUTES[s] ? `#/${ROUTES[s]}` : "#/");
+function sectionFromHash() {
+  const slug = window.location.hash.replace(/^#\/?/, "").replace(/\/$/, "");
+  return SECTIONS.find(s => ROUTES[s] === slug) || "Home";
+}
+const isRouteHash = h => h === "" || h === "#" || h.startsWith("#/");
+
+const Ext = ({ url, children }) => <a href={url} target="_blank" rel="noopener noreferrer">{children}</a>;
 
 // ── TOKENS ── derived from ELC's actual book bindings ─────────────
 // Everyday Ethics (1906): deep wine/burgundy cloth
@@ -96,21 +126,21 @@ const css = `
   border-bottom: 2px solid #c9a84c;
   position: sticky; top: 0; z-index: 200;
 }
-.nav-inner { max-width: 860px; margin: 0 auto; padding: 0 1.4rem; height: 58px; display: flex; align-items: center; justify-content: space-between; }
+.nav-inner { max-width: 1120px; margin: 0 auto; padding: 0 1.4rem; height: 58px; display: flex; align-items: center; justify-content: space-between; }
 .nav-logo {
   font-family: ${FELL};
   font-size: 1.05rem; font-weight: 400; font-style: italic;
   color: #f0e8d8 !important; background: none; border: none; cursor: pointer;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.01em; text-decoration: none; white-space: nowrap;
 }
 .nav-logo:hover { color: #e8c97a !important; }
 .nav-links { display: flex; list-style: none; }
 .nav-btn {
   font-family: ${LABEL};
-  font-size: 0.86rem; letter-spacing: 0.12em; text-transform: uppercase;
-  color: rgba(240,232,216,0.7) !important; background: none; border: none;
+  font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+  color: rgba(240,232,216,0.78) !important; background: none; border: none;
   border-bottom: 2px solid transparent; cursor: pointer;
-  padding: 0 12px; height: 58px; display: flex; align-items: center;
+  padding: 0 10px; height: 58px; display: flex; align-items: center;
   transition: color 0.18s, border-color 0.18s; white-space: nowrap;
 }
 .nav-btn:hover { color: #f0e8d8 !important; }
@@ -127,7 +157,7 @@ const css = `
   font-family: ${LABEL}; font-size: 0.92rem; letter-spacing: 0.1em; text-transform: uppercase;
   color: rgba(240,232,216,0.75) !important; background: none; border: none;
   border-bottom: 1px solid rgba(255,255,255,0.08);
-  padding: 0.85rem 1.4rem; text-align: left; cursor: pointer;
+  padding: 0.85rem 1.4rem; text-align: left; cursor: pointer; text-decoration: none;
   transition: background 0.15s, color 0.15s;
 }
 .mob-btn:hover, .mob-btn.active { background: rgba(255,255,255,0.08) !important; color: #f0e8d8 !important; }
@@ -370,6 +400,7 @@ a:hover { color: #5c1515 !important; }
 
 /* ── Publications (set as a real bibliography: hanging indent, no rules) ── */
 .pub-item {
+  font-size: 1rem; line-height: 1.6;
   padding: 0.55rem 0 0.55rem 1.6em;
   text-indent: -1.6em;
   border-bottom: none;
@@ -448,9 +479,44 @@ a:hover { color: #5c1515 !important; }
 }
 .colophon .pilcrow { color: #c9a84c; margin: 0 0.4em; }
 
+/* ── Homepage links ── */
+.home-links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.8rem; margin: 1.6rem 0 2.2rem; }
+.home-links a {
+  font-family: ${LABEL}; font-variant-caps: all-small-caps; letter-spacing: 0.12em; font-size: 1.05rem;
+  color: #5c1515 !important; text-decoration: none; border-bottom: 1px solid #c9a84c; padding-bottom: 1px;
+}
+.home-links a:hover { color: #2a4a6a !important; border-bottom-color: #2a4a6a; }
+
+/* ── Status lines, notes, edition page ── */
+.status { font-family: ${SERIF}; font-size: 0.98rem; color: #1a1209 !important; margin: 0.25rem 0 0.55rem; line-height: 1.55; }
+.status-label { font-variant-caps: all-small-caps; letter-spacing: 0.12em; color: #5c1515; font-weight: 600; margin-right: 0.35em; }
+.lead-italic { font-family: ${DISPLAY}; font-style: italic; font-size: 1.2rem; color: #3d2a18 !important; margin: -0.8rem 0 0.9rem; }
+.small-note { font-family: ${SERIF}; font-size: 0.92rem; font-style: italic; color: #4f3c28 !important; margin-top: 0.8rem; text-indent: 0 !important; }
+.provisional { font-style: italic; font-variant-caps: normal; letter-spacing: 0; color: #7a5c0f; margin-left: 0.4em; text-transform: none; }
+.ed-sec, .pub-sec { margin-top: 2.4rem; }
+.ed-sec .project-list { border-top: none; margin-top: 0; }
+.scope-row { display: grid; grid-template-columns: 13rem 1fr; gap: 0.2rem 1.4rem; padding: 0.6rem 0; border-bottom: 1px dotted #d4c9b8; }
+.scope-row:last-child { border-bottom: none; }
+.scope-h { font-family: ${DISPLAY}; font-style: italic; font-size: 1.05rem; color: #5c1515 !important; }
+.scope-d { font-family: ${SERIF}; font-size: 0.98rem; line-height: 1.6; }
+.method-list { padding-left: 1.3rem; }
+.method-list li { font-family: ${SERIF}; font-size: 1rem; line-height: 1.65; margin-bottom: 0.45rem; }
+.method-list li::marker { color: #c9a84c; }
+.specimen { border-top: 1px solid #c9a84c; border-bottom: 1px solid #c9a84c; padding: 1.2rem 0; }
+.specimen-title { font-family: ${DISPLAY}; font-style: italic; font-size: 1.15rem; color: #5c1515 !important; }
+.specimen-source { font-family: ${SERIF}; font-size: 0.9rem; color: #4f3c28 !important; margin-bottom: 0.9rem; }
+.specimen-notes { font-size: 0.88rem; padding-left: 1.3rem; margin-top: 1rem; }
+
+/* ── CV header ── */
+.cv-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0.6rem 1.4rem; margin-bottom: 2rem; }
+.cv-dated { font-family: ${SERIF}; font-style: italic; font-size: 0.98rem; color: #3d2a18 !important; }
+.cv-actions { display: flex; gap: 1.2rem; }
+.cv-print { background: none; border: none; cursor: pointer; padding: 0; }
+
 /* ── Print ── */
 @media print {
-  .nav-wrap, .footer, .hamburger, .mob-nav, .news-strip, .skip-link, .spec-grid { display: none !important; }
+  .nav-wrap, .footer, .hamburger, .mob-nav, .news-strip, .skip-link, .spec-grid, .no-print, .home-links { display: none !important; }
+  .cv-head { margin-bottom: 1rem; }
   #site-root { font-size: 11pt !important; background: white !important; color: black !important; }
   .page { max-width: 100% !important; padding: 0 !important; }
   h1, h2 { color: black !important; }
@@ -466,10 +532,13 @@ a:hover { color: #5c1515 !important; }
 }
 
 /* ── Responsive ── */
-@media (max-width: 640px) {
-  #site-root { font-size: 18px; }
+@media (max-width: 1080px) {
   .nav-links { display: none !important; }
   .hamburger { display: flex !important; }
+}
+@media (max-width: 640px) {
+  #site-root { font-size: 18px; }
+  .scope-row { grid-template-columns: 1fr; }
   .page { padding: 2rem 1.1rem 4rem; }
   .inst-grid { grid-template-columns: 1fr; }
   .footer-inner { flex-direction: column; align-items: flex-start; }
@@ -483,13 +552,11 @@ const Rule = () => <div className="rule" />;
 const Dot = () => <div className="cv-dot" />;
 
 // ── HOME ──────────────────────────────────────────────────────────
+// Keep this to the three most recent items.
 const NEWS = [
   { date: "Jan 2027", text: "Three papers at the APA Eastern Division meeting in Boston, including a Josiah Royce Society and Ralph Waldo Emerson Society session I am organizing." },
   { date: "Nov 2026", text: "\"Two Orders of Love: Ella Lyman Cabot Versus MacIntyre\" at the Society of Christian Philosophers Eastern Regional Meeting." },
-  { date: "2026", text: "\"Trauma and Diachronic Reasons-Responsive Moral Responsibility\" accepted at Philosophy of Medicine (forthcoming 2027)." },
-  { date: "2026", text: "Ralph Waldo Emerson Society Research Award, supporting archival work in the Richard Clarke Cabot Papers at Harvard." },
-  { date: "2026", text: "Harris-Jones Prize, Society for the Advancement of American Philosophy, for \"Pluralism in Practice,\" forthcoming in The Pluralist." },
-  { date: "2026", text: "\"Ella Lyman Cabot: Teaching for Royce's Beloved Community\" accepted at Philosophy of Education (forthcoming 2027)." },
+  { date: "Oct 2026", text: <>"Trauma and Diachronic Reasons-Responsive Moral Responsibility" published in <Ext url="https://doi.org/10.5195/pom.2026.284"><em>Philosophy of Medicine</em> 7, no. 1</Ext>.</> },
 ];
 
 function Home() {
@@ -504,7 +571,14 @@ function Home() {
         <div className="masthead-rule" />
       </header>
 
-      <p className="lead">MA Philosophy, Western Michigan University &nbsp;·&nbsp; BA, Indiana University Kokomo</p>
+      <p className="dropcap">I am a moral philosopher working in American pragmatism, ethics, moral responsibility, and the philosophy of education. I teach as an Associate Adjunct in Philosophy at the University of Indianapolis. Most of my research concerns Ella Lyman Cabot (1866–1934), a Boston philosopher and educator who studied with George Herbert Palmer and Josiah Royce at Harvard and served on the Massachusetts Board of Education for nearly three decades.</p>
+      <p>By the Boston ethics tradition I mean the moral philosophy that Palmer, Royce, and Ella Lyman and Richard Clarke Cabot developed at Harvard in the late nineteenth and early twentieth centuries: a body of work on selfhood, moral growth, and purposive agency that the discipline has largely set aside. I am preparing a comprehensive edition of Cabot's writings, based on her papers at the Schlesinger Library, which I have digitized and transcribed in full. I am also writing <em>An Untold American Philosophy of Love</em>, a book that develops her philosophy to argue for love as the normative foundation of ethics.</p>
+
+      <nav className="home-links" aria-label="Start here">
+        <a href={href("Edition")}>The Cabot Edition</a>
+        <a href={href("Publications")}>Publications</a>
+        <a href={href("CV")}>Curriculum Vitae</a>
+      </nav>
 
       <div className="news-strip">
         <h3>Notices</h3>
@@ -516,9 +590,7 @@ function Home() {
         ))}
       </div>
 
-      <p className="dropcap">I am a philosopher working at the intersection of American pragmatism, feminist philosophy, history of ethics, and philosophy of education. My research centers on the recovery and philosophical reconstruction of the Boston ethics tradition, a neglected network of late nineteenth- and early twentieth-century American moral philosophy centered at Harvard and rooted in Boston Unitarian intellectual culture.</p>
-      <p>The animating project of my scholarship is the recovery of <em>Ella Lyman Cabot</em> (1866–1934): ethics educator, Massachusetts Board of Education member for nearly three decades, author of books on ethics and moral education, and student of George Herbert Palmer and Josiah Royce at Harvard. I hold literary rights to her unpublished material through the Ella Lyman Cabot Trust and have fully digitized her papers at the Schlesinger Library, Radcliffe Institute. My current book, <em>An Untold American Philosophy of Love: Ella Lyman Cabot on Becoming Ourselves</em>, reconstructs and develops her philosophy to argue for love as the normative foundation of ethics.</p>
-      <p>I am a moral philosopher working as an independent scholar. I am the recipient of the 2026 Harris-Jones Prize from the Society for the Advancement of American Philosophy and a 2026 Research Award from the Ralph Waldo Emerson Society, and I teach as an Associate Adjunct in Philosophy at the University of Indianapolis.</p>
+      <p>My work has received the 2026 Harris-Jones Prize from the Society for the Advancement of American Philosophy and a 2026 Research Award from the Ralph Waldo Emerson Society. I hold an MA in philosophy from Western Michigan University and a BA from Indiana University Kokomo.</p>
 
       <div className="fleuron" />
 
@@ -537,219 +609,203 @@ function Home() {
 
       <div className="callout-dark" style={{ marginTop: "2rem" }}>
         <h3>The Boston Ethics Tradition Recovery Program</h3>
-        <p style={{ marginTop: "0.5rem" }}>A long-range scholarly initiative recovering the philosophically serious alternative tradition in American ethics: George Herbert Palmer, Josiah Royce, Ella Lyman Cabot, and Richard Clarke Cabot, as a network of teachers and students whose work on selfhood, moral growth, and purposive agency has been unjustly neglected. All proceeds from this program are directed to the Ella Lyman Cabot Trust.</p>
+        <p style={{ marginTop: "0.5rem" }}>The name I give to my editorial and archival work on Palmer, Royce, and Ella Lyman and Richard Clarke Cabot. I direct it as principal investigator. At present it comprises the Cabot edition and the archival transcription behind it, and the Routledge volume of Cabot's writings on children's philosophical education, which I am co-editing with Maughn Rollins Gregory and Megan Jane Laverty. All proceeds from the program go to the Ella Lyman Cabot Trust.</p>
+      </div>
+    </div>
+  );
+}
+
+// ── CABOT EDITION ─────────────────────────────────────────────────
+const EDITION_STATUS = "In preparation. Not yet under contract.";
+
+const EDITION_SCOPE = [
+  { h: "Published books and essays", d: <><em>Everyday Ethics</em> (1906), <em>Ethics for Children</em> (1910), <em>A Course in Citizenship</em> (1914), <em>Seven Ages of Childhood</em> (1921), <em>Temptations to Rightdoing</em> (1929), and her shorter published writing.</> },
+  { h: "Philosophical manuscripts", d: <>Drafts of the unfinished book on growth that Royce encouraged her to write; her 1890 examination answers for Palmer's ethics course; "The Place of Pleasure"; "Marriage" (1889); "Civil Service Versus the Sword" (1915); "On Immortality"; and her commentary on Royce's <em>The World and the Individual</em>.</> },
+  { h: "Letters", d: "Her correspondence, above all the letters exchanged with Richard Clarke Cabot, which survive almost in full, some only as typed transcripts." },
+  { h: "Poetry", d: "Poems spread across ten manuscript collections, most of them unpublished; the only earlier selection is the private family pamphlet 52 Poems (1935)." },
+  { h: "Journals and notebooks", d: "Journals, travel journals, and working notebooks." },
+];
+
+// Provisional: the arrangement will be settled with the publisher.
+const EDITION_VOLUMES = [
+  { t: "Ethical Writings", d: "The published books on ethics and moral education." },
+  { t: "Philosophical Manuscripts", d: "The unpublished essays, drafts, and course writings, with her commentary on Royce." },
+  { t: "Letters", d: "Selected correspondence, centered on the Ella and Richard Cabot letters." },
+  { t: "Poems", d: "The poetry, gathered from the manuscript collections." },
+  { t: "Journals and Notebooks", d: "Selections from the journals and notebooks." },
+];
+
+const EDITION_METHOD = [
+  "An introduction to each volume placing its texts in Cabot's life and in the Palmer–Royce circle.",
+  "A headnote for each text giving its date, occasion, and source.",
+  "Annotation identifying people, sources, and allusions, with cross-references between the published books and the unpublished manuscripts.",
+  "Textual notes recording significant variants between drafts, and between manuscripts and printed versions.",
+  "Documentation of every source by collection, box, and folder; where a letter survives only as a typed transcript, that is stated.",
+];
+
+// Fill in to publish a short edited specimen: { title, source, text: [paragraphs], notes: [strings] }
+const EDITION_SAMPLE = null;
+
+function Edition() {
+  return (
+    <div className="sec">
+      <h2>The Cabot Edition</h2>
+      <Rule />
+      <p className="lead-italic">A comprehensive edition of the writings of Ella Lyman Cabot (1866–1934)</p>
+      <div className="status"><span className="status-label">Status</span> {EDITION_STATUS}</div>
+
+      <p>Cabot wrote across forms. She published books on ethics and moral education. She also left philosophical manuscripts, a large correspondence, a body of poetry, and journals kept over most of her life. Only part of it has ever been printed. The edition is meant to collect all of it, so that her philosophy can be read in the forms in which she actually worked it out.</p>
+
+      <div className="ed-sec">
+        <div className="sub-label">Scope</div>
+        {EDITION_SCOPE.map((s, i) => (
+          <div key={i} className="scope-row">
+            <div className="scope-h">{s.h}</div>
+            <div className="scope-d">{s.d}</div>
+          </div>
+        ))}
+      </div>
+
+      <div className="ed-sec">
+        <div className="sub-label">Collections and work completed</div>
+        <div className="pub-item">
+          <div className="pub-title"><Ext url={FINDING_AID_ELC}>Papers of Ella Lyman Cabot, 1873–1934</Ext></div>
+          <div className="pub-meta">Schlesinger Library, Radcliffe Institute, Harvard University, Collection A-139 (8.17 linear feet)</div>
+          <div className="pub-note">Digitized and transcribed in full.</div>
+        </div>
+        <div className="pub-item">
+          <div className="pub-title"><Ext url={FINDING_AID_RCC}>Papers of Richard Clarke Cabot</Ext></div>
+          <div className="pub-meta">Harvard University Archives, HUG 4255, including Ada Peirce McCormick's research materials (HUG 4255.80) and drafts of her unpublished biography of the Cabots</div>
+          <div className="pub-note">About 16,000 photographs taken; sorting and transcription under way, supported by a 2026 Research Award from the Ralph Waldo Emerson Society.</div>
+        </div>
+        <p className="small-note">{RIGHTS}</p>
+      </div>
+
+      <div className="ed-sec">
+        <div className="sub-label">Arrangement of volumes <span className="provisional">provisional</span></div>
+        <div className="project-list">
+          {EDITION_VOLUMES.map((v, i) => (
+            <div key={i} className="project-item">
+              <div className="project-num">{roman(i + 1)}</div>
+              <div>
+                <div className="project-title">{v.t}</div>
+                <div className="project-desc">{v.d}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <p className="small-note">The number, order, and contents of the volumes will be settled with the publisher.</p>
+      </div>
+
+      <div className="ed-sec">
+        <div className="sub-label">Editorial approach</div>
+        <ul className="method-list">
+          {EDITION_METHOD.map((m, i) => <li key={i}>{m}</li>)}
+        </ul>
+      </div>
+
+      <div className="ed-sec">
+        <div className="sub-label">Sample</div>
+        {EDITION_SAMPLE ? (
+          <div className="specimen">
+            <div className="specimen-title">{EDITION_SAMPLE.title}</div>
+            <div className="specimen-source">{EDITION_SAMPLE.source}</div>
+            {EDITION_SAMPLE.text.map((t, i) => <p key={i}>{t}</p>)}
+            {EDITION_SAMPLE.notes && <ol className="specimen-notes">{EDITION_SAMPLE.notes.map((n, i) => <li key={i}>{n}</li>)}</ol>}
+          </div>
+        ) : (
+          <p>An edited sample with full annotation is available to editors on request: <a href={`mailto:${EMAIL}?subject=Cabot%20edition%20sample`}>{EMAIL}</a>.</p>
+        )}
+      </div>
+
+      <div className="ed-sec">
+        <div className="sub-label">Collaboration</div>
+        <p>I would be glad to hear from press and series editors; from scholars who would like to take on the annotation of a volume, particularly the letters or the poems; and from librarians or collectors who hold Cabot material outside the two Harvard collections.</p>
       </div>
     </div>
   );
 }
 
 // ── RESEARCH ──────────────────────────────────────────────────────
+// Status is shown as prominently as the title.
 const PROJECTS = [
   {
-    t: "An Untold American Philosophy of Love: Ella Lyman Cabot on Becoming Ourselves (Monograph, current priority)",
-    d: "The central book of the recovery project. It reconstructs and develops Cabot's philosophy to argue for love as the normative foundation of ethics: how attraction and commitment give a life a chosen purpose, how a relationship makes particular obligations one's own and keeps them binding through failure, and how loving another adequately requires recognizing that person's independent purposes. Later chapters set Cabot beside MacIntyre and contemporary work on attention, practical identity, and aspiration, and develop an account of forgiveness as a test of accountability and changed purposes. Approximately 90,000 words. Formal proposal invited by John Kaag for Bloomsbury's American Philosophy Series; proposal in preparation.",
+    t: <><em>An Untold American Philosophy of Love: Ella Lyman Cabot on Becoming Ourselves</em></>,
+    s: "Monograph in progress, about 90,000 words. Proposal invited by John Kaag for Bloomsbury's American Philosophy Series; not under contract.",
+    d: "My current priority. The book reconstructs and develops Cabot's philosophy to argue for love as the normative foundation of ethics: how attraction and commitment give a life a chosen purpose, how a relationship makes particular obligations one's own and keeps them binding through failure, and how loving another person adequately requires recognizing that person's independent purposes. Later chapters set Cabot beside MacIntyre and contemporary work on attention, practical identity, and aspiration, and develop an account of forgiveness as a test of accountability and changed purposes.",
   },
   {
-    t: "Ella Lyman Cabot: Purposive Selfhood and the Philosophical Education of Children (Edited Volume, Routledge)",
-    d: "Co-edited with Maughn Rollins Gregory and Megan Jane Laverty for the Routledge Philosophy for Children Forebears series. The first collected edition of Cabot's writings on the philosophical education of children, organized in five parts, each pairing her primary texts with an original commentary chapter by a contemporary scholar, with an editorial introduction and conclusion. Manuscript complete; awaiting series editors' approval for submission.",
+    t: <>The Cabot Edition</>,
+    s: EDITION_STATUS,
+    d: <>A comprehensive edition of Cabot's published books, philosophical manuscripts, letters, poetry, and journals. See <a href={href("Edition")}>the edition page</a> for its scope, the archival work completed, and the editorial approach.</>,
   },
   {
-    t: "Ella Lyman Cabot: Philosophical Writings (Edition)",
-    d: "An edition, with introduction and notes, of Cabot's philosophical writings on growth, individuality, purpose, love, and immortality, including the drafts of her unfinished book on growth that Royce encouraged her to write, her 1890 examination answers for Palmer's ethics course, \"The Place of Pleasure,\" \"Marriage\" (1889), \"Civil Service Versus the Sword\" (1915), \"On Immortality,\" and her commentary on Royce's The World and the Individual. Target: Routledge Studies in American Philosophy.",
+    t: <><em>Ella Lyman Cabot: Purposive Selfhood and the Philosophical Education of Children</em></>,
+    s: "Edited volume. Manuscript complete; awaiting the series editors' approval for submission to Routledge. Not yet under contract.",
+    d: "Co-edited with Maughn Rollins Gregory and Megan Jane Laverty for the Philosophy for Children Forebears series. The first collection of Cabot's writings on the philosophical education of children, in five parts, each pairing her texts with an original commentary chapter by a contemporary scholar.",
   },
   {
-    t: "Reading Within: Ella Lyman Cabot and the Medieval Tradition of Selfhood (Monograph)",
-    d: "A prospective book arguing that Cabot's five conditions of selfhood (individuality, interest, purpose, growth, and invention) are a pragmatist reformulation of structures developed by Augustine, Aquinas, Dante, and medieval women writers. Proposal in preparation.",
-  },
-];
-
-const GOALS = [
-  {
-    h: "Fellowships",
-    items: [
-      { t: "Love Ethic Faculty Fellowship, 2027–28", v: "Institute for Ethics and the Common Good, University of Notre Dame", d: "A year in residence to complete An Untold American Philosophy of Love, rewriting existing arguments into an integrated manuscript of about 90,000 words, with a public-engagement component bringing Cabot's Philosophy for Children methods to Notre Dame students and a public discussion." },
-      { t: "Fulbright U.S. Student Program, Canada Research Award, 2027–28", v: "University of Saskatchewan, hosted by Diana Heney", d: "\"Who Else Did What Cabot Did: Bridging Pragmatism and Idealism in Canada.\" An archival year searching for thinkers who, like Cabot, refused to choose between pragmatism and idealism, beginning with the Halifax philosophers Eliza Ritchie and Ethel Gordon Muir and the Watson, Caldwell, Murray, and Schurman circles, and compiling a register of scholars who moved between Harvard and Canadian posts. Planned outcomes: two articles and a chapter of The Purposive Self." },
-    ],
-  },
-  {
-    h: "Book Proposals",
-    items: [
-      { t: "An Untold American Philosophy of Love", v: "Bloomsbury American Philosophy Series", d: "Formal proposal, invited by series editor John Kaag." },
-      { t: "Ella Lyman Cabot: Philosophical Writings", v: "Routledge Studies in American Philosophy", d: "Prospectus for an edition of Cabot's writings on growth, individuality, purpose, love, and immortality." },
-      { t: "Reading Within: Ella Lyman Cabot and the Medieval Tradition of Selfhood", v: "University of Notre Dame Press", d: "Proposal and sample chapter." },
-    ],
-  },
-  {
-    h: "Conference and Journal Submissions",
-    items: [
-      { t: "Helping the Puzzled Girls: Cabot on Making a Purpose One's Own", v: "SAAP 2027" },
-      { t: "Love and the Whole: Ella Lyman Cabot and John Dewey", v: "SAAP session, APA Pacific Division 2027" },
-      { t: "John William Miller and Huw Price on the scope of functional explanation", v: "SAAP 2027 panel" },
-      { t: "After Dewey; No Moral Equivalent to War; Ella Lyman Cabot and the Platonic-Augustinian Tradition in Virtue Ethics", v: "Journal submissions, 2026–27" },
-    ],
+    t: <><em>The Purposive Self: Agency, Normativity, and Moral Growth</em></>,
+    s: "Monograph in progress.",
+    d: "The systematic side of my work: an account of the self as a purposive achievement, and of that achievement as what makes normativity, responsibility, and moral growth possible. It draws on Cabot's pragmatic idealism and tests it against problems in metaethics, moral responsibility, and the philosophy of education.",
   },
 ];
 
 function Research() {
   return (
     <div className="sec">
-      <h2>Research Interests</h2>
+      <h2>Research</h2>
       <Rule />
-      <p>My philosophical work spans pragmatist ethics and metaethics, feminist philosophy of the late nineteenth and early twentieth century, philosophy of moral education, philosophy of action, and moral responsibility. I work at the boundary between historical recovery and systematic philosophy, using archival research to reconstruct positions and arguments that were historically significant but have been marginalized by the discipline's received canon.</p>
-      <p>The systematic project is a unified account of purposive selfhood as the ground of normativity, moral responsibility, and moral growth. The central claim is that neither deflationary expressivism nor heavyweight metaphysical realism can account for genuine moral error, diachronic responsibility, and the possibility of becoming a better person. What is needed is a minimal metaphysics of the purposive self: a framework in which the self is a purposive achievement, and in which that achievement is what makes normativity, responsibility, and moral growth possible. Ella Lyman Cabot's pragmatic idealism supplies that framework, tested against problems across metaethics, moral responsibility theory, and philosophy of education.</p>
-      <p>This systematic project is developed in my own book in progress, <em>The Purposive Self: Agency, Normativity, and Moral Growth</em>, targeted at Fordham University Press, Oxford University Press, and Cambridge University Press.</p>
+      <p>My work spans pragmatist ethics and metaethics, feminist philosophy of the late nineteenth and early twentieth centuries, the philosophy of moral education, and moral responsibility. I work at the boundary between historical recovery and systematic philosophy, using archival research to reconstruct positions and arguments that mattered in their time and have since been left out of the received canon.</p>
+      <p>The systematic claim running through it is that neither deflationary expressivism nor heavyweight metaphysical realism can account for genuine moral error, responsibility over time, and the possibility of becoming a better person. What is needed is a minimal metaphysics of the purposive self, and Ella Lyman Cabot's pragmatic idealism supplies one.</p>
 
-      <div style={{ marginTop: "2.6rem" }}>
-        <h2>The Ella Lyman Cabot Recovery Project</h2>
-        <Rule />
-        <p>I am the only scholar conducting sustained archival recovery work on Ella Lyman Cabot. I hold literary rights to her unpublished material through the Ella Lyman Cabot Trust, have fully digitized and transcribed the Schlesinger Library ELC Papers (8.17 linear feet), and am sorting and transcribing some 16,000 photographs from the Harvard University Archives (Papers of Richard Clarke Cabot, HUG 4255, 221 containers).</p>
-        <p>The recovery project is led by a monograph on Cabot's philosophy of love, my current priority, alongside an edited volume, an edition of her philosophical writings, and a further monograph in development.</p>
-      </div>
-
-      <div className="project-list">
+      <div className="project-list" style={{ marginTop: "2rem" }}>
         {PROJECTS.map((p, i) => (
           <div key={i} className="project-item">
             <div className="project-num">{roman(i + 1)}</div>
             <div>
               <div className="project-title">{p.t}</div>
+              <div className="status"><span className="status-label">Status</span> {p.s}</div>
               <div className="project-desc">{p.d}</div>
             </div>
           </div>
         ))}
       </div>
 
-      <div style={{ marginTop: "2.6rem" }}>
-        <h2>Near-Future Goals</h2>
-        <Rule />
-        <p>Applications and submissions I am preparing for the 2026–27 cycle.</p>
-        {GOALS.map((g, i) => (
-          <div key={i} style={{ marginTop: "1.6rem" }}>
-            <div className="sub-label">{g.h}</div>
-            {g.items.map((p, j) => (
-              <div key={j} className="pub-item">
-                <div className="pub-title">{p.t}</div>
-                <div className="pub-meta"><em>{p.v}</em></div>
-                {p.d && <div className="pub-note">{p.d}</div>}
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
-
-      <div style={{ marginTop: "2.6rem" }}>
-        <div className="sub-label">Longer-Range Editorial Work</div>
-        <p>The archive also holds material for later editions: Cabot's poetry across ten manuscript collections, the Ella–Richard Cabot correspondence, and several drafts of Ada Peirce McCormick's unfinished biography of the Cabots. The Boston Ethics Tradition Recovery Program further envisions a series of critical reissues of the core published texts in the tradition. Each volume receives a new scholarly introduction, regularized pagination, and editorial footnotes cross-referencing related works, unpublished manuscripts, and archival sources — providing the scholarly apparatus needed to support sustained future research on these figures. All texts are in the public domain. Target: Harvard University Press, Oxford University Press, or Cambridge University Press.</p>
-        <div className="reprint-grid">
-          {[
-            { author: "Ella Lyman Cabot", works: ["Everyday Ethics (1906)", "Temptations to Rightdoing (1929)"] },
-            { author: "Richard Clarke Cabot", works: ["What Men Live By (1914)", "The Meaning of Right and Wrong (1933)", "Adventures on the Borderland of Ethics (1926)"] },
-            { author: "George Herbert Palmer", works: ["The Field of Ethics (1901)", "The Nature of Goodness (1903)"] },
-            { author: "Josiah Royce", works: ["The Philosophy of Loyalty (1908)"] },
-          ].map((group, i) => (
-            <div key={i}>
-              <div className="reprint-author">{group.author}</div>
-              {group.works.map((w, j) => (
-                <div key={j} className="reprint-work">{w}</div>
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div style={{ marginTop: "2.6rem" }}>
-        <div className="sub-label">Papers in Progress</div>
-        <p style={{ fontStyle: "italic", marginBottom: "1.4rem" }}>Selected papers from the active research program. Primary target venues listed.</p>
-
-        <div className="paper-group">
-          <div className="group-label">James–Cabot–Murdoch Series</div>
-          {[
-            { t: "Cabot's Account of Experience", v: "William James Studies" },
-            { t: "Cabot's Account of Community", v: "Journal of Speculative Philosophy" },
-            { t: "James, Cabot, and Murdoch on Suffering", v: "Ethics / Journal of Moral Philosophy" },
-          ].map((p, i) => (
-            <div key={i} className="paper-row">
-              <span className="paper-title">{p.t}.</span>
-              <span className="paper-target">Target: <em>{p.v}</em></span>
-            </div>
-          ))}
-        </div>
-
-        <div className="paper-group">
-          <div className="group-label">ELC Recovery Papers</div>
-          {[
-            { t: "After Dewey: Ella Lyman Cabot, Owned Obligation, and the Anti-Deficit Child Trilemma", v: "Educational Theory" },
-            { t: "Helping the Puzzled Girls: Cabot on Making a Purpose One's Own", v: "Journal of Speculative Philosophy" },
-            { t: "Ella Lyman Cabot and the Platonic-Augustinian Tradition in Virtue Ethics", v: "History of Philosophy Quarterly" },
-            { t: "No Moral Equivalent to War: Ella Lyman Cabot's Religious Case Against William James, 1915", v: "European Journal of Pragmatism and American Philosophy" },
-            { t: "Two Orders of Love: Ella Lyman Cabot Versus MacIntyre on the Proper Ordering of Augustinian Virtue", v: "SCP Eastern Regional Meeting, November 2026" },
-            { t: "Self-Reliance, Loyalty, and American Idealism: Ella Lyman Cabot Between Royce and Emerson", v: "APA Eastern Division, January 2027" },
-            { t: "Against the Isolated Self: Ella Lyman Cabot's Ethics of Love and the Collapse of Egoism and Altruism", v: "APA Eastern Division, January 2027" },
-            { t: "Emerson, Cabot, and the Pragmatist-Feminist Tradition", v: "Emerson Society Papers" },
-            { t: "ELC as Spiritual Director: Practice, Theology, and the Limits of the Label", v: "History of philosophy and American religion journals" },
-            { t: "Ada Peirce McCormick as Philosophical Witness", v: "American philosophy and history of philosophy journals" },
-          ].map((p, i) => (
-            <div key={i} className="paper-row">
-              <span className="paper-title">{p.t}.</span>
-              <span className="paper-target">Target: <em>{p.v}</em></span>
-            </div>
-          ))}
-        </div>
-
-        <div className="paper-group">
-          <div className="group-label">Systematic Papers</div>
-          {[
-            { t: "Constitutive Constraints, Scientific Inquiry, and the Limits of Global Expressivism", v: "Synthese" },
-            { t: "Purposive Pluralism: A Third Option Between Global Expressivism and Bifurcationism", v: "BJHP / Journal of the History of Philosophy / Philosophical Studies" },
-            { t: "Purposive Selfhood and the Metaphysics of Habit", v: "Transactions of the Charles S. Peirce Society; MSA 2027 abstract submitted" },
-            { t: "Probabilistic Compatibilism", v: "Philosophical Psychology" },
-          ].map((p, i) => (
-            <div key={i} className="paper-row">
-              <span className="paper-title">{p.t}.</span>
-              <span className="paper-target">Target: <em>{p.v}</em></span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div style={{ marginTop: "2.6rem" }}>
-        <div className="sub-label">Long-Range Research</div>
-        <p>Beyond the recovery program, I am developing several long-range projects in systematic philosophy and the history of philosophy. These include a book on collective purposive agency as a sequel to <em>The Purposive Self</em>, and an exploratory argument identifying Thomas Reid, Kierkegaard, and Ella Lyman Cabot as a unified tradition in the philosophy of purposive selfhood running from Scottish common sense philosophy through German existentialism into American pragmatism. I am also developing the Purposive Pluralism project as a contribution to the metaethics literature on expressivism and bifurcationism, and a comparison of John William Miller and Huw Price on the scope of functional explanation, planned for a SAAP 2027 panel.</p>
-      </div>
-
-      <div className="callout">
-        <h3 style={{ marginBottom: "0.6rem" }}>Archival Holdings</h3>
-        <p><strong>Schlesinger Library, Radcliffe Institute, Harvard University.</strong> Ella Lyman Cabot Papers (Collection A-139). 8.17 linear feet. Full archive digitized and transcribed. Permission to publish all materials secured from the Ella Lyman Cabot Trust.</p>
-        <p style={{ marginTop: "0.65rem" }}><strong>Harvard University Archives, Pusey Library.</strong> Papers of Richard Clarke Cabot (HUG 4255). 221 containers. Includes Ada Peirce McCormick's research materials (HUG 4255.80, 25 containers) and multiple drafts of her unpublished biography of the Cabots. Some 16,000 photographs taken; sorting and transcription underway, with a focus on Cabot's philosophical formation and relation to Emerson.</p>
-      </div>
+      <p style={{ marginTop: "2rem" }}>Articles and talks drawn from these projects are listed under <a href={href("Publications")}>Publications</a>.</p>
     </div>
   );
 }
 
 // ── PUBLICATIONS ──────────────────────────────────────────────────
-const FORTHCOMING = [
-  { t: "Pluralism in Practice: Interpreting Black Feminism and Womanism Through Ella Lyman Cabot", v: "The Pluralist", n: "Accepted. Winner of the 2026 Harris-Jones Prize, SAAP." },
-  { t: "Ella Lyman Cabot: Teaching for Royce's Beloved Community", v: "Philosophy of Education", n: "Forthcoming 2027." },
-  { t: "Trauma and Diachronic Reasons-Responsive Moral Responsibility", v: "Philosophy of Medicine", n: "Forthcoming 2027." },
-  { t: "An Organic Pragmatist Synthesis through Ella Lyman Cabot: A Review Essay of Diana Heney's American Ethics (2025)", v: "The Pluralist", n: "Review essay. Forthcoming 2027." },
-  { t: "Review of Cheryl Misak, Oxford Pragmatism (Oxford University Press, 2025)", v: "Transactions of the Charles S. Peirce Society", n: "Book review. Vol. 70, no. 1 (2026)." },
-];
+// t: title · cite: the rest of the citation · url: article or publisher page · n: a short note
 const PUBLISHED = [
-  { t: "Reasonable Communities: P4C and Peace Education", v: "Cultivating Reasonableness in Education: Community of Philosophical Inquiry", p: "Springer", y: "2023" },
-  { t: "Expanding the Facilitator's Toolbox: Vygotskian Mediation in Philosophy for Children", v: "Analytic Teaching and Philosophical Praxis", y: "2020", n: "Co-authored with Kevin M. Clark." },
+  { t: "Trauma and Diachronic Reasons-Responsive Moral Responsibility", cite: "Philosophy of Medicine 7, no. 1 (October 2026).", url: "https://doi.org/10.5195/pom.2026.284", n: "Open access." },
+  { t: "Review of Cheryl Misak, Oxford Pragmatism: Ryle and Austin's Debt (Oxford University Press, 2025)", cite: "Transactions of the Charles S. Peirce Society 62, no. 1 (2026): 74–81.", url: "https://muse.jhu.edu/issue/57270" },
+  { t: "Reasonable Communities: P4C and Peace Education", cite: "In Cultivating Reasonableness in Education: Community of Philosophical Inquiry, edited by Marella Ada V. Mancenido-Bolaños, Cathlyne Joy P. Alvarez-Abarejo, and Leander Penaso Marquez. Singapore: Springer, 2023.", url: "https://link.springer.com/book/10.1007/978-981-99-4198-8" },
+  { t: "Expanding the Facilitator's Toolbox: Vygotskian Mediation in Philosophy for Children", cite: "With Kevin M. Clark. Analytic Teaching and Philosophical Praxis 40, no. 2 (2020).", url: "https://journal.viterbo.edu/index.php/atpp/article/download/1183/990/1897", n: "Open access (PDF)." },
+];
+const ACCEPTED = [
+  { t: "Pluralism in Practice: Interpreting Black Feminism and Womanism Through Ella Lyman Cabot", cite: "The Pluralist. Accepted.", n: "Winner of the 2026 Harris-Jones Prize, Society for the Advancement of American Philosophy." },
+  { t: "Ella Lyman Cabot: Teaching for Royce's Beloved Community", cite: "Philosophy of Education. Forthcoming 2027." },
+  { t: "An Organic Pragmatist Synthesis through Ella Lyman Cabot: A Review Essay of Diana Heney's American Ethics (2025)", cite: "The Pluralist. Forthcoming 2027." },
 ];
 const UNDER_REVIEW = [
-  { t: "Being the Moral Teacher: Ella Lyman Cabot's Purposive Virtue Ethics", v: "Journal of Philosophy of Education", n: "Revise and resubmit." },
-  { t: "What the Tradition Presupposes: Minimal Metaphysics, Pragmatist-Feminism, and the Case for Centering Ella Lyman Cabot", v: "Transactions of the Charles S. Peirce Society" },
-  { t: "Rationality as Probabilistic Coherence: Credal Expressivism, Planning Attitudes, and the Guidance of Action", v: "Philosophical Studies" },
+  { t: "Being the Moral Teacher: Ella Lyman Cabot's Purposive Virtue Ethics", cite: "Revise and resubmit, Journal of Philosophy of Education." },
+  { t: "What the Tradition Presupposes: Minimal Metaphysics, Pragmatist-Feminism, and the Case for Centering Ella Lyman Cabot", cite: "Under review." },
+  { t: "Rationality as Probabilistic Coherence: Credal Expressivism, Planning Attitudes, and the Guidance of Action", cite: "Under review." },
+];
+const COMMISSIONED = [
+  { t: "\"Love\" and \"Friendship\" (Ralph Waldo Emerson)", cite: "Reference entries for The Literary Encyclopedia. Commissioned; in preparation." },
 ];
 const UPCOMING_TALKS = [
   { t: "Self-Reliance, Loyalty, and American Idealism: Ella Lyman Cabot Between Royce and Emerson", v: "APA Eastern Division, Boston · Josiah Royce Society and Ralph Waldo Emerson Society session (session organizer)", y: "January 2027" },
   { t: "No Moral Equivalent to War: Ella Lyman Cabot's Religious Case Against William James, 1915", v: "APA Eastern Division, Boston · William James Society session", y: "January 2027" },
   { t: "Against the Isolated Self: Ella Lyman Cabot's Ethics of Love and the Collapse of Egoism and Altruism", v: "APA Eastern Division, Boston · SAAP session", y: "January 2027" },
   { t: "Two Orders of Love: Ella Lyman Cabot Versus MacIntyre on the Proper Ordering of Augustinian Virtue", v: "Society of Christian Philosophers, Eastern Regional Meeting, Christopher Newport University", y: "November 2026" },
-  { t: "After Dewey: Ella Lyman Cabot, Owned Obligation, and the Anti-Deficit Child Trilemma", v: "NAAPE", y: "October 2026" },
 ];
 const TALKS = [
+  { t: "After Dewey: Ella Lyman Cabot, Owned Obligation, and the Anti-Deficit Child Trilemma", v: "NAAPE", y: "2026" },
   { t: "Pluralism in Practice: Interpreting Black Feminism and Womanism Through Ella Lyman Cabot", v: "SAAP", y: "2026" },
   { t: "Ella Lyman Cabot: Teaching for Royce's Beloved Community", v: "PES", y: "2026" },
   { t: "Expanding the Pragmatist-Feminism Canon: Ella Lyman Cabot, Metaphysics, and Feminist Challenges", v: "Boston University Graduate Conference", y: "2026" },
@@ -762,112 +818,82 @@ const TALKS = [
   { t: "Ella Lyman Cabot: The Ethical Educator of Selfhood", v: "NAAPE", y: "2022" },
   { t: "A Pragmatist Metaethics", v: "Indiana University Bicentennial Philosophy Conference", y: "2019" },
 ];
+const AWARDS = [
+  { t: "Harris-Jones Prize", y: "2026", d: "Society for the Advancement of American Philosophy. Recognizes work in the philosophy of the Black experience; awarded for \"Pluralism in Practice: Interpreting Black Feminism and Womanism Through Ella Lyman Cabot.\"" },
+  { t: "Research Award", y: "2026", d: "Ralph Waldo Emerson Society. Supports archival research in the Papers of Richard Clarke Cabot, Harvard University Archives, on Ella Lyman Cabot's philosophical formation and relation to Emerson." },
+  { t: "Outstanding Paper Prize, Finalist", y: "2025", d: "North American Association for Philosophy and Education. For \"Being the Moral Teacher: Ella Lyman Cabot's Ideal Theory of Self and Egoist Virtue.\"" },
+];
+
+const Entry = ({ p }) => (
+  <div className="pub-item">
+    <div className="pub-title">{p.url ? <Ext url={p.url}>{p.t}</Ext> : p.t}</div>
+    <div className="pub-meta">{p.cite}</div>
+    {p.n && <div className="pub-note">{p.n}</div>}
+  </div>
+);
+const Talk = ({ p }) => (
+  <div className="pub-item">
+    <div className="pub-title">{p.t}</div>
+    <div className="pub-meta">{p.v} &middot; {p.y}</div>
+  </div>
+);
 
 function Publications() {
   return (
     <div className="sec">
       <h2>Publications &amp; Talks</h2>
       <Rule />
+      <p className="small-note" style={{ marginTop: 0 }}>Titles that are linked open the article or the publisher's page. Drafts of work in progress are available on request.</p>
 
-      <div style={{ marginBottom: "2.2rem" }}>
-        <div className="sub-label">Books in Progress</div>
-        <div className="pub-item">
-          <div className="pub-title"><em>An Untold American Philosophy of Love: Ella Lyman Cabot on Becoming Ourselves</em></div>
-          <div className="pub-meta">Current priority · Ella Lyman Cabot Recovery Project. Reconstructs and develops Cabot's philosophy to argue for love as the normative foundation of ethics: love as attraction and commitment, the ownership of obligation, and individuality.</div>
-          <div className="pub-note">Formal proposal invited by John Kaag for Bloomsbury's American Philosophy Series; proposal in preparation.</div>
-        </div>
-        <div className="pub-item">
-          <div className="pub-title"><em>The Purposive Self: Agency, Normativity, and Moral Growth</em></div>
-          <div className="pub-meta">Systematic monograph. An account of purposive selfhood as the ground of normativity and moral growth, drawing on Ella Lyman Cabot's pragmatic idealism and tested against problems in metaethics, moral responsibility, and philosophy of education.</div>
-          <div className="pub-note">Target: Fordham University Press (primary); Oxford University Press; Cambridge University Press.</div>
-        </div>
-      </div>
-
-      <div style={{ marginBottom: "2.2rem" }}>
-        <div className="sub-label">Edited Volume in Preparation</div>
-        <div className="pub-item">
-          <div className="pub-title"><em>Ella Lyman Cabot: Purposive Selfhood and the Philosophical Education of Children</em></div>
-          <div className="pub-meta">Co-edited with Maughn Rollins Gregory and Megan Jane Laverty. Philosophy for Children Forebears series, Routledge.</div>
-          <div className="pub-note">Manuscript complete; awaiting series editors' approval for submission. Includes my editorial introduction, "Ella Lyman Cabot: The Ethical Educator of Selfhood."</div>
-        </div>
-      </div>
-
-      <div style={{ marginBottom: "2.2rem" }}>
-        <div className="sub-label">Commissioned</div>
-        <div className="pub-item">
-          <div className="pub-title">"Love" and "Friendship" (Ralph Waldo Emerson)</div>
-          <div className="pub-meta"><em>The Literary Encyclopedia</em></div>
-          <div className="pub-note">Commissioned reference entries; in preparation.</div>
-        </div>
-      </div>
-
-      <div style={{ marginBottom: "2.2rem" }}>
-        <div className="sub-label">Forthcoming</div>
-        {FORTHCOMING.map((p, i) => (
-          <div key={i} className="pub-item">
-            <div className="pub-title">{p.t}</div>
-            <div className="pub-meta"><em>{p.v}</em>{p.p ? `. ${p.p}.` : ""}{p.e ? ` ${p.e}.` : ""}</div>
-            {p.n && <div className="pub-note">{p.n}</div>}
-          </div>
-        ))}
-      </div>
-
-      <div style={{ marginBottom: "2.2rem" }}>
+      <div className="pub-sec">
         <div className="sub-label">Published</div>
-        {PUBLISHED.map((p, i) => (
-          <div key={i} className="pub-item">
-            <div className="pub-title">{p.t}</div>
-            <div className="pub-meta"><em>{p.v}</em>{p.p ? `. ${p.p}.` : ""} {p.y}.</div>
-            {p.n && <div className="pub-note">{p.n}</div>}
-          </div>
-        ))}
+        {PUBLISHED.map((p, i) => <Entry key={i} p={p} />)}
       </div>
 
-      <div style={{ marginBottom: "2.2rem" }}>
+      <div className="pub-sec">
+        <div className="sub-label">Accepted &amp; Forthcoming</div>
+        {ACCEPTED.map((p, i) => <Entry key={i} p={p} />)}
+      </div>
+
+      <div className="pub-sec">
         <div className="sub-label">Under Review</div>
-        {UNDER_REVIEW.map((p, i) => (
-          <div key={i} className="pub-item">
-            <div className="pub-title">{p.t}</div>
-            <div className="pub-meta"><em>{p.v}</em></div>
-            {p.n && <div className="pub-note">{p.n}</div>}
-          </div>
-        ))}
+        {UNDER_REVIEW.map((p, i) => <Entry key={i} p={p} />)}
       </div>
 
-      <div style={{ marginBottom: "2.2rem" }}>
+      <div className="pub-sec">
+        <div className="sub-label">Books &amp; Editions in Preparation</div>
+        {PROJECTS.map((p, i) => (
+          <div key={i} className="pub-item">
+            <div className="pub-title">{p.t}</div>
+            <div className="pub-meta">{p.s}</div>
+          </div>
+        ))}
+        <p className="small-note">Described in more detail under <a href={href("Research")}>Research</a> and <a href={href("Edition")}>Cabot Edition</a>.</p>
+      </div>
+
+      <div className="pub-sec">
+        <div className="sub-label">Commissioned</div>
+        {COMMISSIONED.map((p, i) => <Entry key={i} p={p} />)}
+      </div>
+
+      <div className="pub-sec">
         <div className="sub-label">Forthcoming Presentations</div>
-        {UPCOMING_TALKS.map((p, i) => (
-          <div key={i} className="pub-item">
-            <div className="pub-title">{p.t}</div>
-            <div className="pub-meta">{p.v} &middot; {p.y}</div>
-          </div>
-        ))}
+        {UPCOMING_TALKS.map((p, i) => <Talk key={i} p={p} />)}
       </div>
 
-      <div style={{ marginBottom: "2.2rem" }}>
+      <div className="pub-sec">
         <div className="sub-label">Conference Presentations</div>
-        {TALKS.map((p, i) => (
-          <div key={i} className="pub-item">
-            <div className="pub-title">{p.t}</div>
-            <div className="pub-meta">{p.v} &middot; {p.y}</div>
-          </div>
-        ))}
+        {TALKS.map((p, i) => <Talk key={i} p={p} />)}
       </div>
 
       <div>
         <div className="sub-label">Awards &amp; Prizes</div>
-        <div className="pub-item">
-          <div className="pub-title">Harris-Jones Prize <span style={{ color: C.muted }}>2026</span></div>
-          <div className="pub-meta">Society for the Advancement of American Philosophy (SAAP). Recognizes work in the Philosophy of the Black Experience. Awarded for "Pluralism in Practice: Interpreting Black Feminism and Womanism Through Ella Lyman Cabot."</div>
-        </div>
-        <div className="pub-item">
-          <div className="pub-title">Outstanding Paper Prize, Finalist <span style={{ color: C.muted }}>2025</span></div>
-          <div className="pub-meta">North American Association for Philosophy and Education (NAAPE). For "Being the Moral Teacher: Ella Lyman Cabot's Ideal Theory of Self and Egoist Virtue."</div>
-        </div>
-        <div className="pub-item">
-          <div className="pub-title">Research Award <span style={{ color: C.muted }}>2026</span></div>
-          <div className="pub-meta">Ralph Waldo Emerson Society. Supported archival research in the Papers of Richard Clarke Cabot, Harvard University Archives, on Ella Lyman Cabot's philosophical formation and relation to Emerson.</div>
-        </div>
+        {AWARDS.map((a, i) => (
+          <div key={i} className="pub-item">
+            <div className="pub-title">{a.t} <span style={{ color: C.muted }}>{a.y}</span></div>
+            <div className="pub-meta">{a.d}</div>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -884,6 +910,9 @@ const INST = [
   { name: "Colorado Technical University", detail: "Intro to Ethics" },
   { name: "Western Michigan University", detail: "Intro to Philosophy · Ethics in Engineering · Values & Video Games" },
 ];
+// Put files in public/teaching/ and list them here, e.g.
+// { t: "Introduction to Philosophy, sample syllabus", file: "teaching/intro-syllabus.pdf" }
+const TEACHING_MATERIALS = [];
 
 function Teaching() {
   return (
@@ -898,6 +927,18 @@ function Teaching() {
         <p className="teach-philosophy">In Introduction to Ethics, this becomes a semester-long project. Students begin by generating their own lists of goods, bads, and cases before any theory is introduced. Collaborative reasoning builds toward a working moral framework the class constructs together. When Mill, Kant, and Aristotle enter the conversation, the question is never just what they say but whether their accounts survive contact with what the class has built. This is what Cabot and Royce meant by the Beloved Community: not agreement, but a group that has learned to think and act together while remaining genuinely different from one another.</p>
         <p className="teach-philosophy">The signature assignment in Introduction to Philosophy is the Reading Argument Objection and Reply (RAOR): students reconstruct the central argument of a primary text, raise a serious objection, and develop a reply in the author's defense. The course ends with students returning to their first RAOR with the skills they have developed over the semester. The difference between the two submissions is usually the clearest evidence I have that something real happened.</p>
       </div>
+
+      {TEACHING_MATERIALS.length > 0 && (
+        <div style={{ marginBottom: "2rem" }}>
+          <div className="sub-label">Course Materials</div>
+          {TEACHING_MATERIALS.map((m, i) => (
+            <div key={i} className="pub-item">
+              <div className="pub-title"><a href={m.file}>{m.t}</a></div>
+              {m.n && <div className="pub-note">{m.n}</div>}
+            </div>
+          ))}
+        </div>
+      )}
 
       <div style={{ marginBottom: "1.8rem" }}>
         <div className="sub-label">Institutions (70+ courses at 8 institutions)</div>
@@ -923,39 +964,36 @@ function Teaching() {
       </div>
 
       <div className="callout">
-        <p>Teaching materials, syllabi, and a full teaching statement are available upon request. I am interested in developing courses on the history of American ethics, pragmatism, feminist philosophy, and philosophy of education.</p>
+        <p>{TEACHING_MATERIALS.length > 0 ? "Further syllabi" : "Syllabi, the RAOR assignment sheet,"} and a full teaching statement are available on request: <a href={`mailto:${EMAIL}`}>{EMAIL}</a>. I am interested in developing courses on the history of American ethics, pragmatism, feminist philosophy, and philosophy of education.</p>
       </div>
     </div>
   );
 }
 
 // ── CV ────────────────────────────────────────────────────────────
+// Built from the same data as the other pages, so it can't drift from them.
+const cvLine = p => `${p.cite}${p.n ? " " + p.n : ""}`;
 const CV_DATA = [
   { h: "Education", items: [
     { t: "MA in Philosophy", s: "Western Michigan University, 2021 · Concentrations: Epistemology & Philosophy of Science; Ethical Theory & Value Theory" },
     { t: "BA in Humanities; Minor in Philosophy", s: "Indiana University Kokomo, 2019 · 45 philosophy credit hours" },
   ]},
-  { h: "Current Positions", items: [
-    { t: "Independent Scholar", s: "Boston Ethics Tradition Recovery Program" },
+  { h: "Positions", items: [
     { t: "Associate Adjunct in Philosophy", s: "University of Indianapolis" },
+    { t: "Independent Scholar; Principal Investigator", s: "Boston Ethics Tradition Recovery Program" },
     { t: "Instructor of Record", s: "Eight institutions · 70+ courses" },
   ]},
-  { h: "Archival & Editorial", items: [
-    { t: "Literary Rights Holder", s: "Ella Lyman Cabot Trust, literary rights to unpublished material of Ella Lyman Cabot (1866–1934)" },
-    { t: "Principal Investigator", s: "Boston Ethics Tradition Recovery Program" },
+  { h: "Published", items: PUBLISHED.map(p => ({ t: p.t, s: cvLine(p), url: p.url })) },
+  { h: "Accepted & Forthcoming", items: ACCEPTED.map(p => ({ t: p.t, s: cvLine(p) })) },
+  { h: "Under Review", items: UNDER_REVIEW.map(p => ({ t: p.t, s: p.cite })) },
+  { h: "Books & Editions in Preparation", items: PROJECTS.map(p => ({ t: p.t, s: p.s })) },
+  { h: "Awards & Prizes", items: AWARDS.map(a => ({ t: `${a.t}, ${a.y}`, s: a.d.split(".")[0] })) },
+  { h: "Presentations", items: [...UPCOMING_TALKS, ...TALKS].map(p => ({ t: p.t, s: `${p.v}, ${p.y}` })) },
+  { h: "Archival Research", items: [
+    { t: "Papers of Ella Lyman Cabot (A-139), Schlesinger Library", s: "Digitized and transcribed in full", url: FINDING_AID_ELC },
+    { t: "Papers of Richard Clarke Cabot (HUG 4255), Harvard University Archives", s: "About 16,000 photographs; transcription under way", url: FINDING_AID_RCC },
   ]},
-  { h: "Awards & Prizes", items: [
-    { t: "Harris-Jones Prize", s: "Society for the Advancement of American Philosophy, 2026" },
-    { t: "Ralph Waldo Emerson Society Research Award", s: "Ralph Waldo Emerson Society, 2026" },
-    { t: "Outstanding Paper Prize, Finalist", s: "North American Association for Philosophy and Education / Educational Theory, 2025" },
-  ]},
-  { h: "Selected Publications", items: [
-    { t: "Pluralism in Practice: Interpreting Black Feminism and Womanism Through Ella Lyman Cabot", s: "The Pluralist, forthcoming" },
-    { t: "Ella Lyman Cabot: Teaching for Royce's Beloved Community", s: "Philosophy of Education, forthcoming 2027" },
-    { t: "Trauma and Diachronic Reasons-Responsive Moral Responsibility", s: "Philosophy of Medicine, forthcoming 2027" },
-    { t: "Reasonable Communities: P4C and Peace Education", s: "Cultivating Reasonableness in Education, Springer, 2023" },
-    { t: "Expanding the Facilitator's Toolbox", s: "Analytic Teaching and Philosophical Praxis, 2020 (with Kevin M. Clark)" },
-  ]},
+  { h: "Teaching", items: INST.map(i => ({ t: i.name, s: i.detail })) },
   { h: "Affiliations", items: [
     { t: "Society for the Advancement of American Philosophy (SAAP)" },
     { t: "Philosophy of Education Society (PES)" },
@@ -973,6 +1011,13 @@ function CV() {
     <div className="sec">
       <h2>Curriculum Vitae</h2>
       <Rule />
+      <div className="cv-head">
+        <div className="cv-dated">Jacob B. Castleberry · {EMAIL} · Updated {CV_UPDATED}</div>
+        <div className="cv-actions no-print">
+          {CV_PDF && <a href={CV_PDF} className="cv-link" download>Download PDF</a>}
+          <button className="cv-link cv-print" onClick={() => window.print()}>{CV_PDF ? "Print" : "Print or save as PDF"}</button>
+        </div>
+      </div>
       {CV_DATA.map((sec, i) => (
         <div key={i} className="cv-sec">
           <div className="sub-label">{sec.h}</div>
@@ -980,56 +1025,56 @@ function CV() {
             <div key={j} className="cv-item">
               <Dot />
               <div>
-                <div className="cv-title">{item.t}</div>
+                <div className="cv-title">{item.url ? <Ext url={item.url}>{item.t}</Ext> : item.t}</div>
                 {item.s && <div className="cv-sub">{item.s}</div>}
               </div>
             </div>
           ))}
         </div>
       ))}
-      <div className="cv-box">
-        <div style={{ fontFamily: SANS, fontSize: "0.85rem", color: C.mutedLight, marginBottom: "0.4rem" }}>Full curriculum vitae available upon request.</div>
-        <a href="mailto:castleberryj@uindy.edu" className="cv-link">Request CV</a>
-      </div>
     </div>
   );
 }
 
 // ── RESOURCES ────────────────────────────────────────────────────
+const Source = ({ r }) => (
+  <div className="res-item">
+    <div className="res-title">{r.author ? `${r.author}. ` : ""}<em>{r.title}</em>{r.cite ? `. ${r.cite}` : "."}</div>
+    {r.url && <div className="res-meta"><Ext url={r.url}>{r.source || "Finding aid"}</Ext></div>}
+    {r.note && <div className="res-note">{r.note}</div>}
+  </div>
+);
 
 function Resources() {
   const [tab, setTab] = useState("primary");
-  const resources = tab === "primary" ? PRIMARY : SECONDARY;
+  const TABS = {
+    primary:   ["Published Works", "Books by Ella Lyman Cabot and Richard Clarke Cabot, with links to digitized copies where they exist.", PRIMARY],
+    archives:  ["Archival Collections", "The two Harvard collections that hold most of the Cabots' unpublished papers, with links to their finding aids.", ARCHIVES],
+    secondary: ["Secondary Scholarship", "Scholarship on Ella Lyman Cabot.", SECONDARY],
+  };
+  const [, hint, list] = TABS[tab];
 
   return (
     <div className="sec">
       <h2>Cabot Resource Library</h2>
       <Rule />
-      <p>A living bibliography of primary and secondary sources for the Boston ethics tradition. Maintained as part of the Boston Ethics Tradition Recovery Program and updated as new scholarship appears.</p>
+      <p>A working bibliography for the Boston ethics tradition, with full citations and links to digitized copies and archival finding aids. I add to it as new scholarship appears; corrections and additions are welcome.</p>
 
       <div style={{ marginTop: "2rem" }}>
         <div className="tab-row" role="tablist">
-          {["primary","secondary"].map(t => (
+          {Object.keys(TABS).map(t => (
             <button key={t} className={`tab ${tab === t ? "active" : ""}`} onClick={() => setTab(t)} role="tab" aria-selected={tab === t}>
-              {t === "primary" ? "Primary Sources" : "Secondary Scholarship"}
+              {TABS[t][0]}
             </button>
           ))}
         </div>
-        <p style={{ fontFamily: SANS, fontSize: "0.81rem", color: C.mutedLight, fontStyle: "italic", marginBottom: "1.1rem" }}>
-          {tab === "primary" ? "Works authored by Ella Lyman Cabot, Richard Clarke Cabot, or Ada Peirce McCormick." : "Scholarly works about ELC, RCC, or APM by other authors."}
-        </p>
-        {resources.map((r, i) => (
-          <div key={i} className="res-item">
-            <div className="res-title">{r.title}{r.year ? <span className="res-year"> ({r.year})</span> : ""}</div>
-            <div className="res-meta">{r.author}{r.venue ? ` · ${r.venue}` : ""}{r.type ? ` · ${r.type}` : ""}</div>
-            {r.note && <div className="res-note">{r.note}</div>}
-          </div>
-        ))}
+        <p className="res-hint">{hint}</p>
+        {list.map((r, i) => <Source key={i} r={r} />)}
       </div>
 
       <div style={{ marginTop: "2.8rem" }}>
         <div className="sub-label">Boston Ethics Network</div>
-        <p>I am in correspondence with a small group of scholars working on the Boston ethics tradition and related questions in American pragmatism, feminist philosophy, and philosophy of education. If you work on any figure in this tradition, write to me at <a href="mailto:castleberryj@uindy.edu">castleberryj@uindy.edu</a>.</p>
+        <p>I am in correspondence with a small group of scholars working on the Boston ethics tradition and related questions in American pragmatism, feminist philosophy, and philosophy of education. If you work on any figure in this tradition, write to me at <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.</p>
       </div>
     </div>
   );
@@ -1041,18 +1086,18 @@ function Contact() {
     <div className="sec">
       <h2>Correspondence</h2>
       <Rule />
-      <p>I welcome correspondence about the ELC recovery project, the Boston ethics tradition, potential collaborations, philosophy of education, and moral responsibility. I am particularly glad to hear from scholars interested in the Boston ethics network, potential co-editors, and press editors working on history of philosophy or American philosophy series.</p>
+      <p>I welcome correspondence about the Cabot edition, the Boston ethics tradition, philosophy of education, and moral responsibility. I am particularly glad to hear from press and series editors in American philosophy and the history of philosophy, and from scholars interested in collaborating on the edition.</p>
 
       <div style={{ marginTop: "1.7rem" }}>
         {[
-          { l: "Email", v: "castleberryj@uindy.edu", href: "mailto:castleberryj@uindy.edu" },
-          { l: "PhilPapers", v: "View profile", href: "https://philpapers.org" },
-          { l: "Status", v: "Independent Scholar", href: "" },
+          { l: "Email", v: EMAIL, href: `mailto:${EMAIL}` },
+          { l: "PhilPeople", v: "Profile and papers", href: PHILPEOPLE, ext: true },
+          { l: "Position", v: "Associate Adjunct in Philosophy, University of Indianapolis; independent scholar" },
         ].map((item, i) => (
           <div key={i} className="contact-row">
             <div className="contact-label">{item.l}</div>
             {item.href
-              ? <a href={item.href} className="contact-link">{item.v}</a>
+              ? <a href={item.href} className="contact-link" {...(item.ext ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{item.v}</a>
               : <span className="contact-val">{item.v}</span>}
           </div>
         ))}
@@ -1060,15 +1105,15 @@ function Contact() {
 
       <div style={{ marginTop: "2.4rem" }}>
         <div className="sub-label">Press &amp; series editors</div>
-        <p>I am preparing proposals for a monograph on Cabot's philosophy of love and an edition of her philosophical writings. Inquiries from press and series editors working in American philosophy and the history of philosophy are welcome.</p>
+        <p>I am preparing a comprehensive edition of Ella Lyman Cabot's writings, described on the <a href={href("Edition")}>Cabot Edition</a> page, and a monograph on her philosophy of love. An edited sample, a prospectus, and the current <a href={href("CV")}>CV</a> are available.</p>
       </div>
 
       <div style={{ marginTop: "1.6rem" }}>
         <div className="sub-label">Scholars in related fields</div>
-        <p>I am seeking contributors for the Resource Library and collaborators on the Boston Ethics Tradition Recovery Program. The Trust grants access to unpublished ELC material.</p>
+        <p>I am looking for collaborators on the edition and contributors to the Resource Library. Collaborators can work with unpublished Cabot material by permission of the Ella Lyman Cabot Trust.</p>
       </div>
 
-      <p style={{ marginTop: "1.8rem", fontStyle: "italic" }}>For CV, syllabi, writing samples, or paper drafts, email directly. Response time is typically within one week.</p>
+      <p style={{ marginTop: "1.8rem", fontStyle: "italic" }}>For syllabi, writing samples, or paper drafts, email directly. I usually reply within a week.</p>
     </div>
   );
 }
@@ -1076,7 +1121,8 @@ function Contact() {
 // ── SEO & JSON-LD ─────────────────────────────────────────────────
 const META = {
   Home:         ["Jacob B. Castleberry | Philosopher", "Jacob B. Castleberry is a moral philosopher specializing in American pragmatism, feminist philosophy, and recovery of the Boston ethics tradition, including Ella Lyman Cabot (1866–1934)."],
-  Research:     ["Research | Jacob B. Castleberry", "Book projects on Ella Lyman Cabot, including a Routledge edited volume, a monograph on her philosophy of love, and an edition of her philosophical writings, plus a systematic book on purposive selfhood."],
+  Edition:      ["The Cabot Edition | Jacob B. Castleberry", "A comprehensive edition of the writings of Ella Lyman Cabot (1866–1934): published books, philosophical manuscripts, letters, poetry, and journals, edited from the Schlesinger Library and Harvard University Archives collections."],
+  Research:     ["Research | Jacob B. Castleberry", "Research projects on Ella Lyman Cabot and purposive selfhood: a monograph on Cabot's philosophy of love, a comprehensive edition of her writings, an edited volume, and The Purposive Self."],
   Publications: ["Publications & Talks | Jacob B. Castleberry", "Publications and conference presentations by Jacob B. Castleberry on Ella Lyman Cabot, pragmatist ethics, and philosophy of education."],
   Teaching:     ["Teaching | Jacob B. Castleberry", "Jacob B. Castleberry has taught 70+ courses at eight institutions. Teaching philosophy draws on Cabot, Royce, and the Philosophy for Children tradition."],
   CV:           ["CV | Jacob B. Castleberry", "Curriculum vitae for Jacob B. Castleberry, philosopher and principal investigator of the Boston Ethics Tradition Recovery Program."],
@@ -1127,31 +1173,46 @@ function useSEO(s) {
 }
 
 // ── APP ───────────────────────────────────────────────────────────
-const SECTIONS = ["Home","Research","Publications","Teaching","CV","Resources","Contact"];
 const VIEWS = {
-  Home:<Home/>, Research:<Research/>, Publications:<Publications/>,
+  Home:<Home/>, Edition:<Edition/>, Research:<Research/>, Publications:<Publications/>,
   Teaching:<Teaching/>, CV:<CV/>, Resources:<Resources/>, Contact:<Contact/>
 };
 
 export default function App() {
-  const [active, setActive] = useState("Home");
+  const [active, setActive] = useState(sectionFromHash);
   const [open, setOpen] = useState(false);
   useSEO(active);
 
-  function go(s) { setActive(s); setOpen(false); window.scrollTo({ top: 0 }); }
+  // The address is the source of truth: links set the hash, and this follows it.
+  useEffect(() => {
+    const onHash = () => {
+      if (!isRouteHash(window.location.hash)) return;
+      setActive(sectionFromHash());
+      setOpen(false);
+      window.scrollTo({ top: 0 });
+    };
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, []);
+
+  function skipToMain(e) {
+    e.preventDefault();
+    const main = document.getElementById("main");
+    if (main) { main.focus(); main.scrollIntoView(); }
+  }
 
   return (
     <div id="site-root">
       <style>{css}</style>
 
-      <a href="#main" className="skip-link">Skip to content</a>
+      <a href="#main" className="skip-link" onClick={skipToMain}>Skip to content</a>
 
       <nav className="nav-wrap" aria-label="Main navigation">
         <div className="nav-inner">
-          <button className="nav-logo" onClick={() => go("Home")}>Jacob B. Castleberry</button>
+          <a className="nav-logo" href={href("Home")}>Jacob B. Castleberry</a>
           <ul className="nav-links">
             {SECTIONS.filter(s => s !== "Home").map(s => (
-              <li key={s}><button className={`nav-btn ${active === s ? "active" : ""}`} onClick={() => go(s)}>{s}</button></li>
+              <li key={s}><a className={`nav-btn ${active === s ? "active" : ""}`} href={href(s)} aria-current={active === s ? "page" : undefined}>{label(s)}</a></li>
             ))}
           </ul>
           <button className="hamburger" onClick={() => setOpen(o => !o)} aria-label="Toggle menu" aria-expanded={open}>
@@ -1161,17 +1222,17 @@ export default function App() {
           </button>
         </div>
         <div className={`mob-nav ${open ? "open" : ""}`} role="navigation" aria-label="Mobile navigation">
-          {SECTIONS.map(s => <button key={s} className={`mob-btn ${active === s ? "active" : ""}`} onClick={() => go(s)}>{s}</button>)}
+          {SECTIONS.map(s => <a key={s} className={`mob-btn ${active === s ? "active" : ""}`} href={href(s)} aria-current={active === s ? "page" : undefined}>{label(s)}</a>)}
         </div>
       </nav>
 
-      <main id="main" className="page" key={active}>
+      <main id="main" className="page" key={active} tabIndex={-1}>
         {VIEWS[active]}
       </main>
 
       <footer className="footer">
         <div className="footer-inner">
-          <p>&copy; {new Date().getFullYear()} Jacob B. Castleberry &nbsp;·&nbsp; Literary rights to ELC's unpublished material held by the Ella Lyman Cabot Trust</p>
+          <p>&copy; {new Date().getFullYear()} Jacob B. Castleberry &nbsp;·&nbsp; {RIGHTS}</p>
           <p className="colophon">Set in EB Garamond &amp; IM Fell English <span className="pilcrow">¶</span> Boston Ethics Tradition Recovery Program</p>
         </div>
       </footer>
