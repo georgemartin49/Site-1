@@ -43,10 +43,21 @@ status. The build prints a review reminder for any accepted talk whose month
 has passed. Once you confirm the talk was given, change the status to
 `"delivered"` and it moves to Selected past presentations.
 
-**Replace the CV.** Put the PDF in `public/` (for example
-`public/castleberry-cv.pdf`). Then set `cv.pdf` to the file name and
-`cv.updated` to the date printed on the document, both in `site.json`. The
-download link appears only when `cv.pdf` is set.
+**Update the CV.** The CV page and the PDF are made from the same content:
+`cv.json`, plus the publication, presentation, and award records. After
+changing any of these:
+
+```
+npm run build      # fails with a reminder if the PDF is now out of date
+npm run cv:pdf     # prints /cv/ to public/castleberry-cv.pdf
+npm run build
+```
+
+Set `cv.updated` in `site.json` to the date the PDF should show. The PDF
+generator needs Playwright and Chromium (`CHROMIUM_PATH` can point to a
+browser). If the machine can't reach Google Fonts, `FONT_DIR` can point to a
+folder of local font files. The build refuses to deploy a PDF that no longer
+matches the CV content.
 
 **Add a resource.** Add an entry to the right group in `resources.json`.
 Entries are sorted by author automatically. Label each link as a "Finding aid",

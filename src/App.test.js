@@ -64,3 +64,15 @@ test('accepted talks stay listed as accepted after their month, without being ca
   expect(past.compareDocumentPosition(talk) & Node.DOCUMENT_POSITION_PRECEDING).toBeTruthy();
   jest.useRealTimers();
 });
+
+test('the CV page offers the PDF, and the PDF was made from the current CV content', () => {
+  const fs = require('fs');
+  const path = require('path');
+  const { cvFingerprint } = require('../scripts/cv-source');
+  const made = require('./content/cv-pdf.json');
+  visit('/cv/');
+  const link = screen.getByRole('link', { name: 'Download CV as PDF' });
+  expect(link).toHaveAttribute('href', `/${site.cv.pdf}`);
+  expect(fs.existsSync(path.join(__dirname, '..', 'public', site.cv.pdf))).toBe(true);
+  expect(made.fingerprint).toBe(cvFingerprint());
+});

@@ -19,6 +19,7 @@ if (sampleFile && !sample) fail("sample.json holds a sample that is not enabled.
 if (!sample && fs.existsSync(path.join(build, "edition-sample"))) fail("public/edition-sample/ exists but no sample is enabled. Remove it until the sample is published.");
 const presentations = read("presentations.json").presentations;
 
+
 const routes = sample ? [...site.routes, site.sampleRoute] : site.routes;
 const template = fs.readFileSync(path.join(build, "index.html"), "utf8");
 const esc = s => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
@@ -68,3 +69,12 @@ if (!sample) {
 const month = today.slice(0, 7);
 const stale = presentations.filter(p => p.status === "accepted" && p.date < month);
 for (const p of stale) console.warn(`review: "${p.title}" (${p.date}) is past; confirm whether it was delivered.`);
+
+// Checked last, so the pages exist for `npm run cv:pdf` even when this fails.
+// The CV PDF must have been made from the current CV content.
+if (site.cv.pdf) {
+  const { cvFingerprint } = require("./cv-source");
+  const made = fs.existsSync(path.join(root, "src/content/cv-pdf.json")) ? read("cv-pdf.json") : null;
+  if (!fs.existsSync(path.join(build, site.cv.pdf))) fail(`cv.pdf is set but public/${site.cv.pdf} is missing.`);
+  if (!made || made.file !== site.cv.pdf || made.fingerprint !== cvFingerprint()) fail("the CV content has changed since the PDF was made. Run npm run build, then npm run cv:pdf, then build again.");
+}

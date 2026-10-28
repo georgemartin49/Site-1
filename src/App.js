@@ -473,6 +473,17 @@ a:hover { color: #5c1515 !important; }
   .project-item, .pub-item, .cv-item { page-break-inside: avoid; }
 }
 
+/* ── CV print / PDF ── */
+@page { size: letter; margin: 0.75in; }
+@media print {
+  .cv-page .page-title { font-size: 20pt !important; }
+  .cv-page .sub-label { margin-top: 14pt; border-bottom: 0.5pt solid #999; break-after: avoid; }
+  .cv-page .cite { font-size: 10.5pt; line-height: 1.4; padding-top: 2pt; padding-bottom: 2pt; break-inside: avoid; }
+  .rule, .text-links { display: none !important; }
+  .cv-page .cv-dated { font-size: 10.5pt; margin-bottom: 6pt; }
+  .cv-page .cite .links, .cv-page .cite .event-meta, .cv-page .cite .note { font-size: 10pt; color: #333 !important; }
+}
+
 /* ── Responsive ── */
 @media (max-width: 1080px) {
   .nav-links { display: none !important; }
@@ -640,7 +651,7 @@ const Pub = ({ p }) => (
 const Talk = ({ t }) => (
   <div className="cite">
     “{t.title}.”
-    <span className="event-meta">{[t.event, t.session].filter(Boolean).join(", ")}. {dateLabel(t.date)}.{t.role ? ` ${t.role}.` : ""}</span>
+    <span className="event-meta">{[t.event, t.session].filter(Boolean).join(", ")}. {t.label || dateLabel(t.date)}.{t.role ? ` ${t.role}.` : ""}</span>
   </div>
 );
 
@@ -879,43 +890,61 @@ function Teaching() {
 // ── CV ────────────────────────────────────────────────────────────
 function CV() {
   const { pdf, updated } = site.cv;
+  const accepted = acceptedTalks();
+  const delivered = pastTalks();
+  const love = PROJECTS.find(p => p.id === "love-book");
   return (
-    <div className="sec">
+    <div className="sec cv-page">
       <PageTitle>Curriculum vitae</PageTitle>
-      <p>My CV includes education, publications, editorial work, archival research, teaching experience, presentations, and professional activities.</p>
-      {pdf && <Links><a href={`/${pdf}`} download>Download CV as PDF</a>{updated && <span className="updated">Updated {updated}</span>}</Links>}
+      <p className="cv-dated">Jacob B. Castleberry · <a href={`mailto:${site.email}`}>{site.email}</a> · jacobcastleberry.org · Updated {updated}</p>
+      <p className="no-print">My CV includes education, publications, editorial work, archival research, teaching experience, presentations, and professional activities.</p>
+      {pdf && <Links><a href={`/${pdf}`} download>Download CV as PDF</a></Links>}
+
+      <h2 className="sub-label">Research</h2>
+      <div className="cite">{cvData.interests}</div>
+      <div className="cite">Monograph in development: <em>{love.title}</em>. {love.summary}</div>
 
       <h2 className="sub-label">Education</h2>
       {cvData.education.map((e, i) => <div key={i} className="cite">{e}</div>)}
 
-      <h2 className="sub-label">Current appointment</h2>
-      <div className="cite">{cvData.appointment}</div>
-
-      <h2 className="sub-label">Research interests</h2>
-      <div className="cite">{cvData.interests}</div>
-
-      <h2 className="sub-label">Publications</h2>
-      {PUBS.map(p => <Pub key={p.id} p={p} />)}
-
-      <h2 className="sub-label">Books and editorial projects</h2>
-      {PROJECTS.map(p => <div key={p.id} className="cite">{p.italic ? <em>{p.title}</em> : p.title}. {p.status}</div>)}
-
-      <h2 className="sub-label">Archival research</h2>
-      <div className="cite">Ella Lyman Cabot Papers, Schlesinger Library. Reviewed and transcribed in full.</div>
-      <div className="cite">Richard Clarke Cabot Papers, Harvard University Archives. Approximately 16,000 photographs; research continuing.</div>
-
-      <h2 className="sub-label">Awards</h2>
+      <h2 className="sub-label">Honors and awards</h2>
       {AWARDS.map((a, i) => <div key={i} className="cite">{a.title}, {a.body}, {a.year}.</div>)}
 
-      <h2 className="sub-label">Teaching</h2>
-      <div className="cite">Instructor of record for {site.teaching.courses} courses at {site.teaching.institutions} institutions, as of {site.teaching.asOf}.</div>
-      {cvData.teaching.map((t, i) => <div key={i} className="cite">{t.institution}. {t.detail}</div>)}
+      <h2 className="sub-label">Published work</h2>
+      {PUBS.filter(p => p.status === "published").map(p => <Pub key={p.id} p={p} />)}
 
-      <h2 className="sub-label">Presentations</h2>
-      <p>Accepted and past presentations are listed on the <A to="publications">Publications</A> page.</p>
+      <h2 className="sub-label">Forthcoming work</h2>
+      {PUBS.filter(p => p.status !== "published").map(p => <Pub key={p.id} p={p} />)}
 
-      <h2 className="sub-label">Professional memberships</h2>
-      {cvData.affiliations.map((a, i) => <div key={i} className="cite">{a}</div>)}
+      <h2 className="sub-label">Editorial work and commissioned contributions</h2>
+      {PROJECTS.filter(p => p.id !== "love-book").map(p => <div key={p.id} className="cite">{p.italic ? <em>{p.title}</em> : p.title}. {p.status}</div>)}
+      {COMMISSIONED.map((c, i) => <div key={i} className="cite">{c.title}. <em>{c.venue}</em>. {c.status}</div>)}
+
+      <h2 className="sub-label">Manuscripts in review and revision</h2>
+      {cvData.inReview.map((m, i) => <div key={i} className="cite">“{m.title}.” <em>{m.venue}</em>. {m.status}</div>)}
+
+      <h2 className="sub-label">Selected work in progress</h2>
+      {cvData.inProgress.map((m, i) => <div key={i} className="cite">“{m.title}.” {m.status}</div>)}
+
+      <h2 className="sub-label">Archival research</h2>
+      {cvData.archives.map((a, i) => <div key={i} className="cite">{a}</div>)}
+
+      {accepted.length > 0 && <>
+        <h2 className="sub-label">Accepted presentations</h2>
+        {accepted.map((t, i) => <Talk key={i} t={t} />)}
+      </>}
+
+      <h2 className="sub-label">Selected presentations delivered</h2>
+      {delivered.map((t, i) => <Talk key={i} t={t} />)}
+
+      <h2 className="sub-label">Teaching experience</h2>
+      {cvData.appointments.map((a, i) => <div key={i} className="cite">{a}</div>)}
+      <div className="cite">Instructor of record for {site.teaching.courses} courses across {site.teaching.institutions} institutions, as of {site.teaching.asOf}: {cvData.institutions.join(", ")}.</div>
+      <div className="cite">Selected courses: {cvData.courses}</div>
+      <div className="cite">{cvData.abe}</div>
+
+      <h2 className="sub-label">Selected professional affiliations</h2>
+      <div className="cite">{cvData.affiliations.join("; ")}.</div>
     </div>
   );
 }

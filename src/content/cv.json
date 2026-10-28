@@ -1,29 +1,71 @@
 {
-  "education": [
-    "M.A. in Philosophy, Western Michigan University, August 2021.",
-    "B.A. in Humanities, with a minor in Philosophy, Indiana University Kokomo, May 2019."
-  ],
-  "appointment": "Associate Adjunct in Philosophy, University of Indianapolis.",
+  "_note": "Public CV content. Built from Castleberry_CV_final.docx (23 October 2026), with private items (proposal statuses, planned submissions, home town, GPA) left out. After editing, run npm run cv:pdf.",
+  "updated": "28 October 2026",
   "interests": "American philosophy and pragmatist idealism; love, individuality, and moral obligation; philosophy of education; moral responsibility.",
-  "_teaching": "Institutions and courses as recorded on the site in October 2026. Titles and dates for each appointment are still to be supplied.",
-  "teaching": [
-    { "institution": "University of Indianapolis", "detail": "Associate Adjunct. Introduction to Ethics, Introduction to Philosophy, Business Ethics." },
-    { "institution": "Ivy Tech Community College", "detail": "Introduction to Ethics (18 sections), Introduction to Philosophy; Adult Basic Education, Miami Correctional Facility, summer 2022 to summer 2024." },
-    { "institution": "Purdue University Indianapolis", "detail": "Instructor of record, Philosophy." },
-    { "institution": "Park University", "detail": "Ancient and Medieval Philosophy, Philosophy of Religion, Ethics." },
-    { "institution": "Southern New Hampshire University", "detail": "Ethics in Global Society." },
-    { "institution": "Indiana University Kokomo", "detail": "Critical Thinking, Elementary Logic." },
-    { "institution": "Colorado Technical University", "detail": "Introduction to Ethics." },
-    { "institution": "Western Michigan University", "detail": "Introduction to Philosophy, Ethics in Engineering, Values and Video Games." }
+  "education": [
+    "M.A., Philosophy, Western Michigan University, August 2021. Concentrations in Epistemology and Philosophy of Science; Ethical Theory and Value Theory.",
+    "B.A., Humanities, Indiana University Kokomo, May 2019. Minor in Philosophy."
   ],
+  "inReview": [
+    {
+      "title": "What the Tradition Presupposes: Minimal Metaphysics, Pragmatist-Feminism, and the Case for Centering Ella Lyman Cabot",
+      "venue": "Transactions of the Charles S. Peirce Society",
+      "status": "Revise and resubmit."
+    },
+    {
+      "title": "Being the Moral Teacher: Ella Lyman Cabot's Purposive Virtue Ethics",
+      "venue": "Journal of Philosophy of Education",
+      "status": "Revise and resubmit."
+    }
+  ],
+  "inProgress": [
+    {
+      "title": "After Dewey: Ella Lyman Cabot, Owned Obligation, and the Anti-Deficit Child Trilemma",
+      "status": "Manuscript in preparation."
+    },
+    {
+      "title": "Ella Lyman Cabot and the Platonic-Augustinian Tradition in Virtue Ethics",
+      "status": "Manuscript in revision."
+    },
+    {
+      "title": "Ethical Life and the Structure of Selfhood: Reconstructing Cabot's Minimal Metaphysics",
+      "status": "Final revisions."
+    },
+    {
+      "title": "No Moral Equivalent to War: Ella Lyman Cabot's Religious Case Against William James, 1915",
+      "status": "Advanced draft."
+    },
+    {
+      "title": "Two Orders of Love: Ella Lyman Cabot Versus MacIntyre on the Proper Ordering of Augustinian Virtue",
+      "status": "For the Society of Christian Philosophers Eastern Regional Meeting, November 2026."
+    }
+  ],
+  "archives": [
+    "Ella Lyman Cabot Papers (A-139), Schlesinger Library. Fully digitized and transcribed.",
+    "Richard Clarke Cabot Papers (HUG 4255), Harvard University Archives. Approximately 16,000 photographs, roughly 7,000 of which already have transcriptions. Continuing selection and transcription support research on shared reading, philosophical formation, and Ada Peirce McCormick's unpublished biography drafts."
+  ],
+  "_appointments": "Titles and dates are given only where the CV confirms them; see the private checklist for what is missing.",
+  "appointments": [
+    "Associate Adjunct in Philosophy, University of Indianapolis, current.",
+    "New teaching appointment, Indiana University Indianapolis."
+  ],
+  "institutions": [
+    "Ivy Tech Community College",
+    "University of Indianapolis",
+    "Purdue University Indianapolis",
+    "Park University",
+    "Indiana University Kokomo",
+    "Southern New Hampshire University",
+    "Colorado Technical University",
+    "Western Michigan University"
+  ],
+  "courses": "Ancient and Medieval Philosophy; Business Ethics; Critical Thinking; Elementary Logic; Ethics and Society; Ethics in Engineering and Technology; Ethics in Global Society; Introduction to Ethics; Introduction to Philosophy; Philosophy of Religion; Values and Video Games.",
+  "abe": "Adult Basic Education Teacher, Ivy Tech Community College, contracted at Miami Correctional Facility, Summer 2022 to Summer 2024. Taught mathematics, language arts, social studies, science, and reading.",
   "affiliations": [
     "Society for the Advancement of American Philosophy",
     "Philosophy of Education Society",
     "North American Association for Philosophy and Education",
     "Northeastern Philosophy and Education Society",
-    "Society of Philosophy and History of Education",
-    "International Society of Educational Biography",
-    "Southern Society for Philosophy and Psychology",
-    "Indiana Association for Adult and Continuing Education"
+    "International Society of Educational Biography"
   ]
 }
