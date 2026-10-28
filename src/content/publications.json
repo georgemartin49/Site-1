@@ -1,0 +1,56 @@
+{
+  "publications": [
+    { "id": "trauma", "kind": "article", "status": "published",
+      "authors": "Castleberry, Jacob B.",
+      "title": "Trauma and Diachronic Reasons-Responsive Moral Responsibility",
+      "venue": "Philosophy of Medicine", "volume": "7", "issue": "1", "year": 2026, "date": "2026-10-01",
+      "doi": "10.5195/pom.2026.284",
+      "links": [{ "label": "Journal article", "url": "https://philmed.pitt.edu/philmed/article/view/284" }] },
+    { "id": "reasonable", "kind": "chapter", "status": "published",
+      "authors": "Castleberry, Jacob B.",
+      "title": "Reasonable Communities: P4C and Peace Education",
+      "book": "Cultivating Reasonableness in Education: Community of Philosophical Inquiry",
+      "editors": "Marella Ada V. Mancenido-Bolaños, Cathlyne Joy P. Alvarez-Abarejo, and Leander Penaso Marquez",
+      "pages": "193-211", "publisher": "Springer", "year": 2023,
+      "links": [{ "label": "Publisher page", "url": "https://link.springer.com/book/10.1007/978-981-99-4198-8" }] },
+    { "id": "toolbox", "kind": "article", "status": "published",
+      "authors": "Castleberry, Jacob B., and Kevin M. Clark",
+      "title": "Expanding the Facilitator's Toolbox: Vygotskian Mediation in Philosophy for Children",
+      "venue": "Analytic Teaching and Philosophical Praxis", "volume": "40", "issue": "2", "year": 2020, "pages": "44-58",
+      "links": [{ "label": "Journal article (PDF)", "url": "https://journal.viterbo.edu/index.php/atpp/article/download/1183/990/1897" }] },
+    { "id": "misak", "kind": "review", "status": "published",
+      "authors": "Castleberry, Jacob B.",
+      "reviewOf": "Cheryl Misak", "reviewedTitle": "Oxford Pragmatism: Ryle and Austin's Debt",
+      "venue": "Transactions of the Charles S. Peirce Society", "volume": "62", "issue": "1", "year": 2026, "pages": "74-81",
+      "links": [{ "label": "Journal issue", "url": "https://muse.jhu.edu/issue/57270" }] },
+    { "id": "pluralism", "kind": "article", "status": "forthcoming",
+      "title": "Pluralism in Practice: Interpreting Black Feminism and Womanism Through Ella Lyman Cabot",
+      "venue": "The Pluralist", "note": "Recipient of the 2026 Harris-Jones Prize." },
+    { "id": "beloved", "kind": "article", "status": "forthcoming",
+      "title": "Ella Lyman Cabot: Teaching for Royce's Beloved Community",
+      "venue": "Philosophy of Education", "expected": "2027" },
+    { "id": "heney-essay", "kind": "review-essay", "status": "forthcoming",
+      "title": "An Organic Pragmatist Synthesis through Ella Lyman Cabot: A Review Essay of Diana Heney's American Ethics (2025)",
+      "venue": "The Pluralist", "expected": "2027" }
+  ],
+  "projects": [
+    { "id": "love-book", "title": "An Untold American Philosophy of Love: Ella Lyman Cabot on Becoming Ourselves", "italic": true,
+      "status": "Monograph in development." },
+    { "id": "edition", "title": "Ella Lyman Cabot Critical Edition", "italic": false,
+      "status": "A comprehensive, multivolume edition of her surviving writings, in development.",
+      "route": "edition", "routeLabel": "Project description" },
+    { "id": "anthology", "title": "Anthology of Ella Lyman Cabot's writings for the Philosophy for Children Forebears project", "italic": false,
+      "status": "Manuscript drafted; editorial review and final preparation remain. Series editors: Maughn Rollins Gregory and Megan Jane Laverty." }
+  ],
+  "commissioned": [
+    { "title": "“Love” and “Friendship,” on Ralph Waldo Emerson", "venue": "Literary Encyclopedia", "status": "Commissioned; in preparation." }
+  ],
+  "awards": [
+    { "title": "Harris-Jones Prize", "year": 2026, "body": "Society for the Advancement of American Philosophy",
+      "detail": "Recognizes work in the philosophy of the Black experience. Awarded for “Pluralism in Practice: Interpreting Black Feminism and Womanism Through Ella Lyman Cabot.”" },
+    { "title": "Research Award", "year": 2026, "body": "Ralph Waldo Emerson Society",
+      "detail": "Supports archival research in the Richard Clarke Cabot Papers, Harvard University Archives." },
+    { "title": "Outstanding Paper Prize, Finalist", "year": 2025, "body": "North American Association for Philosophy and Education",
+      "detail": "For “Being the Moral Teacher: Ella Lyman Cabot's Ideal Theory of Self and Egoist Virtue.”" }
+  ]
+}

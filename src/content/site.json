@@ -1,0 +1,95 @@
+{
+  "origin": "https://jacobcastleberry.org",
+  "name": "Jacob B. Castleberry",
+  "email": "castleberryj@uindy.edu",
+  "orcid": "https://orcid.org/0009-0002-7696-3287",
+  "appointment": "Associate Adjunct in Philosophy, University of Indianapolis",
+  "editionProgressUpdated": "October 2026",
+  "teaching": {
+    "courses": 88,
+    "institutions": "eight",
+    "asOf": "October 2026"
+  },
+  "cv": {
+    "pdf": "",
+    "updated": ""
+  },
+  "routes": [
+    {
+      "id": "home",
+      "path": "/",
+      "nav": "Jacob B. Castleberry",
+      "title": "Jacob B. Castleberry | American Philosophy and Ethics",
+      "description": "Jacob B. Castleberry researches American philosophy, ethics, and moral education, with a focus on Ella Lyman Cabot and her surviving writings."
+    },
+    {
+      "id": "edition",
+      "path": "/cabot-edition/",
+      "nav": "Cabot Edition",
+      "title": "Ella Lyman Cabot Critical Edition | Jacob B. Castleberry",
+      "description": "A comprehensive critical edition of Ella Lyman Cabot's surviving books, philosophical manuscripts, correspondence, poetry, and notebooks, in development."
+    },
+    {
+      "id": "research",
+      "path": "/research/",
+      "nav": "Research",
+      "title": "Research | Jacob B. Castleberry",
+      "description": "Research on Ella Lyman Cabot, American philosophy, love, individuality, moral responsibility, and philosophy of education."
+    },
+    {
+      "id": "publications",
+      "path": "/publications/",
+      "nav": "Publications",
+      "title": "Publications and Presentations | Jacob B. Castleberry",
+      "description": "Published and forthcoming scholarship, editorial projects, and presentations by Jacob B. Castleberry."
+    },
+    {
+      "id": "teaching",
+      "path": "/teaching/",
+      "nav": "Teaching",
+      "title": "Teaching | Jacob B. Castleberry",
+      "description": "Jacob B. Castleberry's teaching in philosophy, ethics, and reasoning, with examples of argument reconstruction and collaborative ethical inquiry."
+    },
+    {
+      "id": "cv",
+      "path": "/cv/",
+      "nav": "CV",
+      "title": "Curriculum Vitae | Jacob B. Castleberry",
+      "description": "Education, research interests, teaching, publications, and editorial work of Jacob B. Castleberry."
+    },
+    {
+      "id": "resources",
+      "path": "/resources/",
+      "nav": "Resources",
+      "title": "Research Resources | Jacob B. Castleberry",
+      "description": "Archival finding aids, primary texts, and scholarship relevant to Ella Lyman Cabot and American ethics."
+    },
+    {
+      "id": "contact",
+      "path": "/contact/",
+      "nav": "Contact",
+      "title": "Contact | Jacob B. Castleberry",
+      "description": "Contact Jacob B. Castleberry about Ella Lyman Cabot, American philosophy, moral education, and editorial collaboration."
+    }
+  ],
+  "sampleRoute": {
+    "id": "sample",
+    "path": "/cabot-edition/sample/",
+    "title": "Edition Sample | Ella Lyman Cabot Critical Edition",
+    "description": "A sample text from the Ella Lyman Cabot Critical Edition, in development, with its source, editorial note, and annotations."
+  },
+  "notices": [
+    {
+      "label": "October 2026",
+      "publication": "trauma"
+    },
+    {
+      "label": "2026",
+      "text": "I received the Society for the Advancement of American Philosophy's Harris-Jones Prize for “Pluralism in Practice: Interpreting Black Feminism and Womanism Through Ella Lyman Cabot,” forthcoming in *The Pluralist*."
+    },
+    {
+      "label": "2026",
+      "text": "I received a Ralph Waldo Emerson Society Research Award supporting archival research in the Richard Clarke Cabot Papers at Harvard."
+    }
+  ]
+}

@@ -1,8 +1,49 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import App from './App';
+import site from './content/site.json';
+import pubData from './content/publications.json';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+const visit = path => {
+  window.history.pushState({}, '', path);
+  return render(<App />);
+};
+
+test.each(site.routes.map(r => [r.path, r.title]))('%s renders its own page with one h1', (path, title) => {
+  visit(path);
+  expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1);
+  expect(document.title).toBe(title);
+  expect(document.querySelector('link[rel="canonical"]').getAttribute('href')).toBe(site.origin + path);
+});
+
+test('paths without a trailing slash resolve to the same page', () => {
+  visit('/publications');
+  expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/publications and presentations/i);
+});
+
+test('an unknown address shows a not-found page that is not indexed', () => {
+  visit('/no-such-page/');
+  expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/page not found/i);
+  expect(document.querySelector('meta[name="robots"]').getAttribute('content')).toBe('noindex');
+});
+
+test('navigation links carry real addresses and mark the current page', () => {
+  visit('/cabot-edition/');
+  const nav = screen.getByRole('navigation', { name: 'Main' });
+  const link = within(nav).getByRole('link', { name: 'Cabot Edition' });
+  expect(link).toHaveAttribute('href', '/cabot-edition/');
+  expect(link).toHaveAttribute('aria-current', 'page');
+});
+
+test('the homepage notice and the publications list share one record for the trauma article', () => {
+  const trauma = pubData.publications.find(p => p.id === 'trauma');
+  visit('/');
+  expect(screen.getByText(/has been published in/)).toHaveTextContent(trauma.title);
+  visit('/publications/');
+  expect(screen.getAllByText(new RegExp(trauma.title)).length).toBeGreaterThan(0);
+});
+
+test('no public page shows the edition sample until one is supplied', () => {
+  visit('/cabot-edition/');
+  expect(screen.queryByRole('heading', { name: /sample text/i })).toBeNull();
+  expect(screen.queryByRole('link', { name: /sample/i })).toBeNull();
 });

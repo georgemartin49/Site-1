@@ -1,0 +1,170 @@
+{
+  "_links": "Link labels: Finding aid, Digitized text, Catalog record, Publisher page. Never call a catalog record a readable text.",
+  "archives": [
+    {
+      "author": "Cabot, Ella Lyman",
+      "title": "Ella Lyman Cabot Papers",
+      "italic": false,
+      "details": "A-139, Schlesinger Library, Harvard Radcliffe Institute.",
+      "note": "The finding aid describes the collection and provides information for locating documents.",
+      "links": [
+        {
+          "label": "Finding aid",
+          "url": "https://hollisarchives.lib.harvard.edu/repositories/8/resources/5278"
+        }
+      ]
+    },
+    {
+      "author": "Cabot, Richard Clarke",
+      "title": "Richard Clarke Cabot Papers",
+      "italic": false,
+      "details": "HUG 4255, Harvard University Archives.",
+      "note": "The collection includes material relevant to the Cabots' correspondence and intellectual lives, including Ada Peirce McCormick's research materials on the Cabots (HUG 4255.80).",
+      "links": [
+        {
+          "label": "Finding aid",
+          "url": "https://id.lib.harvard.edu/ead/hua02998/catalog"
+        }
+      ]
+    }
+  ],
+  "primary": [
+    {
+      "author": "Cabot, Ella Lyman",
+      "title": "Everyday Ethics",
+      "details": "New York: Henry Holt, 1906.",
+      "year": 1906,
+      "note": "Her principal philosophical text, drawing on Palmer and Royce.",
+      "links": [
+        {
+          "label": "Digitized text",
+          "url": "https://archive.org/details/cu31924031217874"
+        }
+      ]
+    },
+    {
+      "author": "Cabot, Ella Lyman",
+      "title": "Ethics for Children",
+      "details": "Boston: Houghton Mifflin, 1910.",
+      "year": 1910,
+      "links": [
+        {
+          "label": "Online Books Page listing, with links to digitized copies",
+          "url": "https://onlinebooks.library.upenn.edu/webbin/book/lookupname?key=Cabot,+Ella+Lyman"
+        }
+      ]
+    },
+    {
+      "author": "Cabot, Ella Lyman, Fannie Fern Andrews, Fanny E. Coe, Mabel Hill, and Mary McSkimmon",
+      "sort": "Cabot, Ella Lyman",
+      "title": "A Course in Citizenship",
+      "details": "Boston: Houghton Mifflin, 1914.",
+      "year": 1914,
+      "links": [
+        {
+          "label": "Digitized text (later edition, titled A Course in Citizenship and Patriotism)",
+          "url": "https://archive.org/details/courseincitizens00cabouoft"
+        }
+      ]
+    },
+    {
+      "author": "Cabot, Ella Lyman",
+      "title": "Seven Ages of Childhood",
+      "details": "Boston: Houghton Mifflin, 1921.",
+      "year": 1921,
+      "links": [
+        {
+          "label": "Digitized text",
+          "url": "https://archive.org/details/sevenageschildh00cabogoog"
+        }
+      ]
+    },
+    {
+      "author": "Cabot, Ella Lyman",
+      "title": "Temptations to Rightdoing",
+      "details": "1929.",
+      "year": 1929,
+      "note": "Her final major work; develops the distinction between loyalty, allegiance, and prejudice."
+    },
+    {
+      "author": "Cabot, Ella Lyman",
+      "title": "Seven Suggestions to Parents",
+      "details": "",
+      "year": 9999
+    },
+    {
+      "author": "Cabot, Richard Clarke",
+      "title": "What Men Live By: Work, Play, Love, Worship",
+      "details": "Boston: Houghton Mifflin, 1914.",
+      "year": 1914,
+      "links": [
+        {
+          "label": "Digitized text",
+          "url": "https://archive.org/details/whatmenlivebywor00cabo"
+        }
+      ]
+    },
+    {
+      "author": "Cabot, Richard Clarke",
+      "title": "Adventures on the Borderland of Ethics",
+      "details": "1926.",
+      "year": 1926
+    },
+    {
+      "author": "Cabot, Richard Clarke",
+      "title": "The Meaning of Right and Wrong",
+      "details": "New York: Macmillan, 1933.",
+      "year": 1933,
+      "note": "His final philosophical work.",
+      "links": [
+        {
+          "label": "Digitized text (Internet Archive lending copy)",
+          "url": "https://archive.org/details/meaningofrightwr0000rich"
+        }
+      ]
+    }
+  ],
+  "scholarship": [
+    {
+      "author": "Heney, Diana",
+      "title": "American Ethics: An Introduction to Pragmatist Moral Philosophy",
+      "details": "2025.",
+      "year": 2025
+    },
+    {
+      "author": "Heney, Diana B.",
+      "sort": "Heney, Diana",
+      "title": "The Virtue Ethics of Ella Lyman Cabot",
+      "italic": false,
+      "quoted": true,
+      "details": "*History of Philosophy Quarterly* 40, no. 4 (2023): 279-301.",
+      "year": 2023,
+      "links": [
+        {
+          "label": "Catalog record",
+          "url": "https://philpapers.org/rec/HENTVE"
+        }
+      ]
+    },
+    {
+      "author": "Kaag, John",
+      "title": "Idealism, Pragmatism, and Feminism: The Philosophy of Ella Lyman Cabot",
+      "details": "Lanham, MD: Lexington Books, 2011.",
+      "year": 2011,
+      "links": [
+        {
+          "label": "Catalog record",
+          "url": "https://philpapers.org/rec/KAAIPA-2"
+        }
+      ]
+    },
+    {
+      "author": "Matherne, Samantha",
+      "title": "Ella Lyman Cabot's Everyday Ethics",
+      "italic": false,
+      "quoted": true,
+      "details": "In *Oxford Handbook of American and British Women Philosophers in the Nineteenth Century*. Oxford University Press, 2023.",
+      "year": 2023
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "education": [
+    "M.A. in Philosophy, Western Michigan University, August 2021.",
+    "B.A. in Humanities, with a minor in Philosophy, Indiana University Kokomo, May 2019."
+  ],
+  "appointment": "Associate Adjunct in Philosophy, University of Indianapolis.",
+  "interests": "American philosophy and pragmatist idealism; love, individuality, and moral obligation; philosophy of education; moral responsibility.",
+  "_teaching": "Institutions and courses as recorded on the site in October 2026. Titles and dates for each appointment are still to be supplied.",
+  "teaching": [
+    { "institution": "University of Indianapolis", "detail": "Associate Adjunct. Introduction to Ethics, Introduction to Philosophy, Business Ethics." },
+    { "institution": "Ivy Tech Community College", "detail": "Introduction to Ethics (18 sections), Introduction to Philosophy; Adult Basic Education, Miami Correctional Facility, summer 2022 to summer 2024." },
+    { "institution": "Purdue University Indianapolis", "detail": "Instructor of record, Philosophy." },
+    { "institution": "Park University", "detail": "Ancient and Medieval Philosophy, Philosophy of Religion, Ethics." },
+    { "institution": "Southern New Hampshire University", "detail": "Ethics in Global Society." },
+    { "institution": "Indiana University Kokomo", "detail": "Critical Thinking, Elementary Logic." },
+    { "institution": "Colorado Technical University", "detail": "Introduction to Ethics." },
+    { "institution": "Western Michigan University", "detail": "Introduction to Philosophy, Ethics in Engineering, Values and Video Games." }
+  ],
+  "affiliations": [
+    "Society for the Advancement of American Philosophy",
+    "Philosophy of Education Society",
+    "North American Association for Philosophy and Education",
+    "Northeastern Philosophy and Education Society",
+    "Society of Philosophy and History of Education",
+    "International Society of Educational Biography",
+    "Southern Society for Philosophy and Psychology",
+    "Indiana Association for Adult and Continuing Education"
+  ]
+}
