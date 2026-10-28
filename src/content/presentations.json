@@ -1,0 +1,136 @@
+{
+  "_status": "accepted = on the program, not yet given; delivered = given. Change accepted to delivered after the event.",
+  "presentations": [
+    {
+      "title": "Love and the Obligations of Individuality in Ella Lyman Cabot",
+      "event": "American Philosophical Association, Pacific Division Meeting, Portland",
+      "date": "2027-03",
+      "status": "accepted",
+      "session": "Personalist Society session"
+    },
+    {
+      "title": "Love and the Whole: Ella Lyman Cabot and John Dewey",
+      "event": "American Philosophical Association, Pacific Division Meeting, Portland",
+      "session": "Society for the Advancement of American Philosophy session",
+      "date": "2027-03",
+      "status": "accepted"
+    },
+    {
+      "title": "Loyalty and the Justification of Causes: Royce's Answer to MacIntyre",
+      "event": "American Philosophical Association, Pacific Division Meeting, Portland",
+      "date": "2027-03",
+      "status": "accepted",
+      "session": "Josiah Royce Society session"
+    },
+    {
+      "title": "Self-Reliance, Loyalty, and American Idealism: Ella Lyman Cabot Between Royce and Emerson",
+      "event": "American Philosophical Association, Eastern Division Meeting, Boston",
+      "session": "Josiah Royce Society and Ralph Waldo Emerson Society co-sponsored session",
+      "role": "Session organizer",
+      "date": "2027-01",
+      "status": "accepted"
+    },
+    {
+      "title": "No Moral Equivalent to War: Ella Lyman Cabot's Religious Case Against William James, 1915",
+      "event": "American Philosophical Association, Eastern Division Meeting, Boston",
+      "session": "William James Society session",
+      "date": "2027-01",
+      "status": "accepted"
+    },
+    {
+      "title": "Against the Isolated Self: Ella Lyman Cabot's Ethics of Love and the Collapse of Egoism and Altruism",
+      "event": "American Philosophical Association, Eastern Division Meeting, Boston",
+      "session": "Society for the Advancement of American Philosophy session",
+      "date": "2027-01",
+      "status": "accepted"
+    },
+    {
+      "title": "Two Orders of Love: Ella Lyman Cabot Versus MacIntyre on the Proper Ordering of Augustinian Virtue",
+      "event": "Society of Christian Philosophers, Eastern Regional Meeting, Christopher Newport University",
+      "date": "2026-11",
+      "status": "accepted"
+    },
+    {
+      "title": "After Dewey: Ella Lyman Cabot, Owned Obligation, and the Anti-Deficit Child Trilemma",
+      "event": "North American Association for Philosophy and Education",
+      "date": "2026-10",
+      "status": "accepted"
+    },
+    {
+      "title": "Pluralism in Practice: Interpreting Black Feminism and Womanism Through Ella Lyman Cabot",
+      "event": "Society for the Advancement of American Philosophy",
+      "date": "2026",
+      "status": "delivered",
+      "label": "Spring 2026"
+    },
+    {
+      "title": "Ella Lyman Cabot: Teaching for Royce's Beloved Community",
+      "event": "Philosophy of Education Society",
+      "date": "2026",
+      "status": "delivered",
+      "label": "Spring 2026"
+    },
+    {
+      "title": "Expanding the Pragmatist-Feminism Canon: Ella Lyman Cabot, Metaphysics, and Feminist Challenges",
+      "event": "Boston University Graduate Conference",
+      "date": "2026",
+      "status": "delivered",
+      "label": "Spring 2026"
+    },
+    {
+      "title": "Trauma and Moral Responsibility: Constitutivism, Expressivism, and Idealism",
+      "event": "Southern Society for Philosophy and Psychology",
+      "date": "2026",
+      "status": "delivered",
+      "label": "Spring 2026"
+    },
+    {
+      "title": "Ella Lyman Cabot: Teaching for the Beloved Community",
+      "event": "Northeastern Philosophy and Education Society",
+      "date": "2025",
+      "status": "delivered",
+      "label": "Fall 2025"
+    },
+    {
+      "title": "Being the Moral Teacher: Ella Lyman Cabot's Ideal Theory of Self and Egoist Virtue",
+      "event": "North American Association for Philosophy and Education / Society of Philosophy and History of Education",
+      "date": "2025",
+      "status": "delivered",
+      "label": "Fall 2025"
+    },
+    {
+      "title": "Ella Lyman Cabot: Pioneering Ethics Education for Women's Selfhood",
+      "event": "International Society of Educational Biography",
+      "date": "2025",
+      "status": "delivered",
+      "label": "Fall 2025"
+    },
+    {
+      "title": "Reasonable Communities: P4C and Peace Education",
+      "event": "North American Association for Philosophy and Education",
+      "date": "2023",
+      "status": "delivered",
+      "label": "Fall 2023"
+    },
+    {
+      "title": "What is the ABE Teacher: Three Metaphors for Conceptualizing the Role",
+      "event": "Indiana Association for Adult and Continuing Education",
+      "date": "2023",
+      "status": "delivered",
+      "label": "Fall 2023"
+    },
+    {
+      "title": "Ella Lyman Cabot: The Ethical Educator of Selfhood",
+      "event": "North American Association for Philosophy and Education",
+      "date": "2022",
+      "status": "delivered",
+      "label": "Fall 2022"
+    },
+    {
+      "title": "A Pragmatist Metaethics",
+      "event": "Indiana University Bicentennial Philosophy Conference",
+      "date": "2019",
+      "status": "delivered"
+    }
+  ]
+}
