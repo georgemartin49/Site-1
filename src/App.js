@@ -4,7 +4,7 @@ import pubData from "./content/publications.json";
 import presData from "./content/presentations.json";
 import resData from "./content/resources.json";
 import cvData from "./content/cv.json";
-import SAMPLE from "./content/sample.json";
+import sampleFile from "./content/sample.json";
 
 // ── TOKENS ── derived from ELC's actual book bindings ─────────────
 // Everyday Ethics (1906): deep wine/burgundy cloth
@@ -512,7 +512,7 @@ h2.section {
 .text-links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.6rem; margin: 1.4rem 0 2.2rem; }
 .text-links a {
   font-family: ${SERIF}; font-size: 1.05rem; color: #5c1515 !important;
-  text-decoration: underline; text-decoration-color: #c9a84c; text-decoration-thickness: 1px; text-underline-offset: 4px;
+  text-decoration: underline; text-decoration-color: #9a7a2a; text-decoration-thickness: 1px; text-underline-offset: 4px; /* 3.5:1 on cream */
 }
 .text-links a:hover { color: #2a4a6a !important; text-decoration-color: currentColor; }
 
@@ -537,6 +537,8 @@ h2.section {
 /* Focus and motion */
 a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 2px solid #2a4a6a; outline-offset: 3px; }
 .nav-wrap a:focus-visible, .nav-wrap button:focus-visible { outline: 2px solid #e8c97a; outline-offset: -2px; }
+.footer a:focus-visible { outline-color: #e8c97a; } /* 9:1 on the footer */
+.skip-link:focus { outline: 2px solid #2a4a6a !important; outline-offset: 2px; }
 main:focus, main:focus-visible { outline: none; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
@@ -568,6 +570,8 @@ const { publications: PUBS, projects: PROJECTS, commissioned: COMMISSIONED, awar
 const PRESENTATIONS = presData.presentations;
 
 // ── ROUTING ── real paths; scripts/postbuild.js writes a page for each ──
+// Only an explicitly enabled sample is published; postbuild.js refuses to build with a draft present.
+const SAMPLE = sampleFile && sampleFile.enabled === true ? sampleFile : null;
 const ROUTES = SAMPLE ? [...site.routes, site.sampleRoute] : site.routes;
 const NOT_FOUND = { id: "notfound", path: null, title: "Page not found | Jacob B. Castleberry", description: "This page could not be found." };
 const pathOf = id => ROUTES.find(r => r.id === id).path;
@@ -600,7 +604,6 @@ function rich(s) {
 
 const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 const dateLabel = d => (d.length >= 7 ? `${MONTHS[+d.slice(5, 7) - 1]} ${d.slice(0, 4)}` : d);
-const thisMonth = () => new Date().toISOString().slice(0, 7);
 
 // ── PRIMITIVES ────────────────────────────────────────────────────
 const Rule = () => <div className="rule" />;
@@ -641,9 +644,9 @@ const Talk = ({ t }) => (
   </div>
 );
 
-// Accepted talks show as upcoming until their month has passed; after that they
-// are held back (and flagged at build time) until marked delivered.
-const upcomingTalks = () => PRESENTATIONS.filter(t => t.status === "accepted" && t.date >= thisMonth()).sort((a, b) => a.date.localeCompare(b.date));
+// Accepted talks stay listed as accepted, including after their month has
+// passed, until they are marked delivered. The build flags past ones for review.
+const acceptedTalks = () => PRESENTATIONS.filter(t => t.status === "accepted").sort((a, b) => a.date.localeCompare(b.date));
 const pastTalks = () => PRESENTATIONS.filter(t => t.status === "delivered").sort((a, b) => b.date.localeCompare(a.date));
 
 // ── HOME ──────────────────────────────────────────────────────────
@@ -790,6 +793,9 @@ function Research() {
       <p>The monograph develops an interpretation and philosophical argument. The comprehensive critical edition provides the texts and documentation on which further research can build. A separate anthology for the Philosophy for Children Forebears project focuses on Cabot's contribution to philosophical education.</p>
       <Links><A to="edition">Cabot Edition</A><A to="publications">Publications and editorial projects</A></Links>
 
+      <h2 className="section">Purposive selfhood</h2>
+      <p>My book in progress, <em>The Purposive Self: Agency, Normativity, and Moral Growth</em>, develops a systematic account of purposive selfhood as the ground of normativity and moral growth. It draws on Ella Lyman Cabot's pragmatic idealism and tests that account against problems in metaethics, moral responsibility, and philosophy of education.</p>
+
       <h2 className="section">The Boston ethics tradition</h2>
       <p>I use “the Boston ethics tradition” to describe the network I am reconstructing around George Herbert Palmer, Josiah Royce, Ella Lyman Cabot, and Richard Clarke Cabot. I examine their connections through teaching, correspondence, shared reading, and work on moral education.</p>
       <p>My research asks how their accounts of selfhood, purpose, and moral growth shaped their understandings of ethical life. The Boston Ethics Tradition Recovery Program is the name I use for this continuing research and editorial work.</p>
@@ -808,7 +814,7 @@ function Research() {
 // ── PUBLICATIONS ──────────────────────────────────────────────────
 function Publications() {
   const published = PUBS.filter(p => p.status === "published");
-  const upcoming = upcomingTalks();
+  const accepted = acceptedTalks();
   return (
     <div className="sec">
       <PageTitle>Publications and presentations</PageTitle>
@@ -833,9 +839,9 @@ function Publications() {
       <h2 className="sub-label">Commissioned contributions</h2>
       {COMMISSIONED.map((c, i) => <div key={i} className="cite">{c.title}. <em>{c.venue}</em>. {c.status}</div>)}
 
-      {upcoming.length > 0 && <>
-        <h2 className="sub-label">Upcoming presentations</h2>
-        {upcoming.map((t, i) => <Talk key={i} t={t} />)}
+      {accepted.length > 0 && <>
+        <h2 className="sub-label">Accepted presentations</h2>
+        {accepted.map((t, i) => <Talk key={i} t={t} />)}
       </>}
 
       <h2 className="sub-label">Selected past presentations</h2>
@@ -906,7 +912,7 @@ function CV() {
       {cvData.teaching.map((t, i) => <div key={i} className="cite">{t.institution}. {t.detail}</div>)}
 
       <h2 className="sub-label">Presentations</h2>
-      <p>Upcoming and past presentations are listed on the <A to="publications">Publications</A> page.</p>
+      <p>Accepted and past presentations are listed on the <A to="publications">Publications</A> page.</p>
 
       <h2 className="sub-label">Professional memberships</h2>
       {cvData.affiliations.map((a, i) => <div key={i} className="cite">{a}</div>)}

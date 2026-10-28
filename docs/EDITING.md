@@ -37,10 +37,11 @@ oldest, keeping three. A notice about a publication can point at its record
 (`"publication": "trauma"`) so its wording follows the record's status.
 
 **Record a talk.** Add it to `presentations.json` with `"status": "accepted"`
-and the event month as `"date": "2027-03"`. Accepted talks appear under
-Upcoming presentations until their month has passed; after that they are
-hidden, and the build prints a reminder. Once the talk is given, change the
-status to `"delivered"`.
+and the event month as `"date": "2027-03"`. Accepted talks are listed under
+Accepted presentations, and stay there after the event until you change the
+status. The build prints a review reminder for any accepted talk whose month
+has passed. Once you confirm the talk was given, change the status to
+`"delivered"` and it moves to Selected past presentations.
 
 **Replace the CV.** Put the PDF in `public/` (for example
 `public/castleberry-cv.pdf`). Then set `cv.pdf` to the file name and
@@ -56,14 +57,20 @@ record a readable text.
 `Edition` component in `src/App.js`. Then change `editionProgressUpdated` in
 `site.json`.
 
-**Publish the edition sample.** Replace `null` in `sample.json` with an
-authentic text you have edited. Never use a generated or placeholder passage.
-The fields are:
+**Publish the edition sample.** This repository is public, and everything in
+`src/content/` is bundled into the site. So prepare the sample elsewhere, and
+add it here only when it is ready to publish. Replace `null` in
+`sample.json` with the authentic text you have edited, including
+`"enabled": true`. Never use a generated or placeholder passage. Put any
+images in `public/edition-sample/`. The build refuses to run if
+`sample.json` holds a sample without `"enabled": true`, or if that image
+folder exists while no sample is enabled. The fields are:
 
 ```json
 {
+  "enabled": true,
   "title": "", "date": "", "description": "", "archive": "", "identifier": "",
-  "image": { "src": "/sample/page1.jpg", "full": "/sample/page1-large.jpg", "width": 1200, "height": 1600, "alt": "", "credit": "" },
+  "image": { "src": "/edition-sample/page1.jpg", "full": "/edition-sample/page1-large.jpg", "width": 1200, "height": 1600, "alt": "", "credit": "" },
   "textLabel": "Edited text",
   "text": ["paragraph", "paragraph"],
   "editorialNote": ["paragraph"],
@@ -90,5 +97,5 @@ Page text is rendered by JavaScript in the browser.
 
 ```
 npm test -- --watchAll=false   # routing, page titles, shared records
-npm run build                  # also prints talks that need a status update
+npm run build                  # also lists past accepted talks to confirm
 ```

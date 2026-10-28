@@ -47,3 +47,20 @@ test('no public page shows the edition sample until one is supplied', () => {
   expect(screen.queryByRole('heading', { name: /sample text/i })).toBeNull();
   expect(screen.queryByRole('link', { name: /sample/i })).toBeNull();
 });
+
+test('a direct visit to the sample address shows not-found while no sample is published', () => {
+  visit('/cabot-edition/sample/');
+  expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/page not found/i);
+});
+
+test('accepted talks stay listed as accepted after their month, without being called delivered', () => {
+  jest.useFakeTimers().setSystemTime(new Date('2027-06-15'));
+  visit('/publications/');
+  const accepted = screen.getByRole('heading', { name: 'Accepted presentations' });
+  const past = screen.getByRole('heading', { name: 'Selected past presentations' });
+  const talk = screen.getByText(/After Dewey/);
+  // listed after the Accepted heading and before the past-presentations heading
+  expect(accepted.compareDocumentPosition(talk) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  expect(past.compareDocumentPosition(talk) & Node.DOCUMENT_POSITION_PRECEDING).toBeTruthy();
+  jest.useRealTimers();
+});

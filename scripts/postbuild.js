@@ -9,7 +9,14 @@ const root = path.join(__dirname, "..");
 const build = path.join(root, "build");
 const read = f => JSON.parse(fs.readFileSync(path.join(root, "src/content", f), "utf8"));
 const site = read("site.json");
-const sample = read("sample.json");
+const sampleFile = read("sample.json");
+const sample = sampleFile && sampleFile.enabled === true ? sampleFile : null;
+const fail = msg => { console.error(`postbuild: ${msg}`); process.exit(1); };
+
+// The repository is public and the JSON is bundled into the site's JavaScript,
+// so an unpublished sample must never sit in sample.json or public/.
+if (sampleFile && !sample) fail("sample.json holds a sample that is not enabled. Keep drafts outside this repository; set it to null or set \"enabled\": true to publish.");
+if (!sample && fs.existsSync(path.join(build, "edition-sample"))) fail("public/edition-sample/ exists but no sample is enabled. Remove it until the sample is published.");
 const presentations = read("presentations.json").presentations;
 
 const routes = sample ? [...site.routes, site.sampleRoute] : site.routes;
@@ -48,9 +55,16 @@ fs.writeFileSync(path.join(build, "sitemap.xml"),
   routes.map(r => `  <url><loc>${site.origin}${r.path}</loc><lastmod>${today}</lastmod></url>`).join("\n") +
   `\n</urlset>\n`);
 
-console.log(`postbuild: wrote ${routes.length} pages, 404.html, sitemap.xml`);
+console.log(`postbuild: wrote ${routes.length} pages, 404.html, sitemap.xml; edition sample ${sample ? "published" : "not published"}`);
 
-// Accepted talks whose month has passed are hidden from the site until marked delivered.
+// With no sample enabled, confirm nothing of it reached the output.
+if (!sample) {
+  const sitemap = fs.readFileSync(path.join(build, "sitemap.xml"), "utf8");
+  if (fs.existsSync(path.join(build, site.sampleRoute.path)) || sitemap.includes(site.sampleRoute.path)) fail("sample route found in output while no sample is enabled.");
+}
+
+// Accepted talks stay on the site after their month passes. List them for review
+// so their status can be updated once delivery is confirmed.
 const month = today.slice(0, 7);
 const stale = presentations.filter(p => p.status === "accepted" && p.date < month);
-for (const p of stale) console.warn(`review: "${p.title}" (${p.date}) has passed; mark it delivered in presentations.json or remove it.`);
+for (const p of stale) console.warn(`review: "${p.title}" (${p.date}) is past; confirm whether it was delivered.`);
